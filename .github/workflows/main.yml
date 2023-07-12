@@ -2,7 +2,7 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ CICD_pipeline_githubactions_and_fastAPI ]
+    branches: [ master ]
 
 jobs:
   continuous-integration:
