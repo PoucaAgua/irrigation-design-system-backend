@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from irrigation_design_system_backend.infrastructure.api.v1.controllers import app_test_controller
+from infrastructure.api.v1.controllers import app_test_controller
 
 router = APIRouter()
 
