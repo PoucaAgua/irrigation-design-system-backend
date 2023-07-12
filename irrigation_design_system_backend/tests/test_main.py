@@ -1,5 +1,5 @@
 from fastapi.testclient import TestClient
-from app.main import app
+from irrigation_design_system_backend.main import app
 
 client = TestClient(app)
 

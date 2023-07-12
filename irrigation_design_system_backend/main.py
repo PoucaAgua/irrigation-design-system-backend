@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from mangum import Mangum
 
-from app.infrastructure.api.v1 import router as api_router
+from irrigation_design_system_backend.infrastructure.api.v1 import router as api_router
 
 app = FastAPI(title='Serverless Lambda FastAPI')
 
