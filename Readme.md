@@ -1,4 +1,4 @@
-## Run Localy
+## Run Locally
 
 1. create a venv
 ```bash
