@@ -1,17 +1,31 @@
 from fastapi import FastAPI
 from mangum import Mangum
+from sqlalchemy_utils import database_exists, create_database
 
+from core.configs.settings import settings
 from infrastructure.api.v1 import router as api_router
-
-app = FastAPI(title='Serverless Lambda FastAPI')
-
-app.include_router(api_router, prefix="/api/v1")
+from infrastructure.persistence.models.base import Base
+from infrastructure.persistence.session import engine
 
 
-@app.get("/",  tags=["Endpoint Test"])
-def main_endpoint_test():
-    return {"message": "Welcome CI/CD Pipeline with GitHub Actions!"}
+def create_database_if_not_exists():
+    if not database_exists(engine.url):
+        create_database(engine.url)
 
+
+def create_tables():
+    Base.metadata.create_all(bind=engine)
+
+
+def start_application():
+    app = FastAPI(title=settings.PROJECT_TITLE, varion=settings.PROJECT_VERSION)
+    create_database_if_not_exists()
+    create_tables()
+    app.include_router(api_router, prefix="/api/v1")
+    return app
+
+
+app = start_application()
 
 # to make it work with Amazon Lambda, we create a handler object
 handler = Mangum(app=app)
