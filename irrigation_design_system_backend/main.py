@@ -19,7 +19,12 @@ def create_tables():
 
 
 def start_application():
-    app = FastAPI(title=settings.PROJECT_TITLE, varion=settings.PROJECT_VERSION)
+    app = FastAPI(
+        title=settings.PROJECT_TITLE,
+        varion=settings.PROJECT_VERSION,
+        root_path="/dev/"
+    )
+
     app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],
