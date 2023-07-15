@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from mangum import Mangum
 from sqlalchemy_utils import database_exists, create_database
+from fastapi.middleware.cors import CORSMiddleware
 
 from core.configs.settings import settings
 from infrastructure.api.v1 import router as api_router
@@ -19,6 +20,13 @@ def create_tables():
 
 def start_application():
     app = FastAPI(title=settings.PROJECT_TITLE, varion=settings.PROJECT_VERSION)
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["*"],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
     create_database_if_not_exists()
     create_tables()
     app.include_router(api_router, prefix="/api/v1")
