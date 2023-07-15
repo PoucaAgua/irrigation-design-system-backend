@@ -2,6 +2,7 @@ from fastapi import APIRouter
 
 from infrastructure.api.v1.controllers import  evapotranspiration_controller, project_controller
 
+
 router = APIRouter()
 
 
