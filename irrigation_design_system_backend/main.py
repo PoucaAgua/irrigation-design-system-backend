@@ -22,7 +22,7 @@ def start_application():
     app = FastAPI(
         title=settings.PROJECT_TITLE,
         varion=settings.PROJECT_VERSION,
-        root_path="/dev/"
+        root_path=settings.ROOT_PATH
     )
 
     app.add_middleware(

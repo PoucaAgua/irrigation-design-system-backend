@@ -3,9 +3,8 @@ from infrastructure.persistence.repository.projects_repository import ProjectRep
 
 
 class ProjectService:
+    repository = ProjectRepository()
 
-    def __init__(self, repository):
-        self.repository = repository
-
-    def upsert_project(self, entity: ProjectEntity):
-        self.repository.upsert(entity)
+    @classmethod
+    def upsert_project(cls, entity: ProjectEntity):
+        cls.repository.upsert(entity)

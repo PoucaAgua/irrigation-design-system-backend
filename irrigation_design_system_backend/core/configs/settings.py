@@ -10,6 +10,7 @@ load_dotenv(dotenv_path=env_path)
 class Settings:
     PROJECT_TITLE: str = "Irrigation system design"
     PROJECT_VERSION: str = "0.0.1"
+    ROOT_PATH: str = os.getenv("ROOT_PATH", "")
 
     POSTGRES_USER: str = os.getenv("POSTGRES_USER")
     POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
