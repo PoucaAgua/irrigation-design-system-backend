@@ -1,6 +1,6 @@
 from _decimal import Decimal
 
-from core.constantes.evapotranspiration import ReferenceEvapotranspirationConstants
+from core.constants.evapotranspiration import ReferenceEvapotranspirationConstants
 from core.domain.entity.evapotranspiration_entity import EToEntity
 
 parameters_hargraves_samani = ReferenceEvapotranspirationConstants.parameters_hargraves_samani
