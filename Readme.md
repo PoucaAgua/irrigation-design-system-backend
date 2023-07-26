@@ -1,12 +1,18 @@
 ## Run Locally
 
-1. create a venv
+1. install python version
 
 ```bash
-python3 -m venv .venv
+sudo apt install python3.8
 ```
 
-2. Activate the virtual environment:
+2. create a venv
+
+```bash
+python3.8 -m venv .venv
+```
+
+3. Activate the virtual environment:
 
 On macOS/Linux, run:
 
@@ -20,25 +26,25 @@ On Windows, run:
 .venv\Scripts\activate
 ```
 
-3. install requirements.txt
+4. install requirements.txt
 
 ```bash
 pip install -r requirements.txt
 ```
 
-4. go to app path
+5. go to app path
 
 ```bash
 cd irrigation_design_system_backend
 ```
 
-5. run app
+6. run app
 
 ```bash
 uvicorn main:app --reload
 ```
 
-6. run database
+7. run database
 
 ```bash
 docker-compose run
