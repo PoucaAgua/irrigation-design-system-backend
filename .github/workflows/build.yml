@@ -1,9 +1,8 @@
 name: BeforeMerge
 
 on:
-  push:
-    branches: [ * ]
-    branches-ignore: [ main ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
 
