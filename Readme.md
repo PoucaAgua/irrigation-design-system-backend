@@ -49,3 +49,5 @@ uvicorn main:app --reload
 ```bash
 docker-compose run
 ```
+8. localhost 
+http://127.0.0.1:8000/docs#/
