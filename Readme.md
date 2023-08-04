@@ -32,22 +32,27 @@ On Windows, run:
 pip install -r requirements.txt
 ```
 
-5. go to app path
+5. Environment variables
+- Copy the .env-dev file
+- Save as .env inside irrigation_design_system_backend
+
+
+6. go to app path
 
 ```bash
 cd irrigation_design_system_backend
 ```
 
-6. run app
+7. run app
 
 ```bash
 uvicorn main:app --reload
 ```
 
-7. run database
+8. run database
 
 ```bash
 docker-compose run
 ```
-8. localhost 
+9. localhost 
 http://127.0.0.1:8000/docs#/

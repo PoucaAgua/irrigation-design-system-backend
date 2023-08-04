@@ -102,7 +102,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+irrigation_design_system_backend/.env
 myenv
 .myenv
 .venv
