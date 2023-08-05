@@ -132,3 +132,6 @@ dmypy.json
 
 # database
 sql_app.db
+
+# others
+.idea
