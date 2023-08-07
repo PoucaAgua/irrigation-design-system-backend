@@ -1,16 +1,24 @@
 from fastapi import APIRouter
 from apps.percent_shaded_area.percent_shaded_area_service import PercentShadedAreaService
-from core.domain.entity.PSAEntity import SAEntity,CPEntity
-from infrastructure.api.v1.responses.percent_shaded_area import SAResponse,CPResponse
+from core.domain.entity.percent_shaded_area_entity import (
+    PlantStripProjectionInputEntity,
+    PlantCanopyProjectionInputEntity
+)
+from infrastructure.api.v1.responses.percent_shaded_area import (
+    PercentShadedAreaByCanopyResponse,
+    PercentShadedAreaByStripResponse
+)
 
 router = APIRouter()
 
-@router.post("/shaded_area")
-def percent_shaded_area(sa_entity: SAEntity):
-    Sa = PercentShadedAreaService.calculate_shaded_area(sa_entity)
-    return SAResponse(value=Sa)
 
-@router.post("/shaded_area_crop_projection")
-def percent_shaded_area_crop_projection(cp_entity: CPEntity):
-    Cp = PercentShadedAreaService.calculate_crop_projection(cp_entity)
-    return CPResponse(value=Cp)
+@router.post("/plant_canopy_projection")
+def percent_shaded_area_by_plant_canopy_projection(input: PlantCanopyProjectionInputEntity):
+    percent_shaded_area = PercentShadedAreaService.calculate_by_plant_canopy_projection(input)
+    return PercentShadedAreaByCanopyResponse(value=percent_shaded_area)
+
+
+@router.post("/plant_strip_projection")
+def percent_shaded_area_by_plant_strip_projection(input: PlantStripProjectionInputEntity):
+    percent_shaded_area = PercentShadedAreaService.calculate_by_plant_strip_projection(input)
+    return PercentShadedAreaByStripResponse(value=percent_shaded_area)

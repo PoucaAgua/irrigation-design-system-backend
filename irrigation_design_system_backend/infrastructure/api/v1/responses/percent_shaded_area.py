@@ -1,9 +1,11 @@
 from pydantic import BaseModel
 
-class SAResponse(BaseModel):
-    message: str = "Shaded strip by the plant calculation successful."
+
+class PercentShadedAreaByStripResponse(BaseModel):
+    message: str = "Ps by the plant' strip calculation successful."
     value: float
 
-class CPResponse(BaseModel):
-    message: str = "Diameter of the plant's canopy projection calculation successful."
+
+class PercentShadedAreaByCanopyResponse(BaseModel):
+    message: str = "Ps by plant's canopy projection calculation successful."
     value: float
