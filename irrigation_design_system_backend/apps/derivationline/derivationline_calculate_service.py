@@ -8,11 +8,11 @@ class DerivationlineService:
   @staticmethod
   def calculate_derivationline_dimensions(derivationline_entity: DerivationlineEntity) -> Decimal:
 
-    constant_derivationline = DerivationlineConstants.parameters_branchline
+    constant_derivationline = DerivationlineConstants.parameters_derivationline
 
     f = derivationline_entity.friction_factor
     Q = derivationline_entity.flow
     hf = derivationline_entity.load_loss
     Lv = derivationline_entity.pipe_length
 
-    return Decimal(((constant_derivationline * f * (Q)**2) / hf) * Lv)**(1/5)
+    return Decimal((((constant_derivationline * f * (Q)**2) / hf) * Lv)**Decimal(0.2))
