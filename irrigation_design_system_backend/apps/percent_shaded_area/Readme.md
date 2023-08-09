@@ -1,34 +1,25 @@
 # Percent Shaded Area Service
 
-This module provides two methods to calculate the percent shaded area and the shaded crop projection by a plant.
+The **PercentShadedAreaService** module provides functions to calculate the percent shaded area in different scenarios involving plant canopy projection. It includes methods for calculating the shaded area based on plant canopy projection and plant strip projection.
+
+## Introduction
+
+This module offers calculations for determining the percent shaded area under different conditions involving plant canopy projection. The calculations depend on input parameters that describe the characteristics of the canopy projection and plant arrangement. The module handles the mathematical aspects and presents convenient methods for performing these calculations.
 
 ## Methods
 
-### `calculate_shaded_area(sa_entity: SAEntity) -> Decimal`
+### `calculate_by_plant_canopy_projection(input_entity: PlantCanopyProjectionInputEntity) -> Decimal`
 
-Calculates the shaded area of the plant, projected by the diameter of the plant's canopy.
+Calculates the percent shaded area based on plant canopy projection.
 
-**Parameters:**
+- `input_entity`: An instance of `PlantCanopyProjectionInputEntity` containing projection parameters.
+- Returns: Percentage of the shaded area.
 
-- `sa_entity`: An instance of the `SAEntity` class containing the following attributes:
-  - `diameter_of_the_plants_canopy_projection`: Diameter of the plants' canopy projection.
-  - `space_between_plants`: Space between plants.
-  - `strip_shaded_by_the_plant`: Strip shaded by the plant.
+### `calculate_by_plant_strip_projection(input_entity: PlantStripProjectionInputEntity) -> Decimal`
 
-**Returns:**
+Calculates the percent shaded area based on plant strip projection.
 
-- `Decimal`: The calculated shaded area in decimal format.
+- `input_entity`: An instance of `PlantStripProjectionInputEntity` containing projection parameters.
+- Returns: Percentage of the shaded area.
 
-### `calculate_crop_projection(cp_entity: CPEntity) -> Decimal`
-
-Calculates the shaded crop projection by the plant.
-
-**Parameters:**
-
-- `cp_entity`: An instance of the `CPEntity` class containing the following attributes:
-  - `shaded_strip_plant`: Shaded strip by the plant.
-  - `strip_shaded_by_the_plant`: Strip shaded by the plant.
-
-**Returns:**
-
-- `Decimal`: The calculated shaded crop projection by the plant in decimal format.
+---
