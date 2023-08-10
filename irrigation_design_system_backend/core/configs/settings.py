@@ -12,6 +12,7 @@ class Settings:
     PROJECT_VERSION: str = "0.0.1"
     ROOT_PATH: str = os.getenv("ROOT_PATH", "")
 
+    DATABASE: str = os.getenv("DATABASE", "postgres")
     POSTGRES_USER: str = os.getenv("POSTGRES_USER")
     POSTGRES_PASSWORD: str = os.getenv("POSTGRES_PASSWORD")
     POSTGRES_SERVER: str = os.getenv("POSTGRES_SERVER", "localhost")
