@@ -6,6 +6,23 @@ The **PercentWettedAreaService** module provides functions to calculate the perc
 
 This module offers calculations to determine the percent wetted area for different irrigation scenarios. The calculations depend on input parameters that define the characteristics of the irrigation system. The module handles the underlying mathematics and provides convenient methods for these calculations.
 
+## Percentage of Wetted Area Calculation PW
+
+```mermaid
+graph TD
+    A[Percentage of Wetted Area Calculation Routine PW] --> E
+    E[InputData  Ko, α ,q, NP, z] --> B
+    E--> G
+
+    B[Irrigation to form continuous strip] --> Y
+    G[Irrigation per tree]
+
+    G -->C[LLS] --> Y
+    G -->D[LLD]  --> Y
+
+    Y[Output: PW]
+```
+
 ## Methods
 
 ### `calculate_irrigation_by_tree(input_entity: IrrigationTreeEntity) -> Decimal`

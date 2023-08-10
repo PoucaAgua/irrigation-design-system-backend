@@ -6,6 +6,22 @@ The **PercentShadedAreaService** module provides functions to calculate the perc
 
 This module offers calculations for determining the percent shaded area under different conditions involving plant canopy projection. The calculations depend on input parameters that describe the characteristics of the canopy projection and plant arrangement. The module handles the mathematical aspects and presents convenient methods for performing these calculations.
 
+## Percentage of Shaded Area Calculation PS
+
+```mermaid
+graph TD
+    A[Percentage of Shaded Area Calculation Routine PS]--> D
+    A-->E
+
+    D[InputData Ss,Sr]-->B
+    B[Shaded Strip]--> F
+
+    E[InputData Sr, Sp, Dco]-->C
+    C[Crown Projection Diameter]-->F
+
+    F[Output PS]
+```
+
 ## Methods
 
 ### `calculate_by_plant_canopy_projection(input_entity: PlantCanopyProjectionInputEntity) -> Decimal`
@@ -23,3 +39,7 @@ Calculates the percent shaded area based on plant strip projection.
 - Returns: Percentage of the shaded area.
 
 ---
+
+```
+
+```
