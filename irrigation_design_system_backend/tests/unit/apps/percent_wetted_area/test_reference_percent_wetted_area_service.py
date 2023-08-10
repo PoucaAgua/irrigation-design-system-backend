@@ -1,5 +1,5 @@
 from _decimal import Decimal
-from core.constants.math import MathConstants
+
 from apps.percent_wetted_area.percent_wetted_area_service import PercentWettedAreaService
 from core.domain.entity.percent_wetted_area_entity import (
     IrrigationTreeEntity,
@@ -22,11 +22,7 @@ class TestPercentWettedAreaService:
             hydraulic_conductivity_of_saturated_soil=Decimal(10)
         )
         dw_expected = PercentWettedAreaService._dw_calculate(input_entity)
-        expected_result = Decimal(
-            input_entity.drippers_number * MathConstants.PI * dw_expected ** 2 * 100 /
-            (4 * input_entity.space_between_plants * input_entity.space_between_lines)
-        )
-
+        expected_result = Decimal(2.11)
         # When
         result = PercentWettedAreaService.calculate_irrigation_by_tree(input_entity)
         print(result)
@@ -41,9 +37,7 @@ class TestPercentWettedAreaService:
             hydraulic_conductivity_of_saturated_soil=Decimal(10),
             q=Decimal(0.02)
         )
-        expected_result = Decimal(2) * ((4 / input_entity.parameter_model_unsaturated_hydraulic ** 2 * MathConstants.PI ** 2) +
-                                        (input_entity.q / MathConstants.PI * input_entity.hydraulic_conductivity_of_saturated_soil) -
-                                        (2 / input_entity.parameter_model_unsaturated_hydraulic * MathConstants.PI)) ** Decimal('0.5')
+        expected_result = Decimal(5.2)
 
         # When
         result = PercentWettedAreaService.calculate_twice_saturated_wetted_radius(input_entity)
@@ -61,7 +55,7 @@ class TestPercentWettedAreaService:
         )
         moistened_area_expected = PercentWettedAreaService()._moistened_area_calculate(input_entity)
         area_occupied_plant_expected = PercentWettedAreaService()._area_occupied_plant_calculate(input_entity)
-        expected_result = Decimal(moistened_area_expected / area_occupied_plant_expected * 100)
+        expected_result = Decimal(40.0)
 
         # When
         result = PercentWettedAreaService.calculate_continuous_strip(input_entity)

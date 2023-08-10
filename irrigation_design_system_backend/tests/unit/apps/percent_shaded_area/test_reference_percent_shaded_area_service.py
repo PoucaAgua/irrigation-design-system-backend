@@ -1,5 +1,5 @@
 from _decimal import Decimal
-from core.constants.math import MathConstants
+
 from apps.percent_shaded_area.percent_shaded_area_service import PercentShadedAreaService
 from core.domain.entity.percent_shaded_area_entity import (
     PlantCanopyProjectionInputEntity,
@@ -17,10 +17,7 @@ class TestPercentShadedAreaService:
             space_between_plants=Decimal(1.5),
             space_between_rows=Decimal(2)
         )
-        expected_result = Decimal(
-            MathConstants.PI * (input_entity.diameter_projection ** 2 / 4) /
-            (input_entity.space_between_rows * input_entity.space_between_plants)
-        )
+        expected_result = Decimal(12.82)
 
         # When
         result = PercentShadedAreaService.calculate_by_plant_canopy_projection(input_entity)
@@ -35,7 +32,7 @@ class TestPercentShadedAreaService:
             shaded_strip_plant=Decimal(4),
             space_between_rows=Decimal(2)
         )
-        expected_result = Decimal(input_entity.shaded_strip_plant / input_entity.space_between_rows)
+        expected_result = Decimal(2)
 
         # When
         result = PercentShadedAreaService.calculate_by_plant_strip_projection(input_entity)
