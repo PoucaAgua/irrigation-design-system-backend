@@ -102,7 +102,7 @@ celerybeat.pid
 *.sage.py
 
 # Environments
-.env
+irrigation_design_system_backend/.env
 myenv
 .myenv
 .venv
@@ -129,3 +129,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# database
+sql_app.db
+
+# others
+.idea
