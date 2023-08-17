@@ -16,6 +16,6 @@ class DerivationlineService:
     hf = derivationline_entity.load_loss
     Lv = derivationline_entity.pipe_length
 
-    theorical_dimensions = (((constant_derivationline * f * (Q)**2) / hf) * Lv)**Decimal(0.2)
+    theorical_dimensions = (((constant_derivationline * f * ((Q)**2)) / hf) * Lv)**Decimal(0.2)
 
     return (ConsultNominalDiameterTable.nominal_diameter(float(theorical_dimensions)))
