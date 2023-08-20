@@ -13,6 +13,9 @@ class TestReferenceEvapotranspirationService:
             temperature_med=Decimal(25.0),
             temperature_min=Decimal(20.0),
             temperature_max=Decimal(30.0),
+            latitude=Decimal(30.0),
+            month= "Jan"
+                        
 
         )
         expected_result = Decimal(2.83)
