@@ -4,28 +4,6 @@ from core.domain.enum.hemispherse import Hemispherse
 from core.domain.enum.month import Month
 
 
-@dataclass
-class EToEntity:
-    temperature_med: Decimal
-    temperature_max: Decimal
-    temperature_min: Decimal
-    radiation: Decimal
-    humidity: Decimal
-    psychrometric_constant: Decimal 
-    days: Decimal
-    latitude: Decimal
-    month: Decimal
-    hemispherse: Hemispherse
-    relative_humidity_air: float #umidade relativa do ar RH 
-    temperature_med: float
-    temperature_max: float
-    temperature_min: float
-    days: float
-    altitude: float
-    wind_speed: float
-    ground_heat: float 
-    daily_radiation: float
-    latitude: int
 
 @dataclass
 class EToHargravesSamaniInputyEntity:
