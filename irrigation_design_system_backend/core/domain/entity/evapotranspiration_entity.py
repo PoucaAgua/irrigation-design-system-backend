@@ -11,18 +11,21 @@ class EToEntity:
     temperature_min: Decimal
     radiation: Decimal
     humidity: Decimal
-    slop: Decimal #Declividade da curva de pressão de vapor de saturação = s (delta)
-    radiation_net: Decimal   #radiação líquida na superfície da Terra = Rn
-    ground_heat: Decimal #fluxo de calor do solo = G
-    psychrometric_constant: Decimal #constante psicrométrica = Y
-    temperature_air: Decimal # = Tair
-    wind_speed: Decimal #Velocidade do vento a 2 m de altura = U2
-    vapor_saturation_pressure: Decimal #Pressão da saturação do vapor = es 
-    vapor_current_pressure: Decimal #pressão atual do vapor = ea
+    psychrometric_constant: Decimal 
     days: Decimal
     latitude: Decimal
     month: Decimal
     hemispherse: Hemispherse
+    relative_humidity_air: float #umidade relativa do ar RH 
+    temperature_med: float
+    temperature_max: float
+    temperature_min: float
+    days: float
+    altitude: float
+    wind_speed: float
+    ground_heat: float 
+    daily_radiation: float
+    latitude: int
 
 @dataclass
 class EToHargravesSamaniInputyEntity:
@@ -31,3 +34,31 @@ class EToHargravesSamaniInputyEntity:
     temperature_min: Decimal
     latitude: int
     month: Month
+
+@dataclass
+class EToBlanneyCriddleInputyEntity:
+    temperature_med: Decimal
+    temperature_max: Decimal
+    temperature_min: Decimal
+    latitude: int
+    month: Month
+    days: Decimal
+    hemispherse: Hemispherse
+
+
+@dataclass
+class EToPenmanMonteithInputyEntity:
+    temperature_med: float
+    relative_humidity_air: float #umidade relativa do ar RH 
+    temperature_med: float
+    temperature_max: float
+    temperature_min: float
+    days: float
+    altitude: float
+    wind_speed: float #Velocidade do vento a 2 m de altura = U2
+    ground_heat: float #fluxo de calor do solo = G
+    daily_radiation: float  #radiação líquida na superfície da Terra = Rn
+    
+    
+
+

@@ -1,22 +1,19 @@
 import pandas as pd
 file_path = "C:\\Users\\Evellyn\\Desktop\\Nova pasta\\irrigation-design-system-backend\\irrigation_design_system_backend\\apps\\evapotranspiration\\data_radiation_hargraves_samani.csv"
-from io import StringIO
+import math
 from _decimal import Decimal
-# df = pd.read_csv(file_path, sep=';')
 
 def calculate_temperature_media(temperature_media=None, temperature_max=None, temperature_min=None, days=None):
     if temperature_media is not None:
         return temperature_media
-    
-    if temperature_max is not None and temperature_min is not None and days is not None:
+
+    if temperature_max is not None and temperature_min is not None and days is not None and days != 0:  # Verifique se days é diferente de zero
         calculated_temperature_media = (temperature_max / days + temperature_min / days) / 2
         return calculated_temperature_media
+
+    return None  
+
     
-    return None
-
-
-# temperature_media_calculate = calculate_temperature_media(temperature_max=6, temperature_min=3, days=3)
-# print("Calculated media temperature:", temperature_media_calculate)
 
 
                              #### data_for_Hargreaves_Samani_radiation ####
@@ -41,23 +38,9 @@ def calculate_radiation_Hargreaves_Samani(latitude, month):
     
 
 
-# #  input
-# latitude = int(input("Digite a latitude: "))
-# month_str = input("Digite o mês (Jan, Feb, ..., Dec): ")
-# month = month_str.strip().capitalize() 
-
-# rad_value = calculate_radiation__Hargreaves_Samani(latitude, month)
-# if rad_value is not None:
-#     print(f"Radiação em latitude {latitude}° e mês {month}: {rad_value}")
-# else:
-#     print("Dados não encontrados para a combinação de latitude e mês.")
-
-    
-
-
                 ###### calculate_radiation_blanney_criddle ####
 
-def calculate_radiation_blanney_criddle(latitude, month,hemisphere):
+def calculate_radiation_blaney_criddle(latitude, month,hemisphere):
     file_path_norte = "C:\\Users\\Evellyn\\Desktop\\Nova pasta\\irrigation-design-system-backend\\irrigation_design_system_backend\\apps\\evapotranspiration\\data_north_sun_blanney_criddle.csv"
     file_path_sul = "C:\\Users\\Evellyn\\Desktop\\Nova pasta\\irrigation-design-system-backend\\irrigation_design_system_backend\\apps\\evapotranspiration\\data_south_sun_blanney_criddle.csv"
     
@@ -91,13 +74,33 @@ def calculate_radiation_blanney_criddle(latitude, month,hemisphere):
     else:
         return None
 
-# # input
-# latitude = int(input("Digite a latitude: "))
-# month = input("Digite o mês (Jan, Feb, ..., Dec): ")
-# hemisphere = input("Digite o hemisfério (norte ou sul): ")
 
-# rad_value = calculate_radiation_blanney_criddle(latitude, month, hemisphere)
-# if rad_value is not None:
-#     print(f"Radiação em {hemisphere} em {month} para {latitude}°: {rad_value}")
-# else:
-#     print(f"Dados não encontrados para a combinação de latitude, mês e hemisfério.")
+                             # # # penmanMonteithInputyEntity # # #
+
+
+
+def calculate_vapor_saturation_pressure(temperature):
+    # Equação de Buck
+    es = 0.6108 * math.exp((17.27 * temperature) / (temperature + 237.3))
+    return es
+
+def calculate_vapor_current_pressure(relative_humidity_air, vapor_saturation_pressure):
+        ea = (relative_humidity_air / 100) * vapor_saturation_pressure
+        return ea
+
+def calculate_declivity_curve_pressure_vapor(temperature, vapor_saturation_pressure):
+        delta = (4098 * vapor_saturation_pressure) / ((temperature + 237.3) ** 2)
+        return delta
+
+def calculate_atmospheric_pressure(altitude):
+        
+        atmospheric_pressure = 101.3 * (293 - 0.0065 * altitude / 293.0) ** 5.23
+        return atmospheric_pressure
+
+
+def calculate_psychrometric_constant(atmospheric_pressure):
+        gamma = 0.665 * 10**-3 * atmospheric_pressure
+        return gamma
+
+
+
