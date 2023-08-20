@@ -49,4 +49,5 @@ class ReferenceEvapotranspirationService:
         u2 = eto_entity.wind_speed
         g = eto_entity.ground_heat
         rn = eto_entity.daily_radiation
+        # .
         return ((0.408* declivity_curve_pressure_vapor * (rn - g) + (psychrometric_constant * 900 * u2 * (es - ea) / Tmed + 273)) / (declivity_curve_pressure_vapor + psychrometric_constant * (1 + 0.34 * u2) ))
