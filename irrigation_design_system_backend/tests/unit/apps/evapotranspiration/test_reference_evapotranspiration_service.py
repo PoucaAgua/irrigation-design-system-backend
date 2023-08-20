@@ -10,7 +10,6 @@ class TestReferenceEvapotranspirationService:
     def test_calculate_hargraves_samani(self):
         # Given
         test_eto_entity = EToHargravesSamaniInputyEntity(
-            radiation=Decimal(7),
             temperature_med=Decimal(25.0),
             temperature_min=Decimal(20.0),
             temperature_max=Decimal(30.0),
