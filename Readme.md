@@ -36,23 +36,30 @@ pip install -r requirements.txt
 - Copy the .env-dev file
 - Save as .env inside irrigation_design_system_backend
 
+## Initializing the application
+6. Attention! Use the commands below in the root of the project
 
-6. go to app path
-
+To create the docker images and containers
 ```bash
-cd irrigation_design_system_backend
+make up
 ```
 
-7. run app
-
+To run the application
 ```bash
-uvicorn main:app --reload
+make start
+``` 
+
+To remove the containers
+```bash
+make down
+``` 
+
+## Accessing the database
+7. Para acessar o banco de dados postgres
+```bash
+make postgres
 ```
 
-8. run database
-
-```bash
-docker-compose run
-```
-9. localhost 
+## Accessing the API
+8. localhost 
 http://127.0.0.1:8000/docs#/
