@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 
 from infrastructure.persistence.models.base import Base
 from core.domain.enum.line_types import LineTypes
+from core.domain.enum.status_types import StatusTypes
 
 
 class Project(Base):
@@ -12,7 +13,7 @@ class Project(Base):
     user_id = Column(BigInteger, index=True)
     group_id = Column(String(100))
     description = Column(String(250))
-    status = Column(String(100))
+    status = Column(Enum(StatusTypes, name='project_status'))
     crop = Column(String(100))
     maximum_actual_irrigation_required = Column(DECIMAL(10, 2), default=0.00)
     crop_evapotranspiration = Column(DECIMAL(10, 2), default=0.00)
