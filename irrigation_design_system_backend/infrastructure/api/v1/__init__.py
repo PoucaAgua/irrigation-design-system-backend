@@ -6,6 +6,8 @@ from infrastructure.api.v1.controllers import (
     percent_wetted_area_controller,
     percent_shaded_area_controller,
     derivation_line_controller,
+    ITN_controller,
+    IRN_controller
 )
 
 router = APIRouter()
@@ -31,3 +33,6 @@ router.include_router(
 router.include_router(
     derivation_line_controller.router, prefix="/derivationline", tags=["Endpoint Derivation Line"]
 )
+router.include_router(IRN_controller.router, prefix="/IRN", tags=["Endpoint IRN"])
+router.include_router(ITN_controller.router, prefix="/ITN", tags=["Endpoint ITN"])
+
