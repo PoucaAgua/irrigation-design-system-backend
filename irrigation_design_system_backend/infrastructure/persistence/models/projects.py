@@ -1,7 +1,8 @@
-from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey, BigInteger, Enum, JSON
+from sqlalchemy import Column, String, DECIMAL, ForeignKey, BigInteger, Enum, JSON
 from sqlalchemy.orm import relationship
 
 from infrastructure.persistence.models.base import Base
+from core.domain.enum.line_types import LineTypes
 
 
 class Project(Base):
@@ -28,13 +29,13 @@ class LateralLine(Base):
     id = Column(BigInteger, primary_key=True, index=True, autoincrement=True)
     project_id = Column(BigInteger, ForeignKey('projects.id'), index=True)
     dripper = Column(String(250))
-    declive = Column(DECIMAL(10, 2))
+    decline = Column(DECIMAL(10, 2))
     inlet_pressure = Column(DECIMAL(10, 2))
     separation_between_issuers = Column(DECIMAL(10, 2))
     length_max = Column(DECIMAL(10, 2))
     diameter = Column(DECIMAL(10, 2))
     localized_loss = Column(DECIMAL(10, 2))
-    type = Column(Enum('with_plc', 'without_plc'))
+    type = Column(Enum(LineTypes, name='lateral_line_types'))
 
     # Foreign Keys
     project = relationship('Project', back_populates='lateral_line', uselist=False)
@@ -50,7 +51,7 @@ class DerivationLine(Base):
     length = Column(JSON)
     diameter = Column(JSON)
     localized_loss = Column(String(250))
-    type = Column(Enum('with_plc', 'without_plc'))
+    type = Column(Enum(LineTypes, name='derivation_line_types'))
 
     # Foreign Keys
     project = relationship('Project', back_populates='derivation_line', uselist=False)
