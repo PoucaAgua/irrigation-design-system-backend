@@ -15,10 +15,10 @@ class IRNatmProjectionInputEntity:
     coef_cultura: Decimal
     area_molhada: Decimal
 
+
 @dataclass
 class IRNmaxProjectionInputEntity:
     theta_cc: Decimal
     theta_pm: Decimal
     profunidade: Decimal
     f_critico: Decimal
-

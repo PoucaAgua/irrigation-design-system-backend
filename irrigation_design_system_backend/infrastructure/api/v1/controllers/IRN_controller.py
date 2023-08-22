@@ -14,14 +14,14 @@ def irn_solo(irn_entity: IRNsoloProjectionInputEntity):
     irn_solo = IRNSoloService.calc_irn_solo(irn_entity)
     return IRNResponse(value=irn_solo)
 
+
 @router.post(path="/atm", response_model=IRNResponse)
 def irn_atm(irn_entity: IRNatmProjectionInputEntity):
     irn_atm = IRNatmService.calc_irn_atm(irn_entity)
     return IRNResponse(value=irn_atm)
 
+
 @router.post(path='/IRN_max', response_model=IRNResponse)
 def irn_max(irn_entity: IRNmaxProjectionInputEntity):
     irn_max = IRNmaxService.calc_irn_max(irn_entity)
     return IRNResponse(value=irn_max)
-
-
