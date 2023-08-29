@@ -1,29 +1,24 @@
 import math
 from _decimal import Decimal
+
+import pandas as pd
+
+from core.domain.enum.month import MonthEnum
 from core.tables.evapotraspiration_tables import EvapotranspirationDfTable
 from core.domain.enum.hemisphere import Hemisphere
-
-# def calculate_radiation_Hargreaves_Samani(latitude, month):
-
-#     df_radiation = EvapotranspirationDfTable.DF_RADIATION_HARGRAVES_SAMANI()
-
-#     filtered_df = df_radiation[df_radiation["latitude s"] == latitude]
-#     interpolated_df = df_radiation.iloc[::2].copy()
-
-#     if not interpolated_df.empty:
-#         rad_value = interpolated_df[month.value].values[0]  # Use diretamente o nome do mês
-#         return Decimal(str(rad_value))
+from scipy.interpolate import interp1d
 
 
-def calculate_radiation_Hargreaves_Samani(latitude, month):
+def interpolate(x: pd.Series, y: pd.Series, value: float):
+    interp_func = interp1d(x, y, kind='linear', fill_value="extrapolate")
+    return interp_func(value)
 
+
+def calculate_radiation_hargreaves_samani(latitude: Decimal, month: MonthEnum):
     df_radiation = EvapotranspirationDfTable.DF_RADIATION_HARGRAVES_SAMANI()
-    filtered_df = df_radiation[df_radiation["latitude s"] == latitude]
+    rad_value = interpolate(df_radiation["latitude s"], df_radiation[month.value], float(latitude))
+    return Decimal(str(rad_value))
 
-    if not filtered_df .empty:
-        rad_value = filtered_df [month.value].values[0]
-        return Decimal(str(rad_value))
-    
     
 def calculate_temperature_media(temperature_media: Decimal, temperature_max: Decimal, temperature_min: Decimal, days: Decimal):
     if temperature_media is not None:

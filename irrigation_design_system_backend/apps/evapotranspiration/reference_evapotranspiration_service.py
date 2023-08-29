@@ -1,7 +1,7 @@
 from _decimal import Decimal
 from core.constants.evapotranspiration import ReferenceEvapotranspirationConstants
 from core.domain.entity.evapotranspiration_entity import EToHargravesSamaniInputyEntity, EToPenmanMonteithInputyEntity,EToBlanneyCriddleInputyEntity
-from .funcitions_to_reference_evapotranspiration import (calculate_temperature_media, calculate_radiation_Hargreaves_Samani, calculate_radiation_blaney_criddle, calculate_vapor_saturation_pressure, calculate_vapor_current_pressure, calculate_declivity_curve_pressure_vapor, calculate_atmospheric_pressure, calculate_psychrometric_constant)
+from apps.evapotranspiration.funcitions_to_reference_evapotranspiration import (calculate_temperature_media, calculate_radiation_hargreaves_samani, calculate_radiation_blaney_criddle, calculate_vapor_saturation_pressure, calculate_vapor_current_pressure, calculate_declivity_curve_pressure_vapor, calculate_atmospheric_pressure, calculate_psychrometric_constant)
 
 parameters_hargraves_samani = ReferenceEvapotranspirationConstants.parameters_hargraves_samani
 parameters_blaney_cridlle = ReferenceEvapotranspirationConstants.parameters_blaney_cridlle
@@ -12,7 +12,7 @@ class ReferenceEvapotranspirationService:
     @staticmethod
     def calculate_hargraves_samani(eto_entity: EToHargravesSamaniInputyEntity) -> Decimal:
         a, b, c = parameters_hargraves_samani
-        Ra =  calculate_radiation_Hargreaves_Samani(latitude=eto_entity.latitude, month=eto_entity.month)
+        Ra = calculate_radiation_hargreaves_samani(latitude=eto_entity.latitude, month=eto_entity.month)
         Tmed = eto_entity.temperature_med
         Tmin = eto_entity.temperature_min
         Tmax = eto_entity.temperature_max
