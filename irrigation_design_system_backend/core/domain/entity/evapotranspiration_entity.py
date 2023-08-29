@@ -1,7 +1,7 @@
 from decimal import Decimal
 from dataclasses import dataclass
-from core.domain.enum.hemispherse import Hemispherse    
-from core.domain.enum.month import Month
+from core.domain.enum.hemisphere import Hemisphere    
+from core.domain.enum.month import MonthEnum
 
 
 
@@ -10,18 +10,18 @@ class EToHargravesSamaniInputyEntity:
     temperature_med: Decimal
     temperature_max: Decimal
     temperature_min: Decimal
-    latitude: int
-    month: Month
+    latitude: Decimal
+    month: MonthEnum
 
 @dataclass
 class EToBlanneyCriddleInputyEntity:
     temperature_med: Decimal
     temperature_max: Decimal
     temperature_min: Decimal
-    latitude: int
-    month: Month
     days: Decimal
-    hemispherse: Hemispherse
+    latitude: int
+    month: MonthEnum
+    hemisphere: Hemisphere
 
 
 @dataclass
@@ -35,7 +35,7 @@ class EToPenmanMonteithInputyEntity:
     altitude: float
     wind_speed: float #Velocidade do vento a 2 m de altura = U2
     ground_heat: float #fluxo de calor do solo = G
-    daily_radiation: float  #radiação líquida na superfície da Terra = Rn
+    daily_radiation: float  #radiação líquida na superfície da Terra = Rn .
     
     
 

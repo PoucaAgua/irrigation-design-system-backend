@@ -26,3 +26,5 @@ class TestReferenceEvapotranspirationService:
 
         # Then
         assert abs(result - expected_result) <= self.error
+
+    
