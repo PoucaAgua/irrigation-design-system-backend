@@ -12,6 +12,7 @@ def evapotranspiration_hargraves_samani(eto_entity: EToHargravesSamaniInputyEnti
     eto = ReferenceEvapotranspirationService.calculate_hargraves_samani(eto_entity)   
     return EvapotranspirationResponse(value=eto)
 
+
 @router.post("/blaney_criddle", response_model=EvapotranspirationResponse)
 def evapotranspiration_blaney_criddle(eto_entity: EToBlanneyCriddleInputyEntity):
     eto = ReferenceEvapotranspirationService.calculate_blaney_cridlle(eto_entity)   

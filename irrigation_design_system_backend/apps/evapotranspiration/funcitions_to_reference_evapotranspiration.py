@@ -1,96 +1,112 @@
-import pandas as pd
-file_path = "C:\\Users\\Evellyn\\Desktop\\Nova pasta\\irrigation-design-system-backend\\irrigation_design_system_backend\\apps\\evapotranspiration\\data_radiation_hargraves_samani.csv"
 import math
 from _decimal import Decimal
+from core.tables.evapotraspiration_tables import EvapotranspirationDfTable
+from core.domain.enum.hemisphere import Hemisphere
 
-def calculate_temperature_media(temperature_media=None, temperature_max=None, temperature_min=None, days=None):
+# def calculate_radiation_Hargreaves_Samani(latitude, month):
+
+#     df_radiation = EvapotranspirationDfTable.DF_RADIATION_HARGRAVES_SAMANI()
+
+#     filtered_df = df_radiation[df_radiation["latitude s"] == latitude]
+#     interpolated_df = df_radiation.iloc[::2].copy()
+
+#     if not interpolated_df.empty:
+#         rad_value = interpolated_df[month.value].values[0]  # Use diretamente o nome do mês
+#         return Decimal(str(rad_value))
+
+
+def calculate_radiation_Hargreaves_Samani(latitude, month):
+
+    df_radiation = EvapotranspirationDfTable.DF_RADIATION_HARGRAVES_SAMANI()
+    filtered_df = df_radiation[df_radiation["latitude s"] == latitude]
+
+    if not filtered_df .empty:
+        rad_value = filtered_df [month.value].values[0]
+        return Decimal(str(rad_value))
+    
+    
+def calculate_temperature_media(temperature_media: Decimal, temperature_max: Decimal, temperature_min: Decimal, days: Decimal):
     if temperature_media is not None:
         return temperature_media
 
-    if temperature_max is not None and temperature_min is not None and days is not None and days != 0:  # Verifique se days é diferente de zero
+    if temperature_max is not None and temperature_min is not None and days is not None and days != 0:
         calculated_temperature_media = (temperature_max / days + temperature_min / days) / 2
         return calculated_temperature_media
 
-    return None  
 
-    
+def calculate_radiation_blaney_criddle(latitude, hemisphere, month):
+    df_data_dict = {
+        Hemisphere.NORTE: EvapotranspirationDfTable.DF_DATA_NORTH_SUN_BLANNEY_CRIDDLE(),
+        Hemisphere.SUL: EvapotranspirationDfTable.DF_DATA_SOUTH_SUN_BLANNEY_CRIDDLE()
+    }
 
+    if hemisphere == "NORTE":
+        hemisphere_enum = Hemisphere.NORTE
+    elif hemisphere == "SUL":
+        hemisphere_enum = Hemisphere.SUL
+    else:
+        raise ValueError("Invalid hemisphere value")
 
-                             #### data_for_Hargreaves_Samani_radiation ####
-
-
-import pandas as pd
-def calculate_radiation_Hargreaves_Samani(latitude, month):
-    file_path = "C:\\Users\\Evellyn\\Desktop\\Nova pasta\\irrigation-design-system-backend\\irrigation_design_system_backend\\apps\\evapotranspiration\\data_radiation_hargraves_samani.csv"
-    data_radiation = pd.read_csv(file_path, sep=';', decimal=',', encoding='utf-8')
-
-    print(data_radiation)
-    
-    filtered_df = data_radiation[data_radiation["latitude s"] == latitude]
-
-    print(filtered_df)
+    data = df_data_dict[hemisphere_enum]
+    filtered_df = data[data['latitude'] == latitude]
 
     if not filtered_df.empty:
-        rad_value = filtered_df[month.value].values[0]
-        return Decimal(str(rad_value))
-    else:
-        return None
-    
+        if month in filtered_df.columns:
+            rad_value = filtered_df[month.value].iloc[0]
+            print(rad_value)
+    # print(f"hemisphere_enum: {hemisphere_enum}")
+    # print(f"latitude: {latitude}")
+    # print(f"month.value: {month.value}")
+    # print(f"filtered_df: {filtered_df}")
+    # print(f"filtered_df.columns: {filtered_df.columns}")
+    # print(f"rad_value: {rad_value}")
+            # return Decimal(str(rad_value))
+
+  
+# def calculate_radiation_blaney_criddle(latitude, hemisphere, month):
+#     df_data_dict = {
+#         Hemisphere.NORTE: EvapotranspirationDfTable.DF_DATA_NORTH_SUN_BLANNEY_CRIDDLE(),
+#         Hemisphere.SUL: EvapotranspirationDfTable.DF_DATA_SOUTH_SUN_BLANNEY_CRIDDLE()
+#     }
+#     data = df_data_dict[hemisphere]
+#     filtered_df = data[data['latitude'] == latitude]
+
+#     if not filtered_df.empty:
+#         if month in filtered_df.columns:
+#             rad_value = filtered_df[month.value].iloc[0]
+#             return Decimal(str(rad_value))
 
 
-                ###### calculate_radiation_blanney_criddle ####
+# def calculate_radiation_blaney_criddle(latitude, hemisphere: Hemispherse, month: MonthEnum):
+#     df_data_dict = {
+#         Hemispherse.NORTE: EvapotranspirationDfTable.DF_DATA_NORTH_SUN_BLANNEY_CRIDDLE(),
+#         Hemispherse.SUL: EvapotranspirationDfTable.DF_DATA_SOUTH_SUN_BLANNEY_CRIDDLE()
+#     }
+#     data = df_data_dict[hemisphere]
+#     filtered_df = data[data['latitude'] == latitude]
 
-def calculate_radiation_blaney_criddle(latitude, month,hemisphere):
-    file_path_norte = "C:\\Users\\Evellyn\\Desktop\\Nova pasta\\irrigation-design-system-backend\\irrigation_design_system_backend\\apps\\evapotranspiration\\data_north_sun_blanney_criddle.csv"
-    file_path_sul = "C:\\Users\\Evellyn\\Desktop\\Nova pasta\\irrigation-design-system-backend\\irrigation_design_system_backend\\apps\\evapotranspiration\\data_south_sun_blanney_criddle.csv"
-    
-    valid_hemispheres = ['norte', 'sul']
-    
-    if hemisphere.lower() not in valid_hemispheres:
-        return None  
-    
-    if hemisphere.lower() == 'norte':
-        data = pd.read_csv(file_path_norte, delimiter=";")
-        latitude_col = 'latitude norte'
-    else:
-        data = pd.read_csv(file_path_sul, delimiter=";")
-        latitude_col = 'latitude sul'
-
-    
-    filtered_df = data[data[latitude_col] == latitude]
-   
-    if not filtered_df.empty:
-        month_col = None
-        for col in filtered_df.columns:
-            if month.capitalize().strip() in col:
-                month_col = col
-                break
+#     if not filtered_df.empty:
+#         rad_column_name = month
+#         return rad_column_name  # Assuming your column names are like 'Jan', 'Fev', etc.
         
-        if month_col is not None:
-            rad_value = filtered_df[month_col].iloc[0]  
-            return rad_value
-        else:
-            return None 
-    else:
-        return None
-
-
-                             # # # penmanMonteithInputyEntity # # #
-
-
+#     if rad_column_name in filtered_df.columns:
+#             rad_value = filtered_df[rad_column_name].iloc[0]
+#             return Decimal(str(rad_value))
 
 def calculate_vapor_saturation_pressure(temperature):
-    # Equação de Buck
     es = 0.6108 * math.exp((17.27 * temperature) / (temperature + 237.3))
     return es
+
 
 def calculate_vapor_current_pressure(relative_humidity_air, vapor_saturation_pressure):
         ea = (relative_humidity_air / 100) * vapor_saturation_pressure
         return ea
 
+
 def calculate_declivity_curve_pressure_vapor(temperature, vapor_saturation_pressure):
         delta = (4098 * vapor_saturation_pressure) / ((temperature + 237.3) ** 2)
         return delta
+
 
 def calculate_atmospheric_pressure(altitude):
         
@@ -101,6 +117,9 @@ def calculate_atmospheric_pressure(altitude):
 def calculate_psychrometric_constant(atmospheric_pressure):
         gamma = 0.665 * 10**-3 * atmospheric_pressure
         return gamma
+
+
+
 
 
 
