@@ -5,7 +5,7 @@ from core.domain.entity.derivationline_entity import DerivationlineEntity
 
 class TestDerivationlineService:
 
-  def test_calculate_diameter():
+  def test_calculate_diameter(self):
 
     error = 0
 
@@ -18,7 +18,6 @@ class TestDerivationlineService:
     expected_result = float(35.0)
 
     result = DerivationlineService.calculate_derivationline_dimensions(test_derivationline_entity)
-    print(result)
 
-    assert (expected_result - result) == error
+    assert (expected_result == result)
     print(f'_____Test_Passed____\n')
