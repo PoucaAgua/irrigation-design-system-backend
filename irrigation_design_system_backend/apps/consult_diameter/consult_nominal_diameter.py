@@ -3,17 +3,18 @@ from apps.file_reader.source_table import SourceTable
 
 class ConsultNominalDiameterTable:
 
-  data = SourceTable.reference_table_reading("irrigation-design-system-backend/irrigation_design_system_backend/core/files/reference_table_Commercial_diameters.csv")
+  data = SourceTable.reference_table_reading("/home/lucascaue/Área de trabalho/irrigation-design-system-backend/irrigation_design_system_backend/core/files/reference_table_Commercial_diameters.csv")
 
-  def nominal_diameter(self, diameter_calculation):
+  @classmethod
+  def nominal_diameter(cls, diameter_calculation):
     
-    if ((diameter_calculation - self.data['Nominal_Diameter (mm)']) == 0).any():
+    if ((diameter_calculation - cls.data['Nominal_Diameter (mm)']) == 0).any():
       return diameter_calculation
 
-    if diameter_calculation > self.data['Nominal_Diameter (mm)'].max():
+    if diameter_calculation > cls.data['Nominal_Diameter (mm)'].max():
       return 'Diameter not found in reference tables'
 
     else:
-      index = (self.data['Nominal_Diameter (mm)'] < diameter_calculation).idxmin()
-      return self.data['Nominal_Diameter (mm)'][index]
+      index = (cls.data['Nominal_Diameter (mm)'] < diameter_calculation).idxmin()
+      return cls.data['Nominal_Diameter (mm)'][index]
     
