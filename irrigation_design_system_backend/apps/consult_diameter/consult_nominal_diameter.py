@@ -1,9 +1,13 @@
+import os
 from _decimal import Decimal
-from apps.file_reader.source_table import SourceTable
+from pathlib import Path
+
+from core.tables.source_table import SourceTable
+
 
 class ConsultNominalDiameterTable:
 
-  data = SourceTable.reference_table_reading("/home/lucascaue/Área de trabalho/irrigation-design-system-backend/irrigation_design_system_backend/core/files/reference_table_Commercial_diameters.csv")
+  data = SourceTable.reference_table_reading("/files/reference_table_Commercial_diameters.csv")
 
   @classmethod
   def nominal_diameter(cls, diameter_calculation):
