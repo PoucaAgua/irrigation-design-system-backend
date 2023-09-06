@@ -2,8 +2,16 @@ from decimal import Decimal
 from dataclasses import dataclass
 
 @dataclass
-class DerivationlineEntity:
-  friction_factor: Decimal
-  flow: Decimal                    
-  load_loss: Decimal                
-  pipe_length: Decimal              
+class DerivationlineDiameterEntity:
+  
+  demand_flow:              Decimal
+  speed_max:                Decimal 
+
+@dataclass
+class DerivationlineLoadLoassEntity:
+  
+  length_derivationline:    Decimal
+  flow:                     Decimal
+  n_outputs:                Decimal
+  line_spacing:             Decimal
+  diameter_derivationline:  Decimal
