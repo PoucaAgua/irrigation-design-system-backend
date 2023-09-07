@@ -4,7 +4,7 @@ from core.constants.hydraulic_design import HydraulicConstants
 from core.constants.math import MathConstants
 from core.domain.entity.derivationline_entity import DerivationlineDiameterEntity, DerivationlineLoadLoassEntity
 from apps.consult_diameter.consult_nominal_diameter import ConsultNominalDiameterTable
-from apps.hydraulic_design.aux_calculations.aux_calculation import AuxCalculationHydraulicDesign
+from apps.hydraulic_design.hydraulic_calculation.hydraulic_calculation import HydraulicCalculation
 
 
 class DerivationlineService:
@@ -31,10 +31,10 @@ class DerivationlineService:
         q = loadloss_entity.flow
         n = loadloss_entity.n_outputs
 
-        v = AuxCalculationHydraulicDesign.speed_water(q, d)
-        re = AuxCalculationHydraulicDesign.n_reynolds(v, d)
-        friction = AuxCalculationHydraulicDesign.friction_factor(d, re)
-        f_factor = AuxCalculationHydraulicDesign.f_factor(n)
+        v = HydraulicCalculation.speed_water(q, d)
+        re = HydraulicCalculation.n_reynolds(v, d)
+        friction = HydraulicCalculation.friction_factor(d, re)
+        f_factor = HydraulicCalculation.f_factor(n)
 
         hf = friction * (l / d) * ((v**2) /(2*g))
 

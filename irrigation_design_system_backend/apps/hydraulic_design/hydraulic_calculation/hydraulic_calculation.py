@@ -2,7 +2,7 @@ from _decimal import Decimal
 from core.constants.hydraulic_design import HydraulicConstants
 from core.constants.math import MathConstants
 
-class AuxCalculationHydraulicDesign:
+class HydraulicCalculation:
 
   @staticmethod
   def n_outputs():
