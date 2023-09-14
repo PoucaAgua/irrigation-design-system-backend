@@ -27,9 +27,9 @@ class DerivationlineService:
         g = HydraulicConstants.gravity
 
         l = loadloss_entity.length_derivationline
-        d = loadloss_entity.diameter_derivationline
         q = loadloss_entity.flow
         n = loadloss_entity.n_outputs
+        d = loadloss_entity.diameter_derivationline
 
         v = HydraulicCalculation.speed_water(q, d)
         re = HydraulicCalculation.n_reynolds(v, d)
