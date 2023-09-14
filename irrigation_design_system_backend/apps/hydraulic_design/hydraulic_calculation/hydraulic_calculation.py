@@ -12,8 +12,10 @@ class HydraulicCalculation:
   def speed_water(q, d) -> Decimal:
 
     pi = MathConstants.PI
+    q = Decimal(q)
+    d = Decimal(d)
 
-    speed = Decimal(4*q) / ((Decimal(d)**2) * pi)
+    speed = (4/((d)**2)) * (q / pi)
 
     return speed
 
