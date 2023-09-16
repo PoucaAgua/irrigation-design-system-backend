@@ -20,6 +20,7 @@ packaging==23.1
 pluggy==1.2.0
 psycopg2-binary==2.9.6
 py==1.11.0
+pandas==2.0.3
 pydantic==2.0.2
 pydantic_core==2.1.2
 pyparsing==3.1.0
