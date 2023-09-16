@@ -31,10 +31,9 @@ jobs:
         run: . venv/bin/activate && flake8 .
 
       - name: Run Black Check
-        working-directory: irrigation_design_system_backend
         run: |
           . venv/bin/activate
-          if ! black --check .; then
+          if ! black --check irrigation_design_system_backend; then
             echo "Black found formatting issues."
             exit 1
           fi
