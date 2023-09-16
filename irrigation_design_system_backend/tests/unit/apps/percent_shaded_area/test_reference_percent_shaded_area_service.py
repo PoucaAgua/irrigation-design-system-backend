@@ -40,5 +40,3 @@ class TestPercentShadedAreaService:
 
         # Then
         assert abs(result - expected_result) <= self.error
-
-

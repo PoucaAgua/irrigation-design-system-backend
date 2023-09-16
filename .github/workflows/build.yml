@@ -24,12 +24,16 @@ jobs:
         run: python -m venv venv && source venv/bin/activate &&
           pip3 install -r requirements.txt
 
-      # Install all the app dependencies
+      - name: Install Dev dependencies
+        run: pip3 install -r requirements-dev.txt
+
+      - name: Run Flake8
+        run: . venv/bin/activate && flake8 .
+
       - name: Install dependencies
         run: pip3 install -r requirements.txt
 
-      # Build the app and run tests
-      - name: Build and Run Test
+      - name: Run Test
         run: . venv/bin/activate && pytest
 
       - name: Create Zipfile archive of Dependencies
