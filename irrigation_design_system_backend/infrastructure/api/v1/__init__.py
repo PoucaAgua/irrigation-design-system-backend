@@ -7,7 +7,12 @@ from infrastructure.api.v1.controllers import (
     percent_wetted_area_controller,
     percent_shaded_area_controller,
     derivation_line_controller,
+<<<<<<< HEAD
     irrigation_controller,
+=======
+    special_parts_controller
+    
+>>>>>>> 1406b47 (study: example how use the class)
 )
 
 router = APIRouter()
@@ -64,4 +69,10 @@ router.include_router(
     irrigation_controller.irrigation_time_controller.router,
     prefix="/irrigation/time",
     tags=["Endpoint to irrigation time outputs"],
+)
+
+router.include_router(
+    special_parts_controller.router, 
+    prefix="/special_parts",
+    tags=["Endpoint Special parts"],
 )
