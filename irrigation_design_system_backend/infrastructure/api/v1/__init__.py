@@ -6,6 +6,7 @@ from infrastructure.api.v1.controllers import (
     percent_wetted_area_controller,
     percent_shaded_area_controller,
     derivation_line_controller,
+    special_parts_controller
     
 )
 
@@ -21,3 +22,5 @@ router.include_router(project_controller.router, prefix="/projects",
                       tags=["Endpoint to manager projects"])
 router.include_router(derivation_line_controller.router, prefix="/derivationline",
                       tags=["Endpoint Derivation Line"])
+router.include_router(special_parts_controller.router, prefix="/special_parts",
+                      tags=["Endpoint Special parts"])
