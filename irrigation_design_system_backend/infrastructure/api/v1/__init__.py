@@ -6,7 +6,6 @@ from infrastructure.api.v1.controllers import (
     percent_wetted_area_controller,
     percent_shaded_area_controller,
     derivation_line_controller,
-    
 )
 
 router = APIRouter()

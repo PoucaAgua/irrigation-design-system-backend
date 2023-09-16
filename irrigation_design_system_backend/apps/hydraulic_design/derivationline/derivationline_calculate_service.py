@@ -15,13 +15,13 @@ class DerivationLineService:
         q = diameter_input.demand_flow
         s_max = diameter_input.speed_max
 
-        theoretical_dimensions = (((4*q) / (pi*s_max))**Decimal(0.5)) * Decimal(1000.0)
+        theoretical_dimensions = (((4 * q) / (pi * s_max)) ** Decimal(0.5)) * Decimal(1000.0)
         return ConsultNominalDiameterTable.nominal_diameter(float(theoretical_dimensions))
-    
+
     @staticmethod
     def calculate_load_loss(load_loss_input: DerivationLineLoadLossInput) -> Decimal:
         g = HydraulicConstants.gravity
-        l = load_loss_input.length_derivation_line
+        length = load_loss_input.length_derivation_line
         q = load_loss_input.flow
         n = load_loss_input.n_outputs
         d = load_loss_input.diameter_derivation_line
@@ -31,6 +31,6 @@ class DerivationLineService:
         friction = HydraulicCalculation.friction_factor(d, re)
         f_factor = HydraulicCalculation.f_factor(n)
 
-        hf = friction * (l / d) * ((v**2) /(2*g))
+        hf = friction * (length / d) * ((v ** 2) / (2 * g))
         hf_corr = hf * f_factor
         return hf_corr

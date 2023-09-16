@@ -23,4 +23,3 @@ class ProjectRepository:
     @transactional_session
     def get_all(self, db) -> List[Project]:
         return db.query(Project).all()
-
