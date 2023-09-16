@@ -1,8 +1,8 @@
-from core.tables.load_dataframe import load_dataframes
+from core.tables.dataframes import dataframes
 
 
 class ConsultNominalDiameterTable:
-    data = load_dataframes.commercial_diameter
+    data = dataframes.commercial_diameter
 
     @classmethod
     def nominal_diameter(cls, diameter_calculation):
