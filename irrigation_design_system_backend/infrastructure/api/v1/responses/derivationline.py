@@ -1,10 +1,15 @@
 from pydantic import BaseModel
 
 
-class DerivationlineDiameterReponse(BaseModel):
+class DerivationLineDiameterResponse(BaseModel):
     message: str = "Successfully calculated derivation line diameter."
     value: float
 
-class DerivationlineLoadLossReponse(BaseModel):
+
+class DerivationLineLoadLossResponse(BaseModel):
     message: str = "Successfully calculated bypass line load loss."
     value: float
+
+
+class DerivationLineErrorResponse(BaseModel):
+    message: str

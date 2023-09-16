@@ -1,7 +1,7 @@
 from _decimal import Decimal
 import pytest
 
-from apps.consult_diameter.consult_nominal_diameter import ConsultNominalDiameterTable
+from apps.hydraulic_design.consult_diameter.consult_nominal_diameter import ConsultNominalDiameterTable
 
 class TestConsultNominalDiameterTable:
     @pytest.mark.parametrize("test, expected", [

@@ -1,36 +1,31 @@
 from _decimal import Decimal
 
-from apps.hydraulic_design.derivationline.derivationline_calculate_service import DerivationlineService
-from core.domain.entity.derivationline_entity import DerivationlineDiameterEntity, DerivationlineLoadLoassEntity
+from apps.hydraulic_design.derivationline.derivationline_calculate_service import DerivationLineService
+from core.domain.entity.derivation_line_input import DerivationLineDiameterInput, DerivationLineLoadLossInput
 
-class TestDerivationlineService:
 
-  def test_calculate_diameter(self):
-
+class TestDerivationLineService:
     error = Decimal('1e-3')
 
-    test_derivationline_entity = DerivationlineDiameterEntity(
-        demand_flow = Decimal(0.008481),
-        speed_max = Decimal(1.5),
-      )   
-    expected = float(100)
+    def test_calculate_diameter(self):
+        test_derivation_line_entity = DerivationLineDiameterInput(
+            demand_flow=Decimal(0.008481),
+            speed_max=Decimal(1.5),
+        )
+        expected = float(100)
 
-    result = DerivationlineService.calculate_derivationline_dimensions(test_derivationline_entity)
+        result = DerivationLineService.calculate_diameter(test_derivation_line_entity)
 
-    assert (expected == result)
+        assert (expected == result)
 
-  def calculate_loadloass_derivationline(self):
-    
-    test_loadloss_entity = DerivationlineLoadLoassEntity(
-        length_derivationline = Decimal(50.0),
-        diameter_derivationline = Decimal(0.1),
-        flow = Decimal(1.079834458),
-        n_outputs = Decimal(62.5)
-    )
-    expected = Decimal(0.19613492804)
-    result = DerivationlineService.calculate_loadloass_derivationline(test_loadloss_entity)
+    def calculate_load_loss_derivation_line(self):
+        test_load_loss_entity = DerivationLineLoadLossInput(
+            length_derivation_line=Decimal(50.0),
+            diameter_derivation_line=Decimal(0.1),
+            flow=Decimal(1.079834458),
+            n_outputs=Decimal(62.5)
+        )
+        expected = Decimal(0.19613492804)
+        result = DerivationLineService.calculate_load_loss(test_load_loss_entity)
 
-    assert abs(expected - result) <= self.error
-
-
-
+        assert abs(expected - result) <= self.error
