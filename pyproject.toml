@@ -6,5 +6,5 @@ pythonpath = [
 [tool.black]
 line-length = 100
 exclude = '''
-/(\.git|\.venv|\.pgdata|__pycache__|dist|build|\.eggs)/
+/(\.git|\.venv|\venv|\.pgdata|__pycache__|dist|build|\.eggs)/
 '''
