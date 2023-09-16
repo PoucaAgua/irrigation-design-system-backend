@@ -4,7 +4,6 @@ from core.constants.math import MathConstants
 
 
 class HydraulicCalculation:
-
     @staticmethod
     def speed_water(q, d) -> Decimal:
         pi = MathConstants.PI

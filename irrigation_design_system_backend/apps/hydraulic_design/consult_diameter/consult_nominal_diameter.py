@@ -6,13 +6,12 @@ class ConsultNominalDiameterTable:
 
     @classmethod
     def nominal_diameter(cls, diameter_calculation):
-
-        if ((diameter_calculation - cls.data['Nominal_Diameter (mm)']) == 0).any():
+        if ((diameter_calculation - cls.data["Nominal_Diameter (mm)"]) == 0).any():
             return diameter_calculation
 
-        if diameter_calculation > cls.data['Nominal_Diameter (mm)'].max():
-            raise KeyError('Diameter not found in reference tables')
+        if diameter_calculation > cls.data["Nominal_Diameter (mm)"].max():
+            raise KeyError("Diameter not found in reference tables")
 
         else:
-            index = (cls.data['Nominal_Diameter (mm)'] < diameter_calculation).idxmin()
-            return cls.data['Nominal_Diameter (mm)'][index]
+            index = (cls.data["Nominal_Diameter (mm)"] < diameter_calculation).idxmin()
+            return cls.data["Nominal_Diameter (mm)"][index]
