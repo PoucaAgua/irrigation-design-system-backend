@@ -9,6 +9,8 @@ from infrastructure.api.v1.controllers import (
     derivation_line_controller,
     special_parts_controller,
     irrigation_controller,
+    special_parts_controller
+    
 )
 
 router = APIRouter()
