@@ -3,36 +3,37 @@ from core.constants.math import MathConstants
 from core.domain.entity.percent_wetted_area_entity import (
     IrrigationTreeEntity,
     SaturatedWetRadiusX2Entity,
-    ContinuousStripEntity
+    ContinuousStripEntity,
 )
 
 
 class PercentWettedAreaService:
-
     @classmethod
     def calculate_irrigation_by_tree(cls, input_entity: IrrigationTreeEntity) -> Decimal:
         Np = input_entity.drippers_number
         Dw = cls._dw_calculate(input_entity)
         Sr = input_entity.space_between_lines
         Sp = input_entity.space_between_plants
-        return Decimal(Np * MathConstants.PI * Dw ** 2 * 100 / (4 * Sp * Sr))
+        return Decimal(Np * MathConstants.PI * Dw**2 * 100 / (4 * Sp * Sr))
 
     @classmethod
     def _dw_calculate(cls, input_entity: IrrigationTreeEntity) -> Decimal:
         Z = input_entity.z
         q = input_entity.q
         K0 = input_entity.hydraulic_conductivity_of_saturated_soil
-        return Decimal('1.32') * Z ** Decimal('0.35') * (q / K0) ** Decimal('0.33')
+        return Decimal("1.32") * Z ** Decimal("0.35") * (q / K0) ** Decimal("0.33")
 
     @classmethod
-    def calculate_twice_saturated_wetted_radius(cls, input_entity: SaturatedWetRadiusX2Entity) -> Decimal:
+    def calculate_twice_saturated_wetted_radius(
+        cls, input_entity: SaturatedWetRadiusX2Entity
+    ) -> Decimal:
         alpha = input_entity.parameter_model_unsaturated_hydraulic
         k0 = input_entity.hydraulic_conductivity_of_saturated_soil
         q = input_entity.q
 
         part1 = 2 / (alpha * MathConstants.PI)
         part2 = q / (MathConstants.PI * k0)
-        result = Decimal(2) * ((part1 ** 2 + part2) ** Decimal('0.5') - part1)
+        result = Decimal(2) * ((part1**2 + part2) ** Decimal("0.5") - part1)
         return result
 
     @classmethod

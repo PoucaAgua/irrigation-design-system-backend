@@ -7,7 +7,6 @@ parameters_hargraves_samani = ReferenceEvapotranspirationConstants.parameters_ha
 
 
 class ReferenceEvapotranspirationService:
-
     @staticmethod
     def calculate_hargraves_samani(eto_entity: EToEntity) -> Decimal:
         a, b, c = parameters_hargraves_samani

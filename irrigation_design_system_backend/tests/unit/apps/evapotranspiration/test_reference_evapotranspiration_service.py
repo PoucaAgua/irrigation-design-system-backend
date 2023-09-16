@@ -1,6 +1,8 @@
 from _decimal import Decimal
 
-from apps.evapotranspiration.reference_evapotranspiration_service import ReferenceEvapotranspirationService
+from apps.evapotranspiration.reference_evapotranspiration_service import (
+    ReferenceEvapotranspirationService,
+)
 from core.domain.entity.evapotranspiration_entity import EToEntity
 
 

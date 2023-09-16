@@ -30,6 +30,14 @@ jobs:
       - name: Run Flake8
         run: . venv/bin/activate && flake8 .
 
+      - name: Run Black Check
+        run: |
+          . venv/bin/activate
+          if ! black --check irrigation_design_system_backend; then
+            echo "Black found formatting issues."
+            exit 1
+          fi
+
       - name: Install dependencies
         run: pip3 install -r requirements.txt
 

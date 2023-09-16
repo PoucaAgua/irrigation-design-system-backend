@@ -11,9 +11,7 @@ if settings.DATABASE == "postgres":
     engine = create_engine(SQLALCHEMY_DATABASE_URL)
 else:
     SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
-    engine = create_engine(
-        SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-    )
+    engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
@@ -23,7 +21,7 @@ def get_db() -> Generator:
         db = SessionLocal()
         yield db
     except Exception as e:
-        print(f'error {e}')
+        print(f"error {e}")
     finally:
         db.close()
 
@@ -33,7 +31,9 @@ def transactional_session(func):
     def wrapper(self, *args, **kwargs):
         db = SessionLocal()
         try:
-            result = func(self, db, *args, **kwargs)  # Pass the instance and db session to the wrapped function
+            result = func(
+                self, db, *args, **kwargs
+            )  # Pass the instance and db session to the wrapped function
             db.commit()  # Commit the changes made during the function call
         except Exception as e:
             db.rollback()  # Rollback the changes if an exception occurs
@@ -41,4 +41,5 @@ def transactional_session(func):
         finally:
             db.close()  # Close the database session after the function call
         return result
+
     return wrapper

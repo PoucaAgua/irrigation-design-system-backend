@@ -2,13 +2,17 @@ from _decimal import Decimal
 
 from core.constants.hydraulic_design import HydraulicConstants
 from core.constants.math import MathConstants
-from core.domain.entity.derivation_line_input import DerivationLineDiameterInput, DerivationLineLoadLossInput
-from apps.hydraulic_design.consult_diameter.consult_nominal_diameter import ConsultNominalDiameterTable
+from core.domain.entity.derivation_line_input import (
+    DerivationLineDiameterInput,
+    DerivationLineLoadLossInput,
+)
+from apps.hydraulic_design.consult_diameter.consult_nominal_diameter import (
+    ConsultNominalDiameterTable,
+)
 from apps.hydraulic_design.hydraulic_calculation.hydraulic_calculation import HydraulicCalculation
 
 
 class DerivationLineService:
-
     @staticmethod
     def calculate_diameter(diameter_input: DerivationLineDiameterInput) -> Decimal:
         pi = MathConstants.PI
@@ -31,6 +35,6 @@ class DerivationLineService:
         friction = HydraulicCalculation.friction_factor(d, re)
         f_factor = HydraulicCalculation.f_factor(n)
 
-        hf = friction * (length / d) * ((v ** 2) / (2 * g))
+        hf = friction * (length / d) * ((v**2) / (2 * g))
         hf_corr = hf * f_factor
         return hf_corr

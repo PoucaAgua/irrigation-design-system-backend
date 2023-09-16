@@ -2,10 +2,15 @@ from fastapi import APIRouter, HTTPException, status
 
 from infrastructure.api.v1.responses.derivationline import (
     DerivationLineDiameterResponse,
-    DerivationLineLoadLossResponse
+    DerivationLineLoadLossResponse,
 )
-from core.domain.entity.derivation_line_input import DerivationLineLoadLossInput, DerivationLineDiameterInput
-from apps.hydraulic_design.derivationline.derivationline_calculate_service import DerivationLineService
+from core.domain.entity.derivation_line_input import (
+    DerivationLineLoadLossInput,
+    DerivationLineDiameterInput,
+)
+from apps.hydraulic_design.derivationline.derivationline_calculate_service import (
+    DerivationLineService,
+)
 
 router = APIRouter()
 
