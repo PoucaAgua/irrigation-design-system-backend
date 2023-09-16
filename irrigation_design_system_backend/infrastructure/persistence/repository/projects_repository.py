@@ -7,7 +7,6 @@ from infrastructure.persistence.session import transactional_session
 
 
 class ProjectRepository:
-
     @transactional_session
     def upsert(self, db, project_entity: ProjectEntity):
         project_db = ProjectMapper.entity_to_model(project_entity)

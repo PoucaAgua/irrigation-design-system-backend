@@ -4,7 +4,7 @@ from apps.hydraulic_design.hydraulic_calculation.hydraulic_calculation import Hy
 
 
 class TestHydraulicCalculation:
-    error = Decimal('1e-3')
+    error = Decimal("1e-3")
 
     def test_speed_water(self):
         result = Decimal(HydraulicCalculation.speed_water(0.008481, 0.1))

@@ -2,11 +2,11 @@ from fastapi import APIRouter
 from apps.percent_shaded_area.percent_shaded_area_service import PercentShadedAreaService
 from core.domain.entity.percent_shaded_area_entity import (
     PlantStripProjectionInputEntity,
-    PlantCanopyProjectionInputEntity
+    PlantCanopyProjectionInputEntity,
 )
 from infrastructure.api.v1.responses.percent_shaded_area import (
     PercentShadedAreaByCanopyResponse,
-    PercentShadedAreaByStripResponse
+    PercentShadedAreaByStripResponse,
 )
 
 router = APIRouter()

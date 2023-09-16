@@ -3,12 +3,12 @@ from apps.percent_wetted_area.percent_wetted_area_service import PercentWettedAr
 from infrastructure.api.v1.responses.percent_wetted_area import (
     IrrigationTreeResponse,
     SaturatedWetRadiusX2Response,
-    ContinuousStripResponse
+    ContinuousStripResponse,
 )
 from core.domain.entity.percent_wetted_area_entity import (
     IrrigationTreeEntity,
     SaturatedWetRadiusX2Entity,
-    ContinuousStripEntity
+    ContinuousStripEntity,
 )
 
 router = APIRouter()
