@@ -1,4 +1,5 @@
 from _decimal import Decimal
+from functools import reduce
 
 from core.domain.entity.special_parts_entity import SpecialPartsEntity
 

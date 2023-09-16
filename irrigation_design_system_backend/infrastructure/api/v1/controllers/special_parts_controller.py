@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from apps.special_parts.special_parts_service import SpecialPartsService
+from apps.hydraulic_design.special_parts.special_parts_service import SpecialPartsService
 from core.domain.entity.special_parts_entity import SpecialPartsEntity
 from infrastructure.api.v1.responses.special_parts import SpecialPartsReponse
 
