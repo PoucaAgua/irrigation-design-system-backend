@@ -1,6 +1,6 @@
 from _decimal import Decimal
 from core.constants.math import MathConstants
-from core.domain.entity.percent_wetted_area_entity import ( 
+from core.domain.entity.percent_wetted_area_entity import (
     IrrigationTreeEntity,
     SaturatedWetRadiusX2Entity,
     ContinuousStripEntity
@@ -29,8 +29,11 @@ class PercentWettedAreaService:
         alpha = input_entity.parameter_model_unsaturated_hydraulic
         k0 = input_entity.hydraulic_conductivity_of_saturated_soil
         q = input_entity.q
-        return Decimal(2) * ((4 / alpha ** 2 * MathConstants.PI ** 2) + (q / MathConstants.PI * k0) - (
-                2 / alpha * MathConstants.PI)) ** Decimal('0.5')
+
+        part1 = 2 / (alpha * MathConstants.PI)
+        part2 = q / (MathConstants.PI * k0)
+        result = Decimal(2) * ((part1 ** 2 + part2) ** Decimal('0.5') - part1)
+        return result
 
     @classmethod
     def calculate_continuous_strip(cls, input_entity: ContinuousStripEntity) -> Decimal:
@@ -42,10 +45,10 @@ class PercentWettedAreaService:
     def _moistened_area_calculate(cls, input_entity: ContinuousStripEntity) -> Decimal:
         Sp = input_entity.space_between_plants
         Sw = input_entity.wetted_zone
-        return (Sp * Sw)
-    
+        return Sp * Sw
+
     @classmethod
     def _area_occupied_plant_calculate(cls, input_entity: ContinuousStripEntity) -> Decimal:
         Sp = input_entity.space_between_plants
         Sr = input_entity.row_spacing_plants
-        return (Sp * Sr)
+        return Sp * Sr

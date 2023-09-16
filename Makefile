@@ -12,3 +12,7 @@ postgres:
 # Initializing the application
 start:
 	cd ./irrigation_design_system_backend && uvicorn main:app --reload
+
+# check the code quality
+check:
+	flake8

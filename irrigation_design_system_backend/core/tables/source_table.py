@@ -1,7 +1,5 @@
 import os.path
-
 from pandas import read_csv
-from pathlib import Path
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
