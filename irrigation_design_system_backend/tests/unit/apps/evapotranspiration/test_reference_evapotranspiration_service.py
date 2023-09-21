@@ -1,6 +1,8 @@
 from _decimal import Decimal
 
-from apps.evapotranspiration.reference_evapotranspiration_service import ReferenceEvapotranspirationService
+from apps.evapotranspiration.reference_evapotranspiration_service import (
+    ReferenceEvapotranspirationService,
+)
 from core.domain.entity.evapotranspiration_entity import EToHargravesSamaniInputyEntity
 
 
@@ -14,7 +16,7 @@ class TestReferenceEvapotranspirationService:
             temperature_min=Decimal(10.0),
             temperature_max=Decimal(30.0),
             latitude=Decimal(69.0),
-            month= "Jan"
+            month="Jan",
         )
         expected_result = Decimal(2.83)
 
@@ -23,5 +25,3 @@ class TestReferenceEvapotranspirationService:
 
         # Then
         assert abs(result - expected_result) <= self.error
-
-    
