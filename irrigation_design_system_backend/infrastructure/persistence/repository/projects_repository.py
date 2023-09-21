@@ -1,13 +1,16 @@
 from typing import Optional, List
 
 from core.domain.entity.project_input import ProjectInput, DerivationLineInput, LateralLineInput
-from infrastructure.persistence.mappers.project_mapper import ProjectMapper, DerivationLineMapper, LateralLineMapper
+from infrastructure.persistence.mappers.project_mapper import (
+    ProjectMapper,
+    DerivationLineMapper,
+    LateralLineMapper,
+)
 from infrastructure.persistence.models import Project
 from infrastructure.persistence.session import transactional_session
 
 
 class ProjectRepository:
-
     @transactional_session
     def upsert(self, db, project_entity: ProjectInput):
         project_db = ProjectMapper.entity_to_model(project_entity)
@@ -26,7 +29,6 @@ class ProjectRepository:
 
 
 class DerivationLineRepository:
-
     @transactional_session
     def upsert(self, db, derivation: DerivationLineInput):
         project_db = DerivationLineMapper.entity_to_model(derivation)
@@ -37,7 +39,6 @@ class DerivationLineRepository:
 
 
 class LateralLineRepository:
-
     @transactional_session
     def upsert(self, db, lateral_line: LateralLineInput):
         lateral_line_db = LateralLineMapper.entity_to_model(lateral_line)

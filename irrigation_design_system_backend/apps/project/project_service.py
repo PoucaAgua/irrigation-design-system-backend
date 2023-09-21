@@ -1,5 +1,8 @@
 from core.domain.entity.project_input import ProjectInput, DerivationLineInput, LateralLineInput
-from infrastructure.persistence.repository.projects_repository import ProjectRepository, DerivationLineRepository
+from infrastructure.persistence.repository.projects_repository import (
+    ProjectRepository,
+    DerivationLineRepository,
+)
 from infrastructure.persistence.repository.projects_repository import LateralLineRepository
 
 
