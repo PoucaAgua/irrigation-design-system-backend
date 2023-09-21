@@ -5,7 +5,6 @@ from infrastructure.persistence.models import Project, DerivationLine, LateralLi
 class ProjectMapper:
     @staticmethod
     def entity_to_model(project_entity: ProjectInput) -> Project:
-
         project = Project(
             user_id=project_entity.user_id,
             group_id=project_entity.group_id,
@@ -17,26 +16,31 @@ class ProjectMapper:
             total_irrigation_required=project_entity.total_irrigation_required,
         )
 
-        derivation_line = [DerivationLine(
-            pipe_type=line.pipe_type,
-            inlet_pressure=line.inlet_pressure,
-            length=line.length,
-            diameter=line.diameter,
-            localized_loss=line.localized_loss,
-            type=line.type
-        ) for line in project_entity.derivation_line]
+        derivation_line = [
+            DerivationLine(
+                pipe_type=line.pipe_type,
+                inlet_pressure=line.inlet_pressure,
+                length=line.length,
+                diameter=line.diameter,
+                localized_loss=line.localized_loss,
+                type=line.type,
+            )
+            for line in project_entity.derivation_line
+        ]
 
-        lateral_line = [LateralLine(
-            dripper=line.dripper,
-            decline=line.decline,
-            inlet_pressure=line.inlet_pressure,
-            separation_between_issuers=line.separation_between_issuers,
-            length_max=line.length_max,
-            diameter=line.diameter,
-            localized_loss=line.localized_loss,
-            type=line.type
-
-        ) for line in project_entity.lateral_line]
+        lateral_line = [
+            LateralLine(
+                dripper=line.dripper,
+                decline=line.decline,
+                inlet_pressure=line.inlet_pressure,
+                separation_between_issuers=line.separation_between_issuers,
+                length_max=line.length_max,
+                diameter=line.diameter,
+                localized_loss=line.localized_loss,
+                type=line.type,
+            )
+            for line in project_entity.lateral_line
+        ]
 
         project.derivation_line = derivation_line
         project.lateral_line = lateral_line
@@ -51,7 +55,6 @@ class DerivationLineMapper:
 
 
 class LateralLineMapper:
-
     @staticmethod
     def entity_to_model(lateral_line_entity: LateralLineInput) -> LateralLine:
         return LateralLine(**lateral_line_entity.dict())
