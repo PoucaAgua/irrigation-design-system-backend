@@ -1,7 +1,7 @@
 from decimal import Decimal
 from dataclasses import dataclass
 from core.domain.enum.hemisphere import Hemisphere    
-from core.domain.enum.month import MonthEnum
+from core.domain.enum.month import MonthEnum_hargraves, MonthEnum_samani
 
 
 
@@ -11,7 +11,7 @@ class EToHargravesSamaniInputyEntity:
     temperature_max: Decimal
     temperature_min: Decimal
     latitude: Decimal
-    month: MonthEnum
+    month: MonthEnum_hargraves
 
 @dataclass
 class EToBlanneyCriddleInputyEntity:
@@ -20,7 +20,7 @@ class EToBlanneyCriddleInputyEntity:
     temperature_min: Decimal
     days: Decimal
     latitude: int
-    month: MonthEnum
+    month: MonthEnum_samani
     hemisphere: Hemisphere
 
 
