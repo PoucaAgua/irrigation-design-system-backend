@@ -6,7 +6,7 @@ from apps.evapotranspiration.reference_evapotranspiration.reference_evapotranspi
 from core.domain.entity.evapotranspiration_input import (
     EToHargreavesSamaniInput,
     EToPenmanMonteithInputyEntity,
-    EToBlanneyCriddleInputyEntity,
+    EToBlanneyCriddleInputy,
 )
 from infrastructure.api.v1.responses.evapotranspiration import EvapotranspirationResponse
 
@@ -20,8 +20,8 @@ def evapotranspiration_hargreaves_samani(eto_input: EToHargreavesSamaniInput):
 
 
 @router.post("/blaney_criddle", response_model=EvapotranspirationResponse)
-def evapotranspiration_blaney_criddle(eto_entity: EToBlanneyCriddleInputyEntity):
-    eto = ReferenceEvapotranspirationService.calculate_blaney_cridlle(eto_entity)
+def evapotranspiration_blaney_criddle(eto_entity: EToBlanneyCriddleInputy):
+    eto = ReferenceEvapotranspirationService.calculate_blaney_criddle(eto_entity)
     return EvapotranspirationResponse(value=eto)
 
 
