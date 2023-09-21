@@ -11,8 +11,8 @@ class Dataframes:
     def __init__(self):
         self._commercial_diameter = None
         self._radiation_hargreaves_samani = None
-        self.percent_daily_hours_north = None
-        self.percent_daily_hours_south = None
+        self._percent_daily_hours_north = None
+        self._percent_daily_hours_south = None
 
     @property
     def commercial_diameter(self):
@@ -28,9 +28,25 @@ class Dataframes:
     def radiation_hargreaves_samani(self):
         if self._radiation_hargreaves_samani is None:
             self._radiation_hargreaves_samani = SourceTable.reference_table_reading(
-                self.RADIATION_HARGREAVES_SAMANI_PATH, delimiter=";", decimal=','
+                self.RADIATION_HARGREAVES_SAMANI_PATH, delimiter=";", decimal=","
             )
         return self._radiation_hargreaves_samani
+
+    @property
+    def percent_daily_hours_north(self):
+        if self._percent_daily_hours_north is None:
+            self._percent_daily_hours_north = SourceTable.reference_table_reading(
+                self.PERCENT_DAILY_HOURS_NORTH_PATH, delimiter=";", decimal=","
+            )
+        return self._percent_daily_hours_north
+
+    @property
+    def percent_daily_hours_south(self):
+        if self._percent_daily_hours_south is None:
+            self._percent_daily_hours_south = SourceTable.reference_table_reading(
+                self.PERCENT_DAILY_HOURS_SOUTH_PATH, delimiter=";", decimal=","
+            )
+        return self._percent_daily_hours_south
 
 
 dataframes = Dataframes()

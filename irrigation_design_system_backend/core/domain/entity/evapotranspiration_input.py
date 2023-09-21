@@ -14,7 +14,7 @@ class EToHargreavesSamaniInput:
 
 
 @dataclass
-class EToBlanneyCriddleInputyEntity:
+class EToBlanneyCriddleInputy:
     temperature_med: Decimal
     temperature_max: Decimal
     temperature_min: Decimal
