@@ -26,4 +26,3 @@ def evapotranspiration_penman_monteith(eto_entity: EToPenmanMonteithInputyEntity
 
 
 
-

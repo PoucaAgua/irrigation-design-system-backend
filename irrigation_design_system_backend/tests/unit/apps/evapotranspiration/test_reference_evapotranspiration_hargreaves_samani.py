@@ -5,7 +5,7 @@ import pytest
 from apps.evapotranspiration.funcitions_to_reference_evapotranspiration import calculate_radiation_hargreaves_samani
 from apps.evapotranspiration.reference_evapotranspiration_service import ReferenceEvapotranspirationService
 from core.domain.entity.evapotranspiration_entity import EToHargravesSamaniInputyEntity
-from core.domain.enum.month import MonthEnum
+from core.domain.enum.month import  MonthEnum_hargraves
 
 
 class TestReferenceEvapotranspirationHargreavesSamani:
@@ -14,8 +14,39 @@ class TestReferenceEvapotranspirationHargreavesSamani:
     @pytest.mark.parametrize(
         "latitude, month, expected_result",
         [
-            (Decimal("69.0"), MonthEnum.Jan, Decimal("41.2")),  # Add more test cases here
-            (Decimal("69.0"), MonthEnum.Fev, Decimal("28.95")),  # Add more test cases here
+            (Decimal("69.0"),  MonthEnum_hargraves.Jan, Decimal("41.2")),  # Add more test cases here
+            (Decimal("69.0"),  MonthEnum_hargraves.Fev, Decimal("28.95")),  # Add more test cases here
+            (Decimal("69.0"),  MonthEnum_hargraves.Mar, Decimal("16.35")),
+            (Decimal("69.0"),  MonthEnum_hargraves.Abr, Decimal("5.45")),
+            (Decimal("69.0"),  MonthEnum_hargraves.Maio, Decimal("0.5")),
+            (Decimal("69.0"),  MonthEnum_hargraves.Jun, Decimal("0")),
+            (Decimal("69.0"),  MonthEnum_hargraves.Jul, Decimal("0")),
+            (Decimal("69.0"),  MonthEnum_hargraves.Ago, Decimal("2.7")),
+            (Decimal("69.0"),  MonthEnum_hargraves.Set, Decimal("11.3")),
+            (Decimal("69.0"),  MonthEnum_hargraves.Out, Decimal("23.95")),
+            (Decimal("69.0"),  MonthEnum_hargraves.Nov, Decimal("37.35")),
+            (Decimal("69.0"),  MonthEnum_hargraves.Dez, Decimal("45")),
+
+
+            (Decimal("67.0"),  MonthEnum_hargraves.Jan, Decimal("41.2")),
+            (Decimal("67.0"),  MonthEnum_hargraves.Fev, Decimal("28.75")),  
+            (Decimal("67.0"),  MonthEnum_hargraves.Mar, Decimal("16.35")),
+            (Decimal("67.0"),  MonthEnum_hargraves.Abr, Decimal("5.45")),
+            (Decimal("67.0"),  MonthEnum_hargraves.Maio, Decimal("0.5")),
+            (Decimal("67.0"),  MonthEnum_hargraves.Jun, Decimal("0")),
+            (Decimal("67.0"),  MonthEnum_hargraves.Jul, Decimal("0")),
+            (Decimal("67.0"),  MonthEnum_hargraves.Ago, Decimal("2.7")),
+            (Decimal("67.0"),  MonthEnum_hargraves.Set, Decimal("11.3")),
+            (Decimal("67.0"),  MonthEnum_hargraves.Out, Decimal("23.75")),
+            (Decimal("67.0"),  MonthEnum_hargraves.Nov, Decimal("37.35")),
+            (Decimal("67.0"),  MonthEnum_hargraves.Dez, Decimal("45")),
+
+
+            
+
+
+
+
             # (latitude, month, expected_result),
             # ...
         ]
@@ -23,7 +54,7 @@ class TestReferenceEvapotranspirationHargreavesSamani:
     def test_calculate_radiation_hargreaves_samani(
             self,
             latitude: Decimal,
-            month: MonthEnum,
+            month:  MonthEnum_hargraves,
             expected_result: Decimal
     ):
 
