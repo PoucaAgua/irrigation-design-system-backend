@@ -1,8 +1,6 @@
 import os
 from core.tables.read_files import read_file
-import pandas as pd
 from enum import Enum
-from decimal import Decimal
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 

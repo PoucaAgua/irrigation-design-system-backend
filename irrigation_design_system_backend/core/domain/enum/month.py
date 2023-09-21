@@ -1,5 +1,5 @@
 from enum import Enum
-    
+
 # class Month(Enum):
 #     Jan= "Jan"
 #     Fev = "Fev"
@@ -13,6 +13,7 @@ from enum import Enum
 #     Out = "Out"
 #     Nov = "Nov"
 #     Dez = "Dez"
+
 
 class MonthEnum_hargraves(Enum):
     Jan = "Jan"
@@ -28,6 +29,7 @@ class MonthEnum_hargraves(Enum):
     Nov = "Nov"
     Dez = "Dez"
 
+
 class MonthEnum_blaney(Enum):
     Jan = "Jan"
     Feb = "Feb"
@@ -41,4 +43,3 @@ class MonthEnum_blaney(Enum):
     Oct = "Oct"
     Nov = "Nov"
     Dec = "Dec"
-
