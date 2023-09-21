@@ -1,10 +1,10 @@
 from fastapi import APIRouter
 
-from apps.evapotranspiration.reference_evapotranspiration_service import (
+from apps.evapotranspiration.reference_evapotranspiration.reference_evapotranspiration_service import (
     ReferenceEvapotranspirationService,
 )
-from core.domain.entity.evapotranspiration_entity import (
-    EToHargravesSamaniInputyEntity,
+from core.domain.entity.evapotranspiration_input import (
+    EToHargreavesSamaniInput,
     EToPenmanMonteithInputyEntity,
     EToBlanneyCriddleInputyEntity,
 )
@@ -13,9 +13,9 @@ from infrastructure.api.v1.responses.evapotranspiration import Evapotranspiratio
 router = APIRouter()
 
 
-@router.post("/hargraves_samani", response_model=EvapotranspirationResponse)
-def evapotranspiration_hargraves_samani(eto_entity: EToHargravesSamaniInputyEntity):
-    eto = ReferenceEvapotranspirationService.calculate_hargraves_samani(eto_entity)
+@router.post("/hargreaves_samani", response_model=EvapotranspirationResponse)
+def evapotranspiration_hargreaves_samani(eto_input: EToHargreavesSamaniInput):
+    eto = ReferenceEvapotranspirationService.calculate_hargreaves_samani(eto_input)
     return EvapotranspirationResponse(value=eto)
 
 

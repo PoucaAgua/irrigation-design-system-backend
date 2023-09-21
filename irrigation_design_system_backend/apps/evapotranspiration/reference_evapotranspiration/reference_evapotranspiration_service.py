@@ -1,9 +1,7 @@
 from _decimal import Decimal
 from core.constants.evapotranspiration import ReferenceEvapotranspirationConstants
-from core.domain.entity.evapotranspiration_entity import (
-    EToHargravesSamaniInputyEntity
-)
-from apps.evapotranspiration.funcitions_to_reference_evapotranspiration import (
+from core.domain.entity.evapotranspiration_input import EToHargreavesSamaniInput
+from apps.evapotranspiration.reference_evapotranspiration.hargreaves_samani_method import (
     calculate_radiation_hargreaves_samani,
 )
 
@@ -13,14 +11,14 @@ parameters_blaney_cridlle = ReferenceEvapotranspirationConstants.parameters_blan
 
 class ReferenceEvapotranspirationService:
     @staticmethod
-    def calculate_hargraves_samani(eto_entity: EToHargravesSamaniInputyEntity) -> Decimal:
+    def calculate_hargreaves_samani(eto_input: EToHargreavesSamaniInput) -> Decimal:
         a, b, c = parameters_hargraves_samani
         Ra = calculate_radiation_hargreaves_samani(
-            latitude=eto_entity.latitude, month=eto_entity.month
+            latitude=eto_input.latitude, month=eto_input.month
         )
-        Tmed = eto_entity.temperature_med
-        Tmin = eto_entity.temperature_min
-        Tmax = eto_entity.temperature_max
+        Tmed = eto_input.temperature_med
+        Tmin = eto_input.temperature_min
+        Tmax = eto_input.temperature_max
         return Decimal(Ra * a * (b * (Tmed + c) * (Tmax - Tmin)) ** Decimal(0.5))
 
     # @staticmethod

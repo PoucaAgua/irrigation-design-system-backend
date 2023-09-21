@@ -4,9 +4,15 @@ from core.tables.source_table import SourceTable
 class Dataframes:
     PATH = "/files/"
     COMMERCIAL_DIAMETER_PATH = PATH + "reference_table_commercial_diameters.csv"
+    RADIATION_HARGREAVES_SAMANI_PATH = PATH + "data_radiation_hargreaves_samani.csv"
+    PERCENT_DAILY_HOURS_NORTH_PATH = PATH + "data_percent_daily_hours_north_blanney_criddle.csv"
+    PERCENT_DAILY_HOURS_SOUTH_PATH = PATH + "data_percent_daily_hours_south_blanney_criddle.csv"
 
     def __init__(self):
         self._commercial_diameter = None
+        self._radiation_hargreaves_samani = None
+        self.percent_daily_hours_north = None
+        self.percent_daily_hours_south = None
 
     @property
     def commercial_diameter(self):
@@ -17,6 +23,14 @@ class Dataframes:
             self.COMMERCIAL_DIAMETER_PATH
         )
         return self._commercial_diameter
+
+    @property
+    def radiation_hargreaves_samani(self):
+        if self._radiation_hargreaves_samani is None:
+            self._radiation_hargreaves_samani = SourceTable.reference_table_reading(
+                self.RADIATION_HARGREAVES_SAMANI_PATH, delimiter=";", decimal=','
+            )
+        return self._radiation_hargreaves_samani
 
 
 dataframes = Dataframes()

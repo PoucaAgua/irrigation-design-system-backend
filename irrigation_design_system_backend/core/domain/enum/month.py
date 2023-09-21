@@ -1,36 +1,7 @@
 from enum import Enum
 
-# class Month(Enum):
-#     Jan= "Jan"
-#     Fev = "Fev"
-#     Mar = "Mar"
-#     Abr = "Abr"
-#     Maio = "Maio"
-#     Jun = "Jun"
-#     Jul = "Jul"
-#     Ago = "Ago"
-#     Set = "Set"
-#     Out = "Out"
-#     Nov = "Nov"
-#     Dez = "Dez"
 
-
-class MonthEnum_hargraves(Enum):
-    Jan = "Jan"
-    Fev = "Fev"
-    Mar = "Mar"
-    Abr = "Abr"
-    Maio = "Maio"
-    Jun = "Jun"
-    Jul = "Jul"
-    Ago = "Ago"
-    Set = "Set"
-    Out = "Out"
-    Nov = "Nov"
-    Dez = "Dez"
-
-
-class MonthEnum_blaney(Enum):
+class MonthEnum(Enum):
     Jan = "Jan"
     Feb = "Feb"
     Mar = "Mar"
