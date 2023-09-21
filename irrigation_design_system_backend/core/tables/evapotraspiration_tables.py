@@ -6,7 +6,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 def df_data_radiation_hargraves_samani():
-    file_path = os.path.join(script_dir, "files/data_radiation_hargraves_samani.csv")
+    file_path = os.path.join(script_dir, "files/data_radiation_hargreaves_samani.csv")
     return read_file(file_path)
 
 
