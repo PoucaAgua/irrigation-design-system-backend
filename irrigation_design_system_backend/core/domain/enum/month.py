@@ -14,7 +14,7 @@ from enum import Enum
 #     Nov = "Nov"
 #     Dez = "Dez"
 
-class MonthEnum(Enum):
+class MonthEnum_hargraves(Enum):
     Jan = "Jan"
     Fev = "Fev"
     Mar = "Mar"
@@ -27,3 +27,18 @@ class MonthEnum(Enum):
     Out = "Out"
     Nov = "Nov"
     Dez = "Dez"
+
+class MonthEnum_blaney(Enum):
+    Jan = "Jan"
+    Feb = "Feb"
+    Mar = "Mar"
+    Abr = "Abr"
+    Mai = "Mai"
+    Jun = "Jun"
+    July = "July"
+    Aug = "Aug"
+    Sept = "Sept"
+    Oct = "Oct"
+    Nov = "Nov"
+    Dec = "Dec"
+
