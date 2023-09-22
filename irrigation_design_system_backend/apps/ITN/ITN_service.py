@@ -1,7 +1,6 @@
 from _decimal import Decimal
 from core.tables.df_test_table import df_test_table
 
-
 class IrrigationTotalNecessaryService:
     @classmethod
     def __calculate_lixivation_fraction(cls, ce_i: Decimal, ce_e: Decimal) -> Decimal:

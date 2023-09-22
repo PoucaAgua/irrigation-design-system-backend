@@ -3,22 +3,26 @@ from dataclasses import dataclass
 
 
 @dataclass
-class IRNsoloProjectionInputEntity:
-    umidade_cc: Decimal
-    umidade_atual: Decimal
-    profudidade: Decimal
+class IRNsoilInputEntity:
+    # theta field capacity
+    theta_fc: Decimal
+    # theta observed
+    theta_obs: Decimal
+    # soil depth
+    z: Decimal
 
 
 @dataclass
-class IRNatmProjectionInputEntity:
-    evapo_eto: Decimal
-    coef_cultura: Decimal
-    area_molhada: Decimal
+class IRNatmInputEntity:
+    eto: Decimal
+    kc: Decimal
+    # percent wetted area
+    pwa: Decimal
 
 
 @dataclass
-class IRNmaxProjectionInputEntity:
-    theta_cc: Decimal
-    theta_pm: Decimal
-    profunidade: Decimal
-    f_critico: Decimal
+class IRNmaxInputEntity:
+    theta_fc: Decimal
+    theta_wp: Decimal
+    z: Decimal
+    f_critical: Decimal
