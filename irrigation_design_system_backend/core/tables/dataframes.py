@@ -1,52 +1,24 @@
-from core.tables.source_table import SourceTable
+import os
+import pandas as pd
+
+tables_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 class Dataframes:
-    PATH = "/files/"
-    COMMERCIAL_DIAMETER_PATH = PATH + "reference_table_commercial_diameters.csv"
-    RADIATION_HARGREAVES_SAMANI_PATH = PATH + "data_radiation_hargreaves_samani.csv"
-    PERCENT_DAILY_HOURS_NORTH_PATH = PATH + "data_percent_daily_hours_north_blanney_criddle.csv"
-    PERCENT_DAILY_HOURS_SOUTH_PATH = PATH + "data_percent_daily_hours_south_blanney_criddle.csv"
+    PATH = "files"
 
     def __init__(self):
-        self._commercial_diameter = None
-        self._radiation_hargreaves_samani = None
-        self._percent_daily_hours_north = None
-        self._percent_daily_hours_south = None
+        file_names = [
+            os.path.splitext(file_name)[0]
+            for file_name in os.listdir(os.path.join(tables_dir, self.PATH))
+        ]
 
-    @property
-    def commercial_diameter(self):
-        if self._commercial_diameter:
-            return self._commercial_diameter
+        for file_name in file_names:
+            setattr(self, f"{file_name}", self._load_data(file_name))
 
-        self._commercial_diameter = SourceTable.reference_table_reading(
-            self.COMMERCIAL_DIAMETER_PATH
-        )
-        return self._commercial_diameter
-
-    @property
-    def radiation_hargreaves_samani(self):
-        if self._radiation_hargreaves_samani is None:
-            self._radiation_hargreaves_samani = SourceTable.reference_table_reading(
-                self.RADIATION_HARGREAVES_SAMANI_PATH, delimiter=";", decimal=","
-            )
-        return self._radiation_hargreaves_samani
-
-    @property
-    def percent_daily_hours_north(self):
-        if self._percent_daily_hours_north is None:
-            self._percent_daily_hours_north = SourceTable.reference_table_reading(
-                self.PERCENT_DAILY_HOURS_NORTH_PATH, delimiter=";", decimal=","
-            )
-        return self._percent_daily_hours_north
-
-    @property
-    def percent_daily_hours_south(self):
-        if self._percent_daily_hours_south is None:
-            self._percent_daily_hours_south = SourceTable.reference_table_reading(
-                self.PERCENT_DAILY_HOURS_SOUTH_PATH, delimiter=";", decimal=","
-            )
-        return self._percent_daily_hours_south
+    def _load_data(self, file_name):
+        file_path = os.path.join(tables_dir, os.path.join(self.PATH, f"{file_name}.csv"))
+        return pd.read_csv(os.path.join(tables_dir, file_path), encoding="utf-8")
 
 
 dataframes = Dataframes()
