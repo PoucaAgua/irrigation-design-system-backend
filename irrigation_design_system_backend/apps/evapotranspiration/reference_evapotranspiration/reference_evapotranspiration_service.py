@@ -1,50 +1,42 @@
 from _decimal import Decimal
 
-from apps.evapotranspiration.reference_evapotranspiration.blaney_criddle_method import (
-    calculate_percent_daily_hours,
+from apps.evapotranspiration.reference_evapotranspiration.percent_daily_solar_hours import (
+    calculate_percent_daily_solar_hours,
 )
-from apps.evapotranspiration.temperature import calculate_temperature_media
 from core.constants.evapotranspiration import ReferenceEvapotranspirationConstants
 from core.domain.entity.evapotranspiration_input import (
-    EToHargreavesSamaniInput,
-    EToBlanneyCriddleInputy,
+    EToHargravesSamaniInput,
+    EToBlanneyCriddleInput,
 )
-from apps.evapotranspiration.reference_evapotranspiration.hargreaves_samani_method import (
-    calculate_radiation_hargreaves_samani,
+from apps.evapotranspiration.reference_evapotranspiration.solar_radiation import (
+    calculate_solar_radiation,
 )
-
-parameters_hargraves_samani = ReferenceEvapotranspirationConstants.parameters_hargraves_samani
-parameters_blaney_cridlle = ReferenceEvapotranspirationConstants.parameters_blaney_cridlle
 
 
 class ReferenceEvapotranspirationService:
     @staticmethod
-    def calculate_hargreaves_samani(eto_input: EToHargreavesSamaniInput) -> Decimal:
-        a, b, c = parameters_hargraves_samani
-        Ra = calculate_radiation_hargreaves_samani(
-            latitude=eto_input.latitude, month=eto_input.month
+    def calculate_by_hargraves_samani(eto_input: EToHargravesSamaniInput) -> Decimal:
+        a, b, c = ReferenceEvapotranspirationConstants.parameters_hargraves_samani
+        radiation = calculate_solar_radiation(latitude=eto_input.latitude, month=eto_input.month)
+        temperature_med = eto_input.temperature_med
+        temperature_min = eto_input.temperature_min
+        temperature_max = eto_input.temperature_max
+        return Decimal(
+            radiation
+            * a
+            * (b * (temperature_med + c) * (temperature_max - temperature_min)) ** Decimal(0.5)
         )
-        Tmed = eto_input.temperature_med
-        Tmin = eto_input.temperature_min
-        Tmax = eto_input.temperature_max
-        return Decimal(Ra * a * (b * (Tmed + c) * (Tmax - Tmin)) ** Decimal(0.5))
 
     @staticmethod
-    def calculate_blaney_criddle(eto_input: EToBlanneyCriddleInputy) -> Decimal:
-        a, b, c = parameters_blaney_cridlle
-        percent_daily_hours = calculate_percent_daily_hours(
+    def calculate_by_blaney_criddle(eto_input: EToBlanneyCriddleInput) -> Decimal:
+        a, b, c = ReferenceEvapotranspirationConstants.parameters_blaney_cridlle
+        percent_daily_solar_hours = calculate_percent_daily_solar_hours(
             latitude=eto_input.latitude, month=eto_input.month, hemisphere=eto_input.hemisphere
         )
-        Tmed = calculate_temperature_media(
-            temperature_media=eto_input.temperature_med,
-            temperature_max=eto_input.temperature_max,
-            temperature_min=eto_input.temperature_min,
-            days=eto_input.days,
-        )
-        return Decimal((a * Tmed + b) * percent_daily_hours / c)
+        return Decimal((a * eto_input.temperature_med + b) * percent_daily_solar_hours / c)
 
     # @staticmethod
-    # def calculate_penman_monteith(eto_input: EToPenmanMonteithInputyEntity) -> Decimal:
+    # def calculate_penman_monteith(eto_input: EToPenmanMonteithInput) -> Decimal:
 
     #     Tmed = calculate_temperature_media(temperature_max=eto_input.temperature_max, temperature_min=eto_input.temperature_min, days=eto_input.days)
     #     es = calculate_vapor_saturation_pressure (temperature = Tmed)
