@@ -6,8 +6,8 @@ from infrastructure.api.v1.controllers import (
     percent_wetted_area_controller,
     percent_shaded_area_controller,
     derivation_line_controller,
-    ITN_controller,
-    IRN_controller
+    total_irrigation_controller,
+    actual_irrigation_controller,
 )
 
 router = APIRouter()
@@ -31,8 +31,17 @@ router.include_router(
     project_controller.router, prefix="/projects", tags=["Endpoint to manager projects"]
 )
 router.include_router(
-    derivation_line_controller.router, prefix="/derivationline", tags=["Endpoint Derivation Line"]
+    derivation_line_controller.router,
+    prefix="/derivationline",
+    tags=["Endpoint Derivation Line"]
 )
-router.include_router(IRN_controller.router, prefix="/IRN", tags=["Endpoint IRN"])
-router.include_router(ITN_controller.router, prefix="/ITN", tags=["Endpoint ITN"])
-
+router.include_router(
+    actual_irrigation_controller.router,
+    prefix="/actual_irrigation",
+    tags=["Endpoint actual_irrigation"]
+)
+router.include_router(
+    total_irrigation_controller.router,
+    prefix="/total_irrigation",
+    tags=["Endpoint to calculate Total Irrigation Necessary"],
+)
