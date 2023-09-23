@@ -6,7 +6,7 @@ from core.domain.entity.total_irrigation_input import (
 )
 
 
-class IrrigationTotalNecessaryService:
+class TotalIrrigationService:
     @classmethod
     def __calculate_lixivation_fraction(cls, ce_i: Decimal, ce_e: Decimal) -> Decimal:
         return Decimal(ce_i / (2 * ce_e))

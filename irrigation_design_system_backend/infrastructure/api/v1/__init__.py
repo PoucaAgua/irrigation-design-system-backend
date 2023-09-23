@@ -32,13 +32,13 @@ router.include_router(
 )
 router.include_router(
     derivation_line_controller.router,
-    prefix="/derivationline",
-    tags=["Endpoint Derivation Line"]
+    prefix="/derivation_line",
+    tags=["Endpoint to calculate Derivation Line"],
 )
 router.include_router(
     actual_irrigation_controller.router,
     prefix="/actual_irrigation",
-    tags=["Endpoint actual_irrigation"]
+    tags=["Endpoint to calculate the Actual Irrigation Necessary"],
 )
 router.include_router(
     total_irrigation_controller.router,

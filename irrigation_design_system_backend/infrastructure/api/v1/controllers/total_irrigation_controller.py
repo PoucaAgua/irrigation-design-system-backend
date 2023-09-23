@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from apps.irrigation.total_irrigation.total_irrigation_service import (
-    IrrigationTotalNecessaryService,
+    TotalIrrigationService,
 )
 from core.domain.entity.total_irrigation_input import TotalIrrigationByLixiviationFractionInput
 from core.domain.entity.total_irrigation_input import TotalIrrigationByElectricalConductivityInput
@@ -14,7 +14,7 @@ router = APIRouter()
 def total_irrigation_by_lixiviation_fraction(
     total_irrigation_input: TotalIrrigationByLixiviationFractionInput,
 ):
-    total_irrigation = IrrigationTotalNecessaryService.calculate_by_lixiviation_fraction(
+    total_irrigation = TotalIrrigationService.calculate_by_lixiviation_fraction(
         total_irrigation_input
     )
     return TotalIrrigationResponse(value=total_irrigation)
@@ -24,7 +24,7 @@ def total_irrigation_by_lixiviation_fraction(
 def total_irrigation_by_electrical_conductivity(
     total_irrigation_input: TotalIrrigationByElectricalConductivityInput,
 ):
-    itn = IrrigationTotalNecessaryService.calculate_by_electrical_conductivity(
+    total_irrigation = TotalIrrigationService.calculate_by_electrical_conductivity(
         total_irrigation_input
     )
-    return TotalIrrigationResponse(value=itn)
+    return TotalIrrigationResponse(value=total_irrigation)
