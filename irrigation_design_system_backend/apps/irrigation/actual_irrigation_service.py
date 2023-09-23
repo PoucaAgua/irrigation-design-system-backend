@@ -1,7 +1,9 @@
 from _decimal import Decimal
-from core.domain.entity.actual_irrigation_input import ActualIrrigationBySoilParamsInput
-from core.domain.entity.actual_irrigation_input import ActualIrrigationByAtmosphericParamsInput
-from core.domain.entity.actual_irrigation_input import MaxActualIrrigationInput
+from core.domain.entity.irrigation.actual_irrigation_input import ActualIrrigationBySoilParamsInput
+from core.domain.entity.irrigation.actual_irrigation_input import (
+    ActualIrrigationByAtmosphericParamsInput,
+)
+from core.domain.entity.irrigation.actual_irrigation_input import MaxActualIrrigationInput
 
 
 class ActualIrrigationService:
@@ -10,9 +12,8 @@ class ActualIrrigationService:
         cls, max_actual_irrigation_input: MaxActualIrrigationInput
     ) -> Decimal:
         fraction_of_total_wetted_area = max_actual_irrigation_input.fraction_of_total_wetted_area
-
         max_actual_irrigation = cls.calculate_by_soil_params(
-            ActualIrrigationBySoilParamsInput(**max_actual_irrigation_input.dict())
+            ActualIrrigationBySoilParamsInput(**max_actual_irrigation_input.model_dump())
         )
         return max_actual_irrigation * fraction_of_total_wetted_area
 
