@@ -16,13 +16,11 @@ class ActualIrrigationBySoilParamsInput(BaseModel):
         ...,
         ge=0,
         le=1,
-        description="""
-        [f] depletion or water consumption factor of the soil,
-        always less than 1, with values ranging between 0.3 for crops with shallow
-        root systems and high rates of atmospheric demand, and 0.7 for plants with 
-        deep root systems and low rates of atmospheric demand, hence specific 
-        to each crop.
-        """,
+        description="""[f] depletion or water consumption factor of the soil,
+                        always less than 1, with values ranging between 0.3 for crops with 
+                        shallow root systems and high rates of atmospheric demand, and 0.7 for plants with 
+                        deep root systems and low rates of atmospheric demand, hence specific 
+                        to each crop.""",
     )
     soil_depth: Decimal = Field(..., ge=0, description="[z] Soil depth in cm")
     effective_precipitation: Optional[Decimal] = Field(
