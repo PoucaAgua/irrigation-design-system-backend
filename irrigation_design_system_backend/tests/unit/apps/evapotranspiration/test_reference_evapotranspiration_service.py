@@ -1,9 +1,9 @@
 from _decimal import Decimal
 
-from apps.evapotranspiration.reference_evapotranspiration_service import (
+from apps.evapotranspiration.reference_evapotranspiration.reference_evapotranspiration_service import (
     ReferenceEvapotranspirationService,
 )
-from core.domain.entity.evapotranspiration_entity import EToEntity
+from core.domain.entity.evapotranspiration_input import EToHargravesSamaniInput
 
 
 class TestReferenceEvapotranspirationService:
@@ -11,17 +11,17 @@ class TestReferenceEvapotranspirationService:
 
     def test_calculate_hargraves_samani(self):
         # Given
-        test_eto_entity = EToEntity(
-            radiation=Decimal(7),
-            temperature_med=Decimal(25.0),
-            temperature_min=Decimal(20.0),
+        test_eto_entity = EToHargravesSamaniInput(
+            temperature_med=Decimal(20.0),
+            temperature_min=Decimal(10.0),
             temperature_max=Decimal(30.0),
+            latitude=Decimal(69.0),
+            month="Jan",
         )
         expected_result = Decimal(2.83)
 
         # When
-        result = ReferenceEvapotranspirationService.calculate_hargraves_samani(test_eto_entity)
-        print(result)
+        result = ReferenceEvapotranspirationService.calculate_by_hargraves_samani(test_eto_entity)
 
         # Then
         assert abs(result - expected_result) <= self.error
