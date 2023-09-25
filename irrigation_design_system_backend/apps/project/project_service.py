@@ -8,5 +8,5 @@ class ProjectService:
     repository = ProjectRepository()
 
     @classmethod
-    def upsert_project(cls, entity: ProjectInput):
-        cls.repository.upsert(entity)
+    def upsert_project(cls, project_input: ProjectInput):
+        cls.repository.upsert(project_input)

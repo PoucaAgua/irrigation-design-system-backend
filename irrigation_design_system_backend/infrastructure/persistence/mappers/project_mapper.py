@@ -15,12 +15,18 @@ class ProjectMapper:
             maximum_actual_irrigation_required=project_input.maximum_actual_irrigation_required,
             crop_evapotranspiration=project_input.crop_evapotranspiration,
             total_irrigation_required=project_input.total_irrigation_required,
+            lateral_line=[
+                LateralLineMapper.entity_to_model(line) for line in project_input.lateral_line
+            ],
+            derivation_line=[
+                DerivationLineMapper.entity_to_model(line) for line in project_input.derivation_line
+            ],
         )
 
 
 class DerivationLineMapper:
     @staticmethod
-    def entity_to_model(line: DerivationLineInput, project_id: int) -> DerivationLine:
+    def entity_to_model(line: DerivationLineInput, project_id: int = None) -> DerivationLine:
         return DerivationLine(
             project_id=project_id,
             pipe_type=line.pipe_type,
@@ -34,7 +40,7 @@ class DerivationLineMapper:
 
 class LateralLineMapper:
     @staticmethod
-    def entity_to_model(line: LateralLineInput, project_id: int) -> LateralLine:
+    def entity_to_model(line: LateralLineInput, project_id: int = None) -> LateralLine:
         return LateralLine(
             project_id=project_id,
             dripper=line.dripper,
