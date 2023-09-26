@@ -3,17 +3,15 @@ from typing import Optional, List
 from core.domain.entity.project_input import ProjectInput
 from infrastructure.persistence.mappers.project_mapper import (
     ProjectMapper,
-    DerivationLineMapper,
-    LateralLineMapper,
 )
-from infrastructure.persistence.models import Project, DerivationLine, LateralLine
+from infrastructure.persistence.models import Project
 from infrastructure.persistence.session import transactional_session
 
 
 class ProjectRepository:
     @transactional_session
-    def upsert(self, db, project_input: ProjectInput):
-        project_db = ProjectMapper.entity_to_model(project_input)
+    def upsert(self, db, project_input: ProjectInput) -> Project:
+        project_db = ProjectMapper.model_from_input(project_input)
         if project_db.id is None:
             db.add(project_db)
             return project_db
@@ -22,6 +20,9 @@ class ProjectRepository:
         if not project_db_persisted:
             raise ValueError(f"invalid id {project_db.id}")
 
+        project_db = ProjectMapper.model_from_input_and_persisted(
+            project_input, project_db_persisted
+        )
         db.merge(project_db)
         return project_db
 
