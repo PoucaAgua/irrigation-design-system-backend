@@ -54,3 +54,8 @@ router.include_router(
     prefix="/irrigation/maximum_irrigation_shift",
     tags=["Endpoint to calculate Maximum irrigation shift outputs"],
 )
+router.include_router(
+    irrigation_controller.irrigation_time_controller.router,
+    prefix="/irrigation/time",
+    tags=["Endpoint to irrigation time outputs"],
+)
