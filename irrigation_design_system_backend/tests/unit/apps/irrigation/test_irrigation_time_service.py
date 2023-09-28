@@ -14,13 +14,13 @@ class TestIrrigationTime:
         [
             (
                 IrrigationTimeByPlantInput(
-                    itn=5,
-                    sp=2,
-                    sl=3,
-                    Ne=1,
-                    q=18,
+                    total_irrigation=5,
+                    spacing_between_plants=2,
+                    spacing_between_side_lines=3,
+                    number_of_emitters_per_plant=1,
+                    emitter_flow=18,
                 ),
-                Decimal("1.666666666666666666666666667"),
+                Decimal("1.67"),
             ),
         ],
     )
@@ -35,12 +35,12 @@ class TestIrrigationTime:
         [
             (
                 IrrigationTimeByLineInput(
-                    itn=5,
-                    se=0.2,
-                    sl=1,
-                    q=1.24,
+                    total_irrigation=5,
+                    spacing_between_emitters=0.2,
+                    spacing_between_side_lines=1,
+                    emitter_flow=1.24,
                 ),
-                Decimal("0.8064516129032258064516129032"),
+                Decimal("0.81"),
             ),
         ],
     )
