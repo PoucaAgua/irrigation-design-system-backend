@@ -6,6 +6,8 @@ from infrastructure.api.v1.controllers import (
     percent_wetted_area_controller,
     percent_shaded_area_controller,
     derivation_line_controller,
+    flow_rate_controller,
+    uniformity_controller,
 )
 
 router = APIRouter()
@@ -30,4 +32,10 @@ router.include_router(
 )
 router.include_router(
     derivation_line_controller.router, prefix="/derivationline", tags=["Endpoint Derivation Line"]
+)
+router.include_router(
+    flow_rate_controller.router, prefix="/projects", tags=["Endepoint Fluxo Rate"]
+)
+router.include_router(
+    uniformity_controller.router, prefix="/uniformity_and_flow", tags=["Endpoint Uniformity Irrigation"]
 )

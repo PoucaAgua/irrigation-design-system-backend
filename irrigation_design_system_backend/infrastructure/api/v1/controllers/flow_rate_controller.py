@@ -8,6 +8,7 @@ from infrastructure.api.v1.responses.flow_rate import FlowRateResponse
 
 router = APIRouter()
 
+
 @router.post("/", response_model=FlowRateResponse)
 def flow_irrigation(flow_input: FlowRateIrrigationInput):
     flow_responde = UniformityAndFlowService.calculate_flow(flow_input)

@@ -8,6 +8,7 @@ from infrastructure.api.v1.responses.uniformity import UniformityResponse
 
 router = APIRouter()
 
+
 @router.post("/", response_model=UniformityResponse)
 def uniformity_irrigation(uniformity_input: UniformityIrrigationInput):
     uniformity_responde = UniformityAndFlowService.calculate_uniformity(uniformity_input)
