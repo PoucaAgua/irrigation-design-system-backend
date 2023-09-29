@@ -27,5 +27,5 @@ def evapotranspiration_blaney_criddle(eto_entity: EToBlanneyCriddleInput):
 
 @router.post("/penman_monteith", response_model=EvapotranspirationResponse)
 def evapotranspiration_penman_monteith(eto_entity: EToPenmanMonteithInput):
-    eto = ReferenceEvapotranspirationService.calculate_penman_monteith(eto_entity)
+    eto = ReferenceEvapotranspirationService.calculate_by_penman_monteith(eto_entity)
     return EvapotranspirationResponse(value=eto)

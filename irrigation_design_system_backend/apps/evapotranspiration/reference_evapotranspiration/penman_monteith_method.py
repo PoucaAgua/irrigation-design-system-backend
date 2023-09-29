@@ -5,7 +5,6 @@ def calculate_vapor_saturation_pressure(temperature):
     es = 0.6108 * math.exp((17.27 * temperature) / (temperature + 237.3))
     return es
 
-
 def calculate_vapor_current_pressure(relative_humidity_air, vapor_saturation_pressure):
     ea = (relative_humidity_air / 100) * vapor_saturation_pressure
     return ea
