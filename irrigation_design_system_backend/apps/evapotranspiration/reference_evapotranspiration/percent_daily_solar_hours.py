@@ -8,7 +8,6 @@ from core.domain.enum.hemisphere import Hemisphere
 def calculate_percent_daily_solar_hours(
     latitude: int, month: MonthEnum, hemisphere: Hemisphere
 ) -> Decimal:
-    
     if hemisphere == Hemisphere.NORTE:
         df_data = dataframes.percent_daily_solar_hours_north
     else:

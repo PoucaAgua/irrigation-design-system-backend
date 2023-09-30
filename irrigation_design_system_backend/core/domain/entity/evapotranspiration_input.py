@@ -22,10 +22,10 @@ class EToHargravesSamaniInput(BaseModel):
 
     @staticmethod
     def __temperature_med(
-            temperature_med: Optional[Decimal] = None,
-            temperature_max: Optional[Decimal] = None,
-            temperature_min: Optional[Decimal] = None,
-            **kwargs
+        temperature_med: Optional[Decimal] = None,
+        temperature_max: Optional[Decimal] = None,
+        temperature_min: Optional[Decimal] = None,
+        **kwargs
     ):
         if temperature_med is not None:
             return temperature_med
@@ -36,7 +36,6 @@ class EToHargravesSamaniInput(BaseModel):
         raise ValueError(
             "Needs to have temperature_med or both temperature_max and temperature_min"
         )
-    
 
 
 class EToBlanneyCriddleInput(BaseModel):
@@ -55,10 +54,10 @@ class EToBlanneyCriddleInput(BaseModel):
 
     @staticmethod
     def __temperature_med(
-            temperature_med: Optional[Decimal] = None,
-            temperature_max: Optional[Decimal] = None,
-            temperature_min: Optional[Decimal] = None,
-            **kwargs
+        temperature_med: Optional[Decimal] = None,
+        temperature_max: Optional[Decimal] = None,
+        temperature_min: Optional[Decimal] = None,
+        **kwargs
     ):
         if temperature_med is not None:
             return temperature_med
@@ -70,21 +69,19 @@ class EToBlanneyCriddleInput(BaseModel):
             "Needs to have temperature_med or both temperature_max and temperature_min"
         )
 
-class EToPenmanMonteithInput(BaseModel):
 
-    
+class EToPenmanMonteithInput(BaseModel):
     temperature_med: float
     temperature_max: float = None
     temperature_min: float = None
-    relative_humidity_air: float 
+    relative_humidity_air: float
     days: float
     altitude: float
-    wind_speed: float  
-    ground_heat: float  
-    daily_radiation: float  
-    
+    wind_speed: float
+    ground_heat: float
+    daily_radiation: float
+
     @model_validator(mode="before")
-    
     @classmethod
     def check(cls, data: Any) -> Any:
         data["temperature_med"] = cls.__temperature_med(**data)
@@ -92,10 +89,10 @@ class EToPenmanMonteithInput(BaseModel):
 
     @staticmethod
     def __temperature_med(
-            temperature_med: Optional[Decimal] = None,
-            temperature_max: Optional[Decimal] = None,
-            temperature_min: Optional[Decimal] = None,
-            **kwargs
+        temperature_med: Optional[Decimal] = None,
+        temperature_max: Optional[Decimal] = None,
+        temperature_min: Optional[Decimal] = None,
+        **kwargs
     ):
         if temperature_med is not None:
             return temperature_med
@@ -106,5 +103,3 @@ class EToPenmanMonteithInput(BaseModel):
         raise ValueError(
             "Needs to have temperature_med or both temperature_max and temperature_min"
         )
-
-

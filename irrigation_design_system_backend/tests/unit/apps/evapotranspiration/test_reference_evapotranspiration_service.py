@@ -3,7 +3,11 @@ from _decimal import Decimal
 from apps.evapotranspiration.reference_evapotranspiration.reference_evapotranspiration_service import (
     ReferenceEvapotranspirationService,
 )
-from core.domain.entity.evapotranspiration_input import EToHargravesSamaniInput, EToBlanneyCriddleInput, EToPenmanMonteithInput
+from core.domain.entity.evapotranspiration_input import (
+    EToHargravesSamaniInput,
+    EToBlanneyCriddleInput,
+    EToPenmanMonteithInput,
+)
 import pytest
 from core.domain.enum.month import MonthEnum
 from core.domain.enum.hemisphere import Hemisphere
@@ -15,7 +19,14 @@ class TestReferenceEvapotranspirationService:
     @pytest.mark.parametrize(
         "temperature_med, temperature_min, temperature_max, latitude, month, expected_result",
         [
-            (Decimal("20.0"), Decimal("10.0"), Decimal("30.0"), Decimal("69.0"), MonthEnum.Jan, Decimal("22.165737965964677")),
+            (
+                Decimal("20.0"),
+                Decimal("10.0"),
+                Decimal("30.0"),
+                Decimal("69.0"),
+                MonthEnum.Jan,
+                Decimal("22.165737965964677"),
+            ),
             # falta adicionar mais :)
         ],
     )
@@ -35,120 +46,81 @@ class TestReferenceEvapotranspirationService:
         # Then
         assert abs(result - expected_result) <= self.error
 
-
-
     @pytest.mark.parametrize(
         "temperature_med, temperature_max, temperature_min, latitude, month, hemisphere, expected_result",
         [
-            (Decimal("20.0"),  Decimal("30.0"), Decimal("10.0"),  Decimal("31.0"), MonthEnum.Jan, Hemisphere.NORTE, Decimal("4.11026")),
+            (
+                Decimal("20.0"),
+                Decimal("30.0"),
+                Decimal("10.0"),
+                Decimal("31.0"),
+                MonthEnum.Jan,
+                Hemisphere.NORTE,
+                Decimal("4.11026"),
+            ),
             # falta adicionar mais :)
         ],
     )
     def test_calculate_by_blaney_criddle(
-        self, temperature_med, temperature_max, temperature_min, latitude, month, hemisphere, expected_result
+        self,
+        temperature_med,
+        temperature_max,
+        temperature_min,
+        latitude,
+        month,
+        hemisphere,
+        expected_result,
     ):
         # Given
         input_data = EToBlanneyCriddleInput(
             temperature_med=temperature_med,
-            temperature_max= temperature_max,
-            temperature_min= temperature_min,
+            temperature_max=temperature_max,
+            temperature_min=temperature_min,
             latitude=latitude,
             month=month,
             hemisphere=hemisphere,
-            
         )
         # When
         result = ReferenceEvapotranspirationService.calculate_by_blaney_criddle(input_data)
         # Then
         assert abs(result - expected_result) <= self.error
 
-
-
     @pytest.mark.parametrize(
         "temperature_med, temperature_max, temperature_min, days, relative_humidity_air, altitude, wind_speed, ground_heat, daily_radiation, expected_result",
         [
-            (20.0, 30.0, 10.0, 30.0, 50.0, 1.0, 20.0, 55.0, 15.0, 20.0, 10.026240268784955 ),
+            (20.0, 30.0, 10.0, 30.0, 50.0, 1.0, 20.0, 55.0, 15.0, 20.0, 10.026240268784955),
             # falta adicionar mais :)
         ],
     )
     def test_calculate_by_penman_monteith(
-        self, temperature_med, temperature_max, temperature_min, relative_humidity_air, altitude, wind_speed, ground_heat, daily_radiation, days, expected_result
+        self,
+        temperature_med,
+        temperature_max,
+        temperature_min,
+        relative_humidity_air,
+        altitude,
+        wind_speed,
+        ground_heat,
+        daily_radiation,
+        days,
+        expected_result,
     ):
         # Given
         input_data = EToPenmanMonteithInput(
-            
             temperature_med=temperature_med,
-            temperature_max= temperature_max,
-            temperature_min= temperature_min,
-            days= days,
+            temperature_max=temperature_max,
+            temperature_min=temperature_min,
+            days=days,
             relative_humidity_air=relative_humidity_air,
             altitude=altitude,
             wind_speed=wind_speed,
             ground_heat=ground_heat,
-            daily_radiation=daily_radiation
-    )
+            daily_radiation=daily_radiation,
+        )
         # When
         result = ReferenceEvapotranspirationService.calculate_by_penman_monteith(input_data)
         # Then
         assert abs(result - expected_result) <= self.error
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   
 
     # def test_calculate_hargraves_samani(self):
     #     # Given
@@ -167,12 +139,6 @@ class TestReferenceEvapotranspirationService:
     #     # Then
     #     assert abs(result - expected_result) <= self.error
 
-
-
-
-
-
-        
 
 # @staticmethod
 #     def calculate_by_penman_monteith(eto_input: EToPenmanMonteithInput) -> Decimal:

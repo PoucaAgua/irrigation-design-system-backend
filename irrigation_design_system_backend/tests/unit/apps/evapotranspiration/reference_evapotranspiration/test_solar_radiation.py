@@ -26,7 +26,6 @@ class TestSolarRadiation:
             (Decimal("69.0"), MonthEnum.Out, Decimal("23.95")),
             (Decimal("69.0"), MonthEnum.Nov, Decimal("37.35")),
             (Decimal("69.0"), MonthEnum.Dez, Decimal("45")),
-
             (Decimal("67.0"), MonthEnum.Jan, Decimal("40.95")),
             (Decimal("67.0"), MonthEnum.Fev, Decimal("29.65")),
             (Decimal("67.0"), MonthEnum.Mar, Decimal("17.5")),
@@ -48,5 +47,3 @@ class TestSolarRadiation:
         result = calculate_solar_radiation(latitude, month)
         # Then
         assert abs(result - expected_result) <= self.error
-
-

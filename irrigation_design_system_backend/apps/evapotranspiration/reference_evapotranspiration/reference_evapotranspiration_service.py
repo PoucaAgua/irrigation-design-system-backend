@@ -7,7 +7,7 @@ from core.constants.evapotranspiration import ReferenceEvapotranspirationConstan
 from core.domain.entity.evapotranspiration_input import (
     EToHargravesSamaniInput,
     EToBlanneyCriddleInput,
-    EToPenmanMonteithInput
+    EToPenmanMonteithInput,
 )
 from apps.evapotranspiration.reference_evapotranspiration.solar_radiation import (
     calculate_solar_radiation,
@@ -17,7 +17,7 @@ from apps.evapotranspiration.reference_evapotranspiration.penman_monteith_method
     calculate_vapor_current_pressure,
     calculate_declivity_curve_pressure_vapor,
     calculate_atmospheric_pressure,
-    calculate_psychrometric_constant
+    calculate_psychrometric_constant,
 )
 
 
@@ -30,7 +30,9 @@ class ReferenceEvapotranspirationService:
         temperature_min = eto_input.temperature_min
         temperature_max = eto_input.temperature_max
         return Decimal(
-            radiation * a * (b * (temperature_med + c) * (temperature_max - temperature_min)) ** Decimal(0.5)
+            radiation
+            * a
+            * (b * (temperature_med + c) * (temperature_max - temperature_min)) ** Decimal(0.5)
         )
 
     @staticmethod
@@ -43,13 +45,21 @@ class ReferenceEvapotranspirationService:
 
     @staticmethod
     def calculate_by_penman_monteith(eto_input: EToPenmanMonteithInput) -> Decimal:
-
-        es = calculate_vapor_saturation_pressure (temperature = eto_input.temperature_med)
-        ea = calculate_vapor_current_pressure(relative_humidity_air = eto_input.relative_humidity_air, vapor_saturation_pressure = es)
-        declivity_curve_pressure_vapor = calculate_declivity_curve_pressure_vapor(temperature = eto_input.temperature_med, vapor_saturation_pressure = es)
-        atmospheric_pressure = calculate_atmospheric_pressure(altitude = eto_input.altitude)
-        psychrometric_constant = calculate_psychrometric_constant(atmospheric_pressure = atmospheric_pressure)
+        es = calculate_vapor_saturation_pressure(temperature=eto_input.temperature_med)
+        ea = calculate_vapor_current_pressure(
+            relative_humidity_air=eto_input.relative_humidity_air, vapor_saturation_pressure=es
+        )
+        declivity_curve_pressure_vapor = calculate_declivity_curve_pressure_vapor(
+            temperature=eto_input.temperature_med, vapor_saturation_pressure=es
+        )
+        atmospheric_pressure = calculate_atmospheric_pressure(altitude=eto_input.altitude)
+        psychrometric_constant = calculate_psychrometric_constant(
+            atmospheric_pressure=atmospheric_pressure
+        )
         u2 = eto_input.wind_speed
         g = eto_input.ground_heat
         rn = eto_input.daily_radiation
-        return (0.408 * declivity_curve_pressure_vapor * (rn - g) + (psychrometric_constant * 900 * u2 * (es - ea) / (eto_input.temperature_med + 273))) / (declivity_curve_pressure_vapor + psychrometric_constant * (1 + 0.34 * u2))
+        return (
+            0.408 * declivity_curve_pressure_vapor * (rn - g)
+            + (psychrometric_constant * 900 * u2 * (es - ea) / (eto_input.temperature_med + 273))
+        ) / (declivity_curve_pressure_vapor + psychrometric_constant * (1 + 0.34 * u2))
