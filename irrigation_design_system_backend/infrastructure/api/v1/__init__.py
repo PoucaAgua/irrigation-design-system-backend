@@ -7,6 +7,7 @@ from infrastructure.api.v1.controllers import (
     percent_shaded_area_controller,
     derivation_line_controller,
     irrigation_controller,
+    crop_coefficient_controller,
 )
 
 router = APIRouter()
@@ -58,4 +59,9 @@ router.include_router(
     irrigation_controller.irrigation_time_controller.router,
     prefix="/irrigation/time",
     tags=["Endpoint to irrigation time outputs"],
+)
+router.include_router(
+    crop_coefficient_controller.router,
+    prefix="/crop_coefficient",
+    tags=["Endpoint Crop Coefficient"],
 )
