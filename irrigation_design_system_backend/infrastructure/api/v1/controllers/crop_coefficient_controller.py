@@ -12,6 +12,6 @@ def crop_coefficient(cropcoefficient: CropCoefficientData):
         crop_type=cropcoefficient.crop_type,
         kc_initial=cropcoefficient.kc_initial,
         kc_mid_season=cropcoefficient.kc_mid_season,
-        kc_final=cropcoefficient.kc_final)
+        kc_final=cropcoefficient.kc_final,
+    )
     return results
-

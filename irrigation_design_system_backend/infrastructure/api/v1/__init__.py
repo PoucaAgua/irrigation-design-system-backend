@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from infrastructure.api.v1.controllers import (
     evapotranspiration_controller,
     project_controller,
@@ -9,6 +8,7 @@ from infrastructure.api.v1.controllers import (
     irrigation_controller,
     crop_coefficient_controller,
 )
+
 
 router = APIRouter()
 
