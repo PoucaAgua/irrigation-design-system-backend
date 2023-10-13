@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from infrastructure.api.v1.controllers import (
     crop_evapotranspiration_controller,
     reference_evapotranspiration_controller,
@@ -12,6 +11,7 @@ from infrastructure.api.v1.controllers import (
     lateral_line_controller,
     crop_coefficient_controller,
 )
+
 
 router = APIRouter()
 

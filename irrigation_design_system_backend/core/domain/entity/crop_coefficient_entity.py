@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class CropCoefficient:
     crop_name: str  # Crop name (text)
