@@ -1,5 +1,4 @@
 from _decimal import Decimal
-
 import pytest
 
 from apps.evapotranspiration.reference_evapotranspiration.solar_radiation import (
@@ -26,7 +25,6 @@ class TestSolarRadiation:
             (Decimal("69.0"), MonthEnum.Out, Decimal("23.95")),
             (Decimal("69.0"), MonthEnum.Nov, Decimal("37.35")),
             (Decimal("69.0"), MonthEnum.Dez, Decimal("45")),
-
             (Decimal("67.0"), MonthEnum.Jan, Decimal("40.95")),
             (Decimal("67.0"), MonthEnum.Fev, Decimal("29.65")),
             (Decimal("67.0"), MonthEnum.Mar, Decimal("17.5")),
@@ -50,3 +48,35 @@ class TestSolarRadiation:
         assert abs(result - expected_result) <= self.error
 
 
+# class TestSolarRadiation:
+#     error = Decimal("1e-2")
+
+#     @pytest.mark.parametrize(
+#         "input_data, expected_output",
+#         [
+#             (
+#                 SolarRadiation(
+#                     latitude=Decimal("69.0"),
+#                     month=MonthEnum.Jan,
+#                 ),
+#                 Decimal("22.165737965964677"),
+#             ),
+#              (
+#                 SolarRadiation(
+#                     latitude=Decimal("44.0"),
+#                     month=MonthEnum.Dez,
+#                 ),
+#                 Decimal("18.05430705311771"),
+#             ),
+#              (
+#                 SolarRadiation(
+#                     latitude=Decimal("13.0"),
+#                     month=MonthEnum.Mar,
+#                 ),
+#                 Decimal("13.267747880477849"),
+#             )
+#         ]
+#     )
+#     def test_calculate_solar_radiation(self, input_data, expected_output):
+#         result = calculate_solar_radiation(input_data)
+#         assert abs(result - expected_output) <= self.error

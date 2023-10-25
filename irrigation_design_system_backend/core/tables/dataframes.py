@@ -17,7 +17,9 @@ class Dataframes:
             setattr(self, f"{file_name}", self._load_data(file_name))
 
     def _load_data(self, file_name):
-        file_path = os.path.join(tables_dir, os.path.join(self.PATH, f"{file_name}.csv"))
+        file_path = os.path.join(
+            tables_dir, os.path.join(self.PATH, f"{file_name}.csv")
+        )
         return pd.read_csv(os.path.join(tables_dir, file_path), encoding="utf-8")
 
 

@@ -8,7 +8,9 @@ from core.domain.entity.evapotranspiration_input import (
     EToPenmanMonteithInput,
     EToBlanneyCriddleInput,
 )
-from infrastructure.api.v1.responses.evapotranspiration import EvapotranspirationResponse
+from infrastructure.api.v1.responses.evapotranspiration import (
+    EvapotranspirationResponse,
+)
 
 router = APIRouter()
 

@@ -29,5 +29,7 @@ router.include_router(
     project_controller.router, prefix="/projects", tags=["Endpoint to manager projects"]
 )
 router.include_router(
-    derivation_line_controller.router, prefix="/derivationline", tags=["Endpoint Derivation Line"]
+    derivation_line_controller.router,
+    prefix="/derivationline",
+    tags=["Endpoint Derivation Line"],
 )

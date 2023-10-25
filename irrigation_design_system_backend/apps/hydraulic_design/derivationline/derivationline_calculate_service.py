@@ -9,7 +9,9 @@ from core.domain.entity.derivation_line_input import (
 from apps.hydraulic_design.consult_diameter.consult_nominal_diameter import (
     ConsultNominalDiameterTable,
 )
-from apps.hydraulic_design.hydraulic_calculation.hydraulic_calculation import HydraulicCalculation
+from apps.hydraulic_design.hydraulic_calculation.hydraulic_calculation import (
+    HydraulicCalculation,
+)
 
 
 class DerivationLineService:
@@ -19,8 +21,12 @@ class DerivationLineService:
         q = diameter_input.demand_flow
         s_max = diameter_input.speed_max
 
-        theoretical_dimensions = (((4 * q) / (pi * s_max)) ** Decimal(0.5)) * Decimal(1000.0)
-        return ConsultNominalDiameterTable.nominal_diameter(float(theoretical_dimensions))
+        theoretical_dimensions = (((4 * q) / (pi * s_max)) ** Decimal(0.5)) * Decimal(
+            1000.0
+        )
+        return ConsultNominalDiameterTable.nominal_diameter(
+            float(theoretical_dimensions)
+        )
 
     @staticmethod
     def calculate_load_loss(load_loss_input: DerivationLineLoadLossInput) -> Decimal:

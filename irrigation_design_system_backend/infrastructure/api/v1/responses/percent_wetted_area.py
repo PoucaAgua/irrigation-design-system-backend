@@ -12,5 +12,7 @@ class SaturatedWetRadiusX2Response(BaseModel):
 
 
 class ContinuousStripResponse(BaseModel):
-    message: str = "Pw by Maximum percentage of area wetted by the dripper calculation successful."
+    message: str = (
+        "Pw by Maximum percentage of area wetted by the dripper calculation successful."
+    )
     value: float

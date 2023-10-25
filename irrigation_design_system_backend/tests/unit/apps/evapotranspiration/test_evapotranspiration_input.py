@@ -2,9 +2,7 @@ from _decimal import Decimal
 import pytest
 from core.domain.enum.hemisphere import Hemisphere
 from core.domain.enum.month import MonthEnum
-from apps.evapotranspiration.reference_evapotranspiration.reference_evapotranspiration_service import (
-    ReferenceEvapotranspirationService,
-)
+
 from core.domain.entity.evapotranspiration_input import (
     EToHargravesSamaniInput,
     EToBlanneyCriddleInput,
@@ -12,7 +10,7 @@ from core.domain.entity.evapotranspiration_input import (
 )
 
 
-class TestReferenceEvapotranspirationService:
+class TestReferenceEvapotranspirationInput:
     error = Decimal("1e-2")
 
     @pytest.mark.parametrize(
@@ -50,12 +48,8 @@ class TestReferenceEvapotranspirationService:
             ),
         ],
     )
-    def test_calculate_by_hargraves_samani(
-        self, input_data: EToHargravesSamaniInput, expected_output
-    ):
-        result = ReferenceEvapotranspirationService.calculate_by_hargraves_samani(
-            input_data
-        )
+    def test_calculate_by_hargraves_samani(self, input_data, expected_output):
+        result = EToHargravesSamaniInput(input_data)
         assert abs(result - expected_output) <= self.error
 
     @pytest.mark.parametrize(
@@ -74,12 +68,8 @@ class TestReferenceEvapotranspirationService:
             ),
         ],
     )
-    def test_calculate_by_blaney_criddle(
-        self, input_data: EToBlanneyCriddleInput, expected_output
-    ):
-        result = ReferenceEvapotranspirationService.calculate_by_blaney_criddle(
-            input_data
-        )
+    def test_calculate_by_blaney_criddle(self, input_data, expected_output):
+        result = EToBlanneyCriddleInput(input_data)
         assert abs(result - expected_output) <= self.error
 
     @pytest.mark.parametrize(
@@ -101,10 +91,6 @@ class TestReferenceEvapotranspirationService:
             ),
         ],
     )
-    def test_calculate_by_penman_monteith(
-        self, input_data: EToPenmanMonteithInput, expected_output
-    ):
-        result = ReferenceEvapotranspirationService.calculate_by_penman_monteith(
-            input_data
-        )
+    def test_calculate_by_penman_monteith(self, input_data, expected_output):
+        result = EToPenmanMonteithInput(input_data)
         assert abs(result - expected_output) <= self.error
