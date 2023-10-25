@@ -46,37 +46,3 @@ class TestSolarRadiation:
         result = calculate_solar_radiation(latitude, month)
         # Then
         assert abs(result - expected_result) <= self.error
-
-
-# class TestSolarRadiation:
-#     error = Decimal("1e-2")
-
-#     @pytest.mark.parametrize(
-#         "input_data, expected_output",
-#         [
-#             (
-#                 SolarRadiation(
-#                     latitude=Decimal("69.0"),
-#                     month=MonthEnum.Jan,
-#                 ),
-#                 Decimal("22.165737965964677"),
-#             ),
-#              (
-#                 SolarRadiation(
-#                     latitude=Decimal("44.0"),
-#                     month=MonthEnum.Dez,
-#                 ),
-#                 Decimal("18.05430705311771"),
-#             ),
-#              (
-#                 SolarRadiation(
-#                     latitude=Decimal("13.0"),
-#                     month=MonthEnum.Mar,
-#                 ),
-#                 Decimal("13.267747880477849"),
-#             )
-#         ]
-#     )
-#     def test_calculate_solar_radiation(self, input_data, expected_output):
-#         result = calculate_solar_radiation(input_data)
-#         assert abs(result - expected_output) <= self.error
