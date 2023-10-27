@@ -21,12 +21,8 @@ class DerivationLineService:
         q = diameter_input.demand_flow
         s_max = diameter_input.speed_max
 
-        theoretical_dimensions = (((4 * q) / (pi * s_max)) ** Decimal(0.5)) * Decimal(
-            1000.0
-        )
-        return ConsultNominalDiameterTable.nominal_diameter(
-            float(theoretical_dimensions)
-        )
+        theoretical_dimensions = (((4 * q) / (pi * s_max)) ** Decimal(0.5)) * Decimal(1000.0)
+        return ConsultNominalDiameterTable.nominal_diameter(float(theoretical_dimensions))
 
     @staticmethod
     def calculate_load_loss(load_loss_input: DerivationLineLoadLossInput) -> Decimal:

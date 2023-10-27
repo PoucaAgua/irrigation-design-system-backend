@@ -16,9 +16,7 @@ class EToHargravesSamaniInput(BaseModel):
     @model_validator(mode="before")
     @classmethod
     def check(cls, data: Any) -> Any:
-        data["temperature_med"] = calculate_temperature_med(
-            **data
-        )  # Use a função do módulo
+        data["temperature_med"] = calculate_temperature_med(**data)  # Use a função do módulo
         return data
 
 

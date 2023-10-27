@@ -21,9 +21,7 @@ class Project(Base):
 
     # Foreign Keys
     lateral_line = relationship("LateralLine", back_populates="project", uselist=True)
-    derivation_line = relationship(
-        "DerivationLine", back_populates="project", uselist=True
-    )
+    derivation_line = relationship("DerivationLine", back_populates="project", uselist=True)
 
 
 class LateralLine(Base):

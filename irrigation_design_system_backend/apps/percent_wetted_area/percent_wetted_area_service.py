@@ -9,9 +9,7 @@ from core.domain.entity.percent_wetted_area_entity import (
 
 class PercentWettedAreaService:
     @classmethod
-    def calculate_irrigation_by_tree(
-        cls, input_entity: IrrigationTreeEntity
-    ) -> Decimal:
+    def calculate_irrigation_by_tree(cls, input_entity: IrrigationTreeEntity) -> Decimal:
         Np = input_entity.drippers_number
         Dw = cls._dw_calculate(input_entity)
         Sr = input_entity.space_between_lines
@@ -51,9 +49,7 @@ class PercentWettedAreaService:
         return Sp * Sw
 
     @classmethod
-    def _area_occupied_plant_calculate(
-        cls, input_entity: ContinuousStripEntity
-    ) -> Decimal:
+    def _area_occupied_plant_calculate(cls, input_entity: ContinuousStripEntity) -> Decimal:
         Sp = input_entity.space_between_plants
         Sr = input_entity.row_spacing_plants
         return Sp * Sr

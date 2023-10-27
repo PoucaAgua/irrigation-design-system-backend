@@ -53,9 +53,7 @@ class TestReferenceEvapotranspirationService:
     def test_calculate_by_hargraves_samani(
         self, input_data: EToHargravesSamaniInput, expected_output
     ):
-        result = ReferenceEvapotranspirationService.calculate_by_hargraves_samani(
-            input_data
-        )
+        result = ReferenceEvapotranspirationService.calculate_by_hargraves_samani(input_data)
         assert abs(result - expected_output) <= self.error
 
     @pytest.mark.parametrize(
@@ -74,12 +72,8 @@ class TestReferenceEvapotranspirationService:
             ),
         ],
     )
-    def test_calculate_by_blaney_criddle(
-        self, input_data: EToBlanneyCriddleInput, expected_output
-    ):
-        result = ReferenceEvapotranspirationService.calculate_by_blaney_criddle(
-            input_data
-        )
+    def test_calculate_by_blaney_criddle(self, input_data: EToBlanneyCriddleInput, expected_output):
+        result = ReferenceEvapotranspirationService.calculate_by_blaney_criddle(input_data)
         assert abs(result - expected_output) <= self.error
 
     @pytest.mark.parametrize(
@@ -104,7 +98,5 @@ class TestReferenceEvapotranspirationService:
     def test_calculate_by_penman_monteith(
         self, input_data: EToPenmanMonteithInput, expected_output
     ):
-        result = ReferenceEvapotranspirationService.calculate_by_penman_monteith(
-            input_data
-        )
+        result = ReferenceEvapotranspirationService.calculate_by_penman_monteith(input_data)
         assert abs(result - expected_output) <= self.error

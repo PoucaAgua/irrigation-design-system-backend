@@ -14,6 +14,4 @@ def calculate_temperature_med(
     if temperature_max is not None and temperature_min is not None:
         return (temperature_max + temperature_min) / 2
 
-    raise ValueError(
-        "Needs to have temperature_med or both temperature_max and temperature_min"
-    )
+    raise ValueError("Needs to have temperature_med or both temperature_max and temperature_min")

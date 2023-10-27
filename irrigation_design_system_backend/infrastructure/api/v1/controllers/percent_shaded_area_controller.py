@@ -18,9 +18,7 @@ router = APIRouter()
 def percent_shaded_area_by_plant_canopy_projection(
     input: PlantCanopyProjectionInputEntity,
 ):
-    percent_shaded_area = PercentShadedAreaService.calculate_by_plant_canopy_projection(
-        input
-    )
+    percent_shaded_area = PercentShadedAreaService.calculate_by_plant_canopy_projection(input)
     return PercentShadedAreaByCanopyResponse(value=percent_shaded_area)
 
 
@@ -28,7 +26,5 @@ def percent_shaded_area_by_plant_canopy_projection(
 def percent_shaded_area_by_plant_strip_projection(
     input: PlantStripProjectionInputEntity,
 ):
-    percent_shaded_area = PercentShadedAreaService.calculate_by_plant_strip_projection(
-        input
-    )
+    percent_shaded_area = PercentShadedAreaService.calculate_by_plant_strip_projection(input)
     return PercentShadedAreaByStripResponse(value=percent_shaded_area)

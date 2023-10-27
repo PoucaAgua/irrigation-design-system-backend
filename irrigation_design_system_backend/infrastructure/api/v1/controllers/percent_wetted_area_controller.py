@@ -24,9 +24,7 @@ def percent_wetted_area_irrigation_by_tree(input: IrrigationTreeEntity):
 
 @router.post("/calculate_twice_saturated_wetted_radius")
 def calculate_twice_saturated_wetted_radius(input: SaturatedWetRadiusX2Entity):
-    percent_wetted_area = (
-        PercentWettedAreaService.calculate_twice_saturated_wetted_radius(input)
-    )
+    percent_wetted_area = PercentWettedAreaService.calculate_twice_saturated_wetted_radius(input)
     return SaturatedWetRadiusX2Response(value=percent_wetted_area)
 
 

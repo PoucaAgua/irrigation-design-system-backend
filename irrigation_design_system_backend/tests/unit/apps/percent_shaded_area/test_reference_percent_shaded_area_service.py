@@ -22,9 +22,7 @@ class TestPercentShadedAreaService:
         expected_result = Decimal(12.82)
 
         # When
-        result = PercentShadedAreaService.calculate_by_plant_canopy_projection(
-            input_entity
-        )
+        result = PercentShadedAreaService.calculate_by_plant_canopy_projection(input_entity)
         print(result)
 
         # Then
@@ -38,9 +36,7 @@ class TestPercentShadedAreaService:
         expected_result = Decimal(2)
 
         # When
-        result = PercentShadedAreaService.calculate_by_plant_strip_projection(
-            input_entity
-        )
+        result = PercentShadedAreaService.calculate_by_plant_strip_projection(input_entity)
         print(result)
 
         # Then

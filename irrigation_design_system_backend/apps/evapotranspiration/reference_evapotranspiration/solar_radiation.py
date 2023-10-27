@@ -6,7 +6,5 @@ from apps.evapotranspiration.reference_evapotranspiration.interpolate import int
 
 def calculate_solar_radiation(latitude: Decimal, month: MonthEnum) -> Decimal:
     df_radiation = dataframes.solar_radiation
-    rad_value = interpolate(
-        df_radiation["latitude"], df_radiation[month.value], float(latitude)
-    )
+    rad_value = interpolate(df_radiation["latitude"], df_radiation[month.value], float(latitude))
     return Decimal(str(rad_value))

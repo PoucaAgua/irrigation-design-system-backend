@@ -40,9 +40,7 @@ class TestPercentWettedAreaService:
         expected_result = Decimal(0.176)
 
         # When
-        result = PercentWettedAreaService.calculate_twice_saturated_wetted_radius(
-            input_entity
-        )
+        result = PercentWettedAreaService.calculate_twice_saturated_wetted_radius(input_entity)
 
         # Then
         assert abs(result - expected_result) <= self.error

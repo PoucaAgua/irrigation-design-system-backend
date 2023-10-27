@@ -7,7 +7,7 @@ class ReferenceEvapotranspirationConstants:
 
 
 class CropEvapotranspirationConstants:
-    parameters_keller = (Decimal(0.15), Decimal(1)) 
-    parameters_bernardo = (Decimal(100)) 
-    parameters_fereres = (Decimal(100)) 
-    parameters_keller_and_bliesner = (Decimal(0.10))
+    parameters_keller = (Decimal(0.15), Decimal(1))
+    parameters_bernardo = Decimal(100)
+    parameters_fereres = Decimal(100)
+    parameters_keller_and_bliesner = Decimal(0.10)
