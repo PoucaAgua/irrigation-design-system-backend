@@ -3,7 +3,7 @@ import pytest
 from core.domain.enum.hemisphere import Hemisphere
 from core.domain.enum.month import MonthEnum
 
-from core.domain.entity.evapotranspiration_input import (
+from core.domain.entity.reference_evapotranspiration_input import (
     EToHargravesSamaniInput,
     EToBlanneyCriddleInput,
     EToPenmanMonteithInput,

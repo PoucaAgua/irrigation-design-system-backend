@@ -5,7 +5,7 @@ from core.domain.enum.month import MonthEnum
 from apps.evapotranspiration.reference_evapotranspiration.reference_evapotranspiration_service import (
     ReferenceEvapotranspirationService,
 )
-from core.domain.entity.evapotranspiration_input import (
+from core.domain.entity.reference_evapotranspiration_input import (
     EToHargravesSamaniInput,
     EToBlanneyCriddleInput,
     EToPenmanMonteithInput,

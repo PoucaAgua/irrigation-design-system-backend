@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from apps.evapotranspiration.reference_evapotranspiration.reference_evapotranspiration_service import (
     ReferenceEvapotranspirationService,
 )
-from core.domain.entity.evapotranspiration_input import (
+from core.domain.entity.reference_evapotranspiration_input import (
     EToHargravesSamaniInput,
     EToPenmanMonteithInput,
     EToBlanneyCriddleInput,
@@ -25,7 +25,6 @@ def evapotranspiration_hargraves_samani(eto_input: EToHargravesSamaniInput):
 def evapotranspiration_blaney_criddle(eto_entity: EToBlanneyCriddleInput):
     eto = ReferenceEvapotranspirationService.calculate_by_blaney_criddle(eto_entity)
     return EvapotranspirationResponse(value=eto)
-
 
 @router.post("/penman_monteith", response_model=EvapotranspirationResponse)
 def evapotranspiration_penman_monteith(eto_entity: EToPenmanMonteithInput):

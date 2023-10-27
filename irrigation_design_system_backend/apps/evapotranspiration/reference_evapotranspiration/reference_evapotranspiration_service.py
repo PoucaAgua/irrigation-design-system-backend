@@ -4,7 +4,7 @@ from apps.evapotranspiration.reference_evapotranspiration.percent_daily_solar_ho
     calculate_percent_daily_solar_hours,
 )
 from core.constants.evapotranspiration import ReferenceEvapotranspirationConstants
-from core.domain.entity.evapotranspiration_input import (
+from core.domain.entity.reference_evapotranspiration_input import (
     EToHargravesSamaniInput,
     EToBlanneyCriddleInput,
     EToPenmanMonteithInput,
