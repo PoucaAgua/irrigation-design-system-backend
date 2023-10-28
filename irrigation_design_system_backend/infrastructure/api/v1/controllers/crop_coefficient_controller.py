@@ -2,8 +2,14 @@ from typing import List
 from fastapi import APIRouter, HTTPException
 from infrastructure.api.v1.responses.crop_coefficient import CropCoefficientResponse
 from apps.crop_coefficient.crop_coefficient import CropCoefficientData
-from db.db import crop_coefficient_post, crop_coefficient_get_id, \
-    crop_coefficients_get_all, crop_coefficient_delete, crop_coefficient_active, crop_coefficient_update
+from db.db import (
+    crop_coefficient_post,
+    crop_coefficient_get_id,
+    crop_coefficients_get_all,
+    crop_coefficient_delete,
+    crop_coefficient_active,
+    crop_coefficient_update,
+)
 
 router = APIRouter()
 
