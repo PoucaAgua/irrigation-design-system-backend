@@ -8,7 +8,7 @@ Base = declarative_base()
 
 
 class CropCoefficientModel(Base):
-    __tablename__ = 'crop_coefficients'
+    __tablename__ = "crop_coefficients"
 
     id = Column(Integer, primary_key=True, index=True)
     crop_name = Column(String, index=True)
@@ -19,7 +19,7 @@ class CropCoefficientModel(Base):
     active = Column(Boolean, default=True)
 
 
-engine = create_engine('sqlite:///crop_coefficient.db')
+engine = create_engine("sqlite:///crop_coefficient.db")
 Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 
@@ -31,7 +31,7 @@ def crop_coefficient_post(cropcoefficient: CropCoefficientData, active: bool = T
         kc_initial=cropcoefficient.kc_initial,
         kc_mid_season=cropcoefficient.kc_mid_season,
         kc_final=cropcoefficient.kc_final,
-        active=active
+        active=active,
     )
     session = Session()
     session.add(db_cropcoefficient)
@@ -41,10 +41,11 @@ def crop_coefficient_post(cropcoefficient: CropCoefficientData, active: bool = T
     return db_cropcoefficient
 
 
-
 def crop_coefficient_get_id(get_id: int):
     session = Session()
-    db_cropcoefficient = session.query(CropCoefficientModel).filter(CropCoefficientModel.id == get_id).first()
+    db_cropcoefficient = (
+        session.query(CropCoefficientModel).filter(CropCoefficientModel.id == get_id).first()
+    )
     session.close()
     return db_cropcoefficient
 
@@ -58,7 +59,9 @@ def crop_coefficients_get_all():
 
 def crop_coefficient_active(get_id: int, active: bool):
     session = Session()
-    db_cropcoefficient = session.query(CropCoefficientModel).filter(CropCoefficientModel.id == get_id).first()
+    db_cropcoefficient = (
+        session.query(CropCoefficientModel).filter(CropCoefficientModel.id == get_id).first()
+    )
     if db_cropcoefficient:
         db_cropcoefficient.active = active
         session.commit()
@@ -70,7 +73,9 @@ def crop_coefficient_active(get_id: int, active: bool):
 
 def crop_coefficient_update(get_id: int, update_data: CropCoefficientData):
     session = Session()
-    db_cropcoefficient = session.query(CropCoefficientModel).filter(CropCoefficientModel.id == get_id).first()
+    db_cropcoefficient = (
+        session.query(CropCoefficientModel).filter(CropCoefficientModel.id == get_id).first()
+    )
     if db_cropcoefficient:
         db_cropcoefficient.crop_name = update_data.crop_name
         db_cropcoefficient.crop_type = update_data.crop_type
@@ -84,10 +89,11 @@ def crop_coefficient_update(get_id: int, update_data: CropCoefficientData):
         raise HTTPException(status_code=404, detail="Recurso não encontrado")
 
 
-
 def crop_coefficient_delete(get_id: int):
     session = Session()
-    db_cropcoefficient = session.query(CropCoefficientModel).filter(CropCoefficientModel.id == get_id).first()
+    db_cropcoefficient = (
+        session.query(CropCoefficientModel).filter(CropCoefficientModel.id == get_id).first()
+    )
     if db_cropcoefficient:
         session.delete(db_cropcoefficient)
         session.commit()
