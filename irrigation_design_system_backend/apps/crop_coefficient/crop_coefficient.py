@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 @dataclass
 class CropCoefficientData:
+    id: int
     crop_name: str
     crop_type: str
     kc_initial: float
