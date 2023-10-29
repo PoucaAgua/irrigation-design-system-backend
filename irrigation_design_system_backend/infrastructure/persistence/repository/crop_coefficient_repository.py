@@ -19,7 +19,7 @@ class CropCoefficientModel(Base):
     active = Column(Boolean, default=True)
 
 
-engine = create_engine("sqlite:///crop_coefficient.db")
+engine = create_engine("sqlite:///sql_app.db")
 Base.metadata.create_all(bind=engine)
 Session = sessionmaker(bind=engine)
 
