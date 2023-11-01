@@ -1,11 +1,10 @@
-from dataclasses import dataclass
+from pydantic import BaseModel
+from decimal import Decimal
 
-
-@dataclass
-class CropCoefficientData:
+class CropCoefficientData(BaseModel):
     id: int
     crop_name: str
     crop_type: str
-    kc_initial: float
-    kc_mid_season: float
-    kc_final: float
+    kc_initial: Decimal
+    kc_mid_season: Decimal
+    kc_final: Decimal
