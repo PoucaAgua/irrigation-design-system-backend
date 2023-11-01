@@ -1,7 +1,20 @@
 from typing import List, Optional
 from sqlalchemy.orm import Session
-from infrastructure.persistence import models
 
+from core.domain.entity.crop_coefficient_entity import CropCoefficientEntity
+from infrastructure.persistence import models
+from infrastructure.persistence.mappers.crop_coefficient import CropCoefficientMapper
+from infrastructure.persistence.session import transactional_session
+
+
+class CropCoefficientRepositoryV2:
+    @transactional_session
+    def upsert(self, db, crop_coefficient: CropCoefficientEntity):
+        crop_coefficient_db = CropCoefficientMapper.entity_to_model(crop_coefficient)
+        if crop_coefficient_db.id is None:
+            db.add(crop_coefficient_db)
+        else:
+            db.merge(crop_coefficient_db)
 
 class CropCoefficientRepository:
     def __init__(self, session: Session):

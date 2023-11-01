@@ -1,5 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+
+from apps.crop_coefficient.crop_coefficient import CropCoefficientService
 from infrastructure.api.v1.responses.crop_coefficient import (
     CropCoefficientResponse,
     CropCoefficientListResponse,
@@ -17,15 +19,8 @@ router = APIRouter()
 
 
 @router.post("/crop_coefficients/", response_model=CropCoefficientCreateResponse)
-def create_crop_coefficient(crop_coefficient: CropCoefficientEntity, db: Session = Depends(get_db)):
-    crop_coefficient_repository = CropCoefficientRepository(db)
-    crop_coefficient_repository.create_crop_coefficient(
-        crop_coefficient.crop_name,
-        crop_coefficient.crop_type,
-        crop_coefficient.kc_initial,
-        crop_coefficient.kc_mid_season,
-        crop_coefficient.kc_final,
-    )
+def create_crop_coefficient(crop_coefficient: CropCoefficientEntity):
+    CropCoefficientService.upsert(crop_coefficient)
     return {"message": "Crop coefficient created successfully"}
 
 
