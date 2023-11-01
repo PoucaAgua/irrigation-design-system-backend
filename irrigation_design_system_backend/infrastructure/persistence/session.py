@@ -1,30 +1,29 @@
 from functools import wraps
 from typing import Generator
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from core.configs.settings import settings
 
-# connect with postgres
+# Connect with the database based on settings
 if settings.DATABASE == "postgres":
     SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL
-    engine = create_engine(SQLALCHEMY_DATABASE_URL)
 else:
     SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
-    engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
 
+# Create an SQLAlchemy engine
+engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
+
+# Create a sessionmaker bound to the engine
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-
 def get_db() -> Generator:
+    db = SessionLocal()
     try:
-        db = SessionLocal()
         yield db
     except Exception as e:
-        print(f"error {e}")
+        print(f"Error: {e}")
     finally:
         db.close()
-
 
 def transactional_session(func):
     @wraps(func)
@@ -34,15 +33,13 @@ def transactional_session(func):
             db = SessionLocal()
 
         try:
-            result = func(
-                self, db, *args, **kwargs
-            )  # Pass the instance and db session to the wrapped function
-            db.commit()  # Commit the changes made during the function call
+            result = func(self, db, *args, **kwargs)
+            db.commit()
         except Exception as e:
-            db.rollback()  # Rollback the changes if an exception occurs
+            db.rollback()
             raise e
         finally:
-            db.close()  # Close the database session after the function call
+            db.close()
         return result
 
     return wrapper
