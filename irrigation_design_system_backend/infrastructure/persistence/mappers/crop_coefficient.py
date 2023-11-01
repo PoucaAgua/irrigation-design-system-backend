@@ -6,6 +6,7 @@ class CropCoefficientMapper:
     @staticmethod
     def entity_to_model(crop_coefficient_entity: CropCoefficientEntity) -> CropCoefficientModel:
         return CropCoefficientModel(
+            id=crop_coefficient_entity.id,
             crop_name=crop_coefficient_entity.crop_name,
             crop_type=crop_coefficient_entity.crop_type,
             kc_initial=crop_coefficient_entity.kc_initial,

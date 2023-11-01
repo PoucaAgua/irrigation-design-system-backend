@@ -1,11 +1,16 @@
 from pydantic import BaseModel
 from decimal import Decimal
 
+from core.domain.entity.crop_coefficient_entity import CropCoefficientEntity
+from infrastructure.persistence.repository.crop_coefficient_repository import CropCoefficientRepositoryV2
 
-class CropCoefficientData(BaseModel):
-    id: int
-    crop_name: str
-    crop_type: str
-    kc_initial: Decimal
-    kc_mid_season: Decimal
-    kc_final: Decimal
+
+class CropCoefficientService:
+
+    crop_repository = CropCoefficientRepositoryV2()
+
+    @classmethod
+    def upsert(cls, crop_coefficient: CropCoefficientEntity):
+        cls.crop_repository.upsert(crop_coefficient)
+        return
+
