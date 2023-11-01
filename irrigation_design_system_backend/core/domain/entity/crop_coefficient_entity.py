@@ -1,6 +1,7 @@
 from decimal import Decimal
 from pydantic import BaseModel
 
+
 class CropCoefficientEntity(BaseModel):
     id: int
     crop_name: str

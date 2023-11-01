@@ -16,6 +16,7 @@ engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread
 # Create a sessionmaker bound to the engine
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
+
 def get_db() -> Generator:
     db = SessionLocal()
     try:
@@ -24,6 +25,7 @@ def get_db() -> Generator:
         print(f"Error: {e}")
     finally:
         db.close()
+
 
 def transactional_session(func):
     @wraps(func)

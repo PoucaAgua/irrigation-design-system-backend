@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean
 from infrastructure.persistence.models.base import Base
 
+
 class CropCoefficientModel(Base):
     __tablename__ = "crop_coefficients"
 

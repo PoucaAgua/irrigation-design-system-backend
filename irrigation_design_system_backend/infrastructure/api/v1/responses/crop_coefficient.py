@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from typing import List
 
+
 class CropCoefficientResponse(BaseModel):
     id: int
     crop_name: str
@@ -10,14 +11,18 @@ class CropCoefficientResponse(BaseModel):
     kc_final: float
     active: bool
 
+
 class CropCoefficientListResponse(BaseModel):
     crop_coefficients: List[CropCoefficientResponse]
+
 
 class CropCoefficientCreateResponse(BaseModel):
     message: str
 
+
 class CropCoefficientUpdateResponse(BaseModel):
     message: str
+
 
 class CropCoefficientDeleteResponse(BaseModel):
     message: str
