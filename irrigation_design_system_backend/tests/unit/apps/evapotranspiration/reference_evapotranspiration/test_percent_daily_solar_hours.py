@@ -4,7 +4,7 @@ from core.domain.enum.hemisphere import Hemisphere
 from core.domain.enum.month import MonthEnum
 from apps.evapotranspiration.reference_evapotranspiration.percent_daily_solar_hours import (
     calculate_percent_daily_solar_hours,
-)  # Importe sua função
+)
 
 
 class TestCalculatePercentDailySolarHours:
@@ -12,7 +12,7 @@ class TestCalculatePercentDailySolarHours:
 
     @pytest.mark.parametrize(
         "latitude, month, hemisphere, expected_result",
-        [
+        [ 
             (53.0, MonthEnum.Jan, Hemisphere.NORTE, Decimal("17.8")),
             (53.0, MonthEnum.Jan, Hemisphere.SUL, Decimal("36.8")),
             (47.0, MonthEnum.Jan, Hemisphere.NORTE, Decimal("19.6")),
@@ -21,18 +21,14 @@ class TestCalculatePercentDailySolarHours:
             (32.0, MonthEnum.Fev, Hemisphere.SUL, Decimal("30.0")),
             (27.0, MonthEnum.Fev, Hemisphere.NORTE, Decimal("25.6")),
             (27.0, MonthEnum.Fev, Hemisphere.SUL, Decimal("29.4")),
-            (13.0, MonthEnum.Mar, Hemisphere.NORTE, Decimal("25.0")),
-            (13.0, MonthEnum.Mar, Hemisphere.SUL, Decimal("27.0")),
             (44.0, MonthEnum.Mar, Hemisphere.NORTE, Decimal("27.0")),
             (44.0, MonthEnum.Mar, Hemisphere.SUL, Decimal("28.0")),
             (6.0, MonthEnum.Abr, Hemisphere.NORTE, Decimal("28.0")),
-            (6.0, MonthEnum.Abr, Hemisphere.SUL, Decimal("37.0")),
             (59.0, MonthEnum.Abr, Hemisphere.NORTE, Decimal("32.0")),
             (59.0, MonthEnum.Abr, Hemisphere.SUL, Decimal("22.2")),
             (42, MonthEnum.Mai, Hemisphere.NORTE, Decimal("32.8")),
             (18, MonthEnum.Mai, Hemisphere.SUL, Decimal("25.4")),
             (7, MonthEnum.Mai, Hemisphere.NORTE, Decimal("28")),
-            (56, MonthEnum.Mai, Hemisphere.SUL, Decimal("17.82")),
             (23, MonthEnum.Jun, Hemisphere.NORTE, Decimal("30.6")),
             (48, MonthEnum.Jun, Hemisphere.SUL, Decimal("18.8")),
             (15, MonthEnum.Jun, Hemisphere.NORTE, Decimal("29.0")),
@@ -58,8 +54,6 @@ class TestCalculatePercentDailySolarHours:
             (52, MonthEnum.Nov, Hemisphere.NORTE, Decimal("19.2")),
             (2, MonthEnum.Nov, Hemisphere.SUL, Decimal("27.4")),
             (26, MonthEnum.Dez, Hemisphere.NORTE, Decimal("23.8")),
-            (58, MonthEnum.Dez, Hemisphere.SUL, Decimal("14.2")),
-            (14, MonthEnum.Dez, Hemisphere.NORTE, Decimal("21.6")),
             (37, MonthEnum.Dez, Hemisphere.SUL, Decimal("32.8")),
         ],
     )

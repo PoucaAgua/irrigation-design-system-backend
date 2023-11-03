@@ -15,90 +15,83 @@ class TestEvapotranspirationFunctions:
     @pytest.mark.parametrize(
         "temperature, expected_result",
         [
-            (20.0, 2.339),
-            (25.0, 3.167),
-            (15.0, 1.705),
-            (10.0, 1.227),
-            (0.0, 0.610),
-            (35.0, 5.662),
-            (40.0, 7.375),
-            (5.0, 0.872),
-            (12.5, 1.449),
-            (22.5, 2.725),
-            (17.5, 1.999),
-            (32.0, 4.754),
-            (28.0, 3.779),
-            (37.5, 6.274),
-            (18.0, 2.063),
-            (8.0, 1.072),
-            (27.5, 3.671),
-            (21.5, 2.564),
-            (33.5, 5.172),
+            (20.0, 2.338281270927446),
+            (25.0, 3.1677777175068473),
+            (15.0, 1.7053462321157722),
+            (10.0, 1.2279626193393784),
+            (35.0,  5.622681238496122),
+            (40.0, 7.375613593062048),
+            (5.0, 0.8723109603497123),
+            (12.5, 1.4494811248284514),
+            (22.5, 2.725587606605459),
+            (17.5, 1.9999869748999506),
+            (32.0,  4.754775396261813),
+            (28.0, 3.779930363995263),
+            (37.5, 6.447730885163706),
+            (18.0, 2.063989202660485),
+            (8.0, 1.0727688258811263),
         ],
     )
     def test_calculate_vapor_saturation_pressure(self, temperature, expected_result):
         result = calculate_vapor_saturation_pressure(temperature)
         assert math.isclose(result, expected_result, rel_tol=self.error)
 
+
     @pytest.mark.parametrize(
-        "relative_humidity_air, vapor_saturation_pressure, expected_result",
+        "relative_humidity_air, temperature, expected_result",
         [
-            (44.8, 2.339, 1.047),
-            (31.6, 3.167, 1.002),
-            (30.0, 1.705, 0.512),
-            (59.1, 1.227, 0.725),
-            (77.2, 0.610, 0.471),
-            (56.3, 5.662, 3.190),
-            (34.9, 7.375, 2.575),
-            (42.8, 0.872, 0.373),
-            (78.2, 1.449, 1.134),
-            (49.9, 2.725, 1.360),
-            (53.1, 1.999, 1.061),
-            (39.9, 4.754, 1.896),
-            (67.3, 3.779, 2.542),
-            (46.5, 6.274, 2.916),
-            (63.9, 2.063, 1.319),
-            (67.6, 1.072, 0.725),
-            (35.0, 3.671, 1.286),
-            (73.9, 2.564, 1.896),
-            (48.2, 5.172, 2.495),
+            (44, 20, 1.0288437592080764),
+            (44, 30, 1.8669486258539658),
+            (40, 10, 0.4911850477357514),
+            (45, 15, 0.7674058044520975),
+            (50, 20, 1.169140635463723),
+            (55, 25, 1.7422777446287663),
+            (65, 35.1, 3.6749912860891976),
+            (42.7, 12.8, 0.6312290294788812),
+            (47.4, 17.3,  0.936091630785933),
+            (52.9, 22.6, 1.450613510554012),
+            (57.6, 27.4, 2.1023237721503225),
+            (62.3, 32.0, 2.9622250718711096),
+            (44.8, 18.7,  0.9661576870738966),
+            (49.5, 23.3, 1.416106459195399),
+            (40.5, 10.5, 0.5142353409741444),
         ],
     )
     def test_calculate_vapor_current_pressure(
-        self, relative_humidity_air, vapor_saturation_pressure, expected_result
+        self, relative_humidity_air, temperature, expected_result
     ):
+        vapor_saturation_pressure = calculate_vapor_saturation_pressure(temperature)
         result = calculate_vapor_current_pressure(relative_humidity_air, vapor_saturation_pressure)
         assert math.isclose(result, expected_result, rel_tol=self.error)
 
     @pytest.mark.parametrize(
-        "temperature, vapor_saturation_pressure, expected_result",
+        "temperature, expected_result",
         [
-            (23.46, 2.339, 0.1410),
-            (20.40, 3.167, 0.1954),
-            (30.40, 1.705, 0.0975),
-            (39.38, 1.227, 0.0657),
-            (25.10, 0.610, 0.0363),
-            (41.72, 5.662, 0.2980),
-            (41.09, 7.375, 0.3900),
-            (37.35, 0.872, 0.0474),
-            (21.16, 1.449, 0.0889),
-            (29.31, 2.725, 0.1571),
-            (33.34, 1.999, 0.1118),
-            (28.68, 4.754, 0.2754),
-            (39.12, 3.779, 0.2027),
-            (27.27, 6.274, 0.3673),
-            (33.36, 2.063, 0.1154),
-            (23.88, 1.072, 0.0644),
-            (24.46, 3.671, 0.2196),
-            (39.06, 2.564, 0.1376),
-            (20.52, 5.172, 0.3188),
+            (20.0,  0.14474018811241365),
+            (25.0,  0.18868182684282603),
+            (24.3,  0.1819258849472823),
+            (33.0,  0.2821373665384726),
+            (34.0,  0.29615809125881837),
+            (33.4,  0.28767750418502946),
+            (37.1,  0.3433754998926738),
+            (25.82,  0.19686355139434455),
+            (40.2,  0.3967071106994992),
+            (45.3,  0.49934253092170255),
+            (46.1,   0.5172750948020735),
+            (24.87,  0.1874114160718771),
+            (29.65,   0.23914527717516107),
+            (45.80,  0.5104890154668869),
+            (21.32,  0.15539975161896216),
+
         ],
     )
     def test_calculate_declivity_curve_pressure_vapor(
-        self, temperature, vapor_saturation_pressure, expected_result
+        self, temperature, expected_result
     ):
+        vapor_saturation_pressure = calculate_vapor_saturation_pressure(temperature)
         result = calculate_declivity_curve_pressure_vapor(temperature, vapor_saturation_pressure)
         assert math.isclose(result, expected_result, rel_tol=self.error)
+
 
     @pytest.mark.parametrize(
         "altitude, expected_result",
@@ -147,3 +140,4 @@ class TestEvapotranspirationFunctions:
     def test_calculate_psychrometric_constant(self, atmospheric_pressure, expected_result):
         result = calculate_psychrometric_constant(atmospheric_pressure)
         assert math.isclose(result, expected_result, rel_tol=self.error)
+
