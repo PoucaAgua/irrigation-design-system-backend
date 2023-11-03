@@ -3,7 +3,7 @@ from typing import Any
 from pydantic import BaseModel, PositiveInt, model_validator
 from core.domain.enum.hemisphere import Hemisphere
 from core.domain.enum.month import MonthEnum
-from core.domain.utils.temperature_utils import calculate_temperature_med
+from core.domain.entity.evapotranspiration.temperature_med import calculate_temperature_med
 
 
 class EToHargravesSamaniInput(BaseModel):

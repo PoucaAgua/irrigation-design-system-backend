@@ -3,7 +3,7 @@ from fastapi import APIRouter
 from apps.evapotranspiration.reference_evapotranspiration.reference_evapotranspiration_service import (
     ReferenceEvapotranspirationService,
 )
-from core.domain.entity.reference_evapotranspiration_input import (
+from core.domain.entity.evapotranspiration.reference.reference_evapotranspiration_input import (
     EToHargravesSamaniInput,
     EToPenmanMonteithInput,
     EToBlanneyCriddleInput,
