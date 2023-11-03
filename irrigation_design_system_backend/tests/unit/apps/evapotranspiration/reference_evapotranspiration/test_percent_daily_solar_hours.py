@@ -12,7 +12,7 @@ class TestCalculatePercentDailySolarHours:
 
     @pytest.mark.parametrize(
         "latitude, month, hemisphere, expected_result",
-        [ 
+        [
             (53.0, MonthEnum.Jan, Hemisphere.NORTE, Decimal("17.8")),
             (53.0, MonthEnum.Jan, Hemisphere.SUL, Decimal("36.8")),
             (47.0, MonthEnum.Jan, Hemisphere.NORTE, Decimal("19.6")),

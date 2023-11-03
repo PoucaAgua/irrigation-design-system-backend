@@ -30,11 +30,11 @@ class TestReferenceEvapotranspirationService:
             ),
         ],
     )
-    def test_calculate_by_hargraves_samani(self, input_data: EToHargravesSamaniInput, expected_output):
+    def test_calculate_by_hargraves_samani(
+        self, input_data: EToHargravesSamaniInput, expected_output
+    ):
         result = ReferenceEvapotranspirationService.calculate_by_hargraves_samani(input_data)
         assert round(result, 6) == round(expected_output, 6)
-
-
 
     @pytest.mark.parametrize(
         "input_data, expected_output",
@@ -74,12 +74,9 @@ class TestReferenceEvapotranspirationService:
                 (9.208248638463727),
             ),
         ],
-    )   
-    def test_calculate_by_penman_monteith(self, input_data: EToPenmanMonteithInput, expected_output):
-        result = ReferenceEvapotranspirationService.calculate_by_penman_monteith(
-            input_data
-        )
+    )
+    def test_calculate_by_penman_monteith(
+        self, input_data: EToPenmanMonteithInput, expected_output
+    ):
+        result = ReferenceEvapotranspirationService.calculate_by_penman_monteith(input_data)
         assert result == expected_output
-
-
-        

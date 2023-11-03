@@ -5,6 +5,7 @@ from core.domain.enum.hemisphere import Hemisphere
 from core.domain.enum.month import MonthEnum
 from core.domain.utils.temperature_utils import calculate_temperature_med
 
+
 class EToHargravesSamaniInput(BaseModel):
     temperature_med: Decimal
     temperature_max: Decimal = None
@@ -15,7 +16,7 @@ class EToHargravesSamaniInput(BaseModel):
     @model_validator(mode="before")
     @classmethod
     def check(cls, data: Any) -> Any:
-        data["temperature_med"] = calculate_temperature_med(**data) 
+        data["temperature_med"] = calculate_temperature_med(**data)
         return data
 
 

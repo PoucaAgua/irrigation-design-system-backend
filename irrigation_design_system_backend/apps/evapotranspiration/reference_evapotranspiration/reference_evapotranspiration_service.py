@@ -22,18 +22,16 @@ from apps.evapotranspiration.reference_evapotranspiration.penman_monteith_method
 
 
 class ReferenceEvapotranspirationService:
-    
     @staticmethod
     def calculate_by_hargraves_samani(eto_input: EToHargravesSamaniInput) -> Decimal:
         a, b, c, d = ReferenceEvapotranspirationConstants.parameters_hargraves_samani
-        radiation = calculate_solar_radiation(
-            latitude=eto_input.latitude, month=eto_input.month)
+        radiation = calculate_solar_radiation(latitude=eto_input.latitude, month=eto_input.month)
         temperature_med = eto_input.temperature_med
         temperature_min = eto_input.temperature_min
         temperature_max = eto_input.temperature_max
-        return Decimal(radiation * a * (b *(temperature_med + c) * (temperature_max - temperature_min)) ** d)
-        
-
+        return Decimal(
+            radiation * a * (b * (temperature_med + c) * (temperature_max - temperature_min)) ** d
+        )
 
     @staticmethod
     def calculate_by_blaney_criddle(eto_input: EToBlanneyCriddleInput) -> Decimal:
@@ -66,4 +64,3 @@ class ReferenceEvapotranspirationService:
             0.408 * declivity_curve_pressure_vapor * (rn - g)
             + (psychrometric_constant * 900 * u2 * (es - ea) / (eto_input.temperature_med + 273))
         ) / (declivity_curve_pressure_vapor + psychrometric_constant * (1 + 0.34 * u2))
-
