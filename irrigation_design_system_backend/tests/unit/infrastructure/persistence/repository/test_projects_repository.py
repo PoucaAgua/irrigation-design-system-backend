@@ -1,5 +1,5 @@
 import pytest
-from unittest.mock import Mock
+from unittest.mock import Mock, patch
 
 from infrastructure.persistence.mappers.project_mapper import ProjectMapper
 from infrastructure.persistence.models.projects import Project
@@ -28,3 +28,10 @@ class TestProjectRepository:
             derivation_line=[],
             lateral_line=[]
         )
+        repository = ProjectRepository()
+
+        repository.upsert(project_input, db=db)
+
+        # Assert that the necessary methods were called
+        db.save.assert_called_with(Mock())
+

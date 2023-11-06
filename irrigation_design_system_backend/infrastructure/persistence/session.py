@@ -29,7 +29,10 @@ def get_db() -> Generator:
 def transactional_session(func):
     @wraps(func)
     def wrapper(self, *args, **kwargs):
-        db = SessionLocal()
+        db = kwargs.pop('db', None)
+        if db is None:
+            db = SessionLocal()
+
         try:
             result = func(
                 self, db, *args, **kwargs
