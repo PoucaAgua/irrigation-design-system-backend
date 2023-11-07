@@ -13,10 +13,54 @@ class HydraulicCalculation:
         return speed
 
     @staticmethod
+    def flow_section_area(intern_diameter):
+        d = Decimal(intern_diameter)
+        pi = MathConstants.PI
+        fsa = (pi * d ** Decimal(2)) / 4
+
+        return fsa
+
+    @staticmethod
+    def emissors_number(length_lateral_line, emitter_spacing):
+        l = Decimal(length_lateral_line)
+        spacing = Decimal(emitter_spacing)
+        en = l / spacing
+
+        return en
+
+    @staticmethod
+    def flow_section(intern_diameter):
+        di = Decimal(intern_diameter)
+        fs = di ** Decimal(2) / 4
+        return fs
+
+    @staticmethod
+    def flow_lateral_line(emissors, flow_nominal):
+        e = Decimal(emissors)
+        fn = Decimal(flow_nominal)
+        flow = 0.0000002777 * (e * fn)
+
+        return flow
+
+    @staticmethod
+    def speed_water_lateral_line(flow, section):
+        f = Decimal(flow)
+        s = Decimal(section)
+
+        return f / s
+
+    @staticmethod
     def n_reynolds(speed, diameter) -> Decimal:
         viscosity = HydraulicConstants.kinematic_viscosity
         num_reynolds = Decimal(diameter * speed) / viscosity
         return num_reynolds
+
+    @staticmethod
+    def coeficient_K(intern_diameter):
+        di = Decimal(intern_diameter)
+        const = HydraulicConstants.coeficient_for_K
+        k = const / (di) ** Decimal(4.75)
+        return k
 
     @staticmethod
     def friction_factor(d, re) -> Decimal:
