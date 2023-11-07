@@ -9,6 +9,7 @@ from infrastructure.api.v1.controllers import (
     derivation_line_controller,
     irrigation_controller,
     special_parts_controller,
+    lateral_line_controller,
 )
 
 router = APIRouter()
@@ -40,6 +41,11 @@ router.include_router(
     derivation_line_controller.router,
     prefix="/derivation_line",
     tags=["Endpoint to calculate Derivation Line"],
+)
+router.include_router(
+    lateral_line_controller.router,
+    prefix="/Lateral_Line_line",
+    tags=["Endpoint to calculate Lateral Line"],
 )
 router.include_router(
     irrigation_controller.actual_irrigation_controller.router,
