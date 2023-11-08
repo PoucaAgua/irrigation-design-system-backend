@@ -7,12 +7,9 @@ from infrastructure.api.v1.controllers import (
     percent_wetted_area_controller,
     percent_shaded_area_controller,
     derivation_line_controller,
-<<<<<<< HEAD
     irrigation_controller,
-=======
-    special_parts_controller
+    special_parts_controller,
     
->>>>>>> 1406b47 (study: example how use the class)
 )
 
 router = APIRouter()
