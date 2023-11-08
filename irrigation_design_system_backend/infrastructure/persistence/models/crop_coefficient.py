@@ -5,8 +5,8 @@ from infrastructure.persistence.models.base import Base
 class CropCoefficientModel(Base):
     __tablename__ = "crop_coefficients"
 
-    id = Column(Integer, primary_key=True, index=True)
-    crop_name = Column(String, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    crop_name = Column(String)
     crop_type = Column(String)
     kc_initial = Column(Float)
     kc_mid_season = Column(Float)
