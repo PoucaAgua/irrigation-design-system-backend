@@ -2,24 +2,19 @@ from enum import Enum
 
 
 class SpecialPartsTypes(Enum):
-    JOELHO_90 = "JOELHO_90"
-    JOELHO_45 = "JOELHO_45"
-    # TODO input the others and translate the KEY to english
-    '''['DE', 
-    'D', 
-    'joelho_90', 
-    'joelho_45', 
-    'curva_90', 
-    'curva_45',
-    'tê_90_passagem_direta', 
-    'tê_90_saida_de_lado', 
-    'tê_90_saida_bilateral',
-    'entrada_normal', 
-    'entrada_de_borda', 
-    'saida_canalização',
-    'valvula_pe_crivo',
-    'valvula_retenção_tipo_leve',
-    'valvula_retenção_tipo_pesado', 
-    'registro_globo_aberto',
-    'registro_gaveta_aberto', 
-    'registro_angulo_aberto']'''
+    Degree_90_Elbow = "Degree_90_Elbow"
+    Degree_45_Elbow = "Degree_45_Elbow"
+    Degree_90_Bend = "Degree_90_Bend"
+    Degree_45_Bend = "Degree_45_Bend"
+    Degree_90_Straight_Tee = "Degree_90_Straight_Tee"
+    Degree_90_Lateral_Tee = "Degree_90_Lateral_Tee"
+    Degree_90_Double_Branch_Tee = "Degree_90_Double_Branch_Tee"
+    Standard_Entry = "Standard_Entry"
+    Edge_Entry = "Edge_Entry"
+    Duct_Exit = "Duct_Exit"
+    Foot_Valve_with_Strainer = "Foot_Valve_with_Strainer"
+    Lightweight_Check_Valve = "Lightweight_Check_Valve"
+    Heavy_Duty_Check_Valve = "Heavy_Duty_Check_Valve"
+    Open_Globe_Valve = "Open_Globe_Valve"
+    Open_Gate_Valve = "Open_Gate_Valve"
+    Open_Angle_Valve = "Open_Angle_Valve"
