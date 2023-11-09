@@ -48,11 +48,13 @@ jobs:
       - name: Create Zipfile archive of Dependencies
         run: |
           cd ./venv/lib/python3.8/site-packages
-          find . -type d -name "__pycache__" -exec rm -r {} \;
           zip -r9 ../../../../api.zip .
 
       - name: Add App to Zipfile
-        run: cd ./irrigation_design_system_backend && zip -g ../api.zip -r . --exclude "tests/*"
+        run: |
+          cd ./irrigation_design_system_backend
+          find . -type d -name "__pycache__" -exec rm -r {} \;
+          zip -g ../api.zip -r . --exclude "tests/*"
       
       - name: Upload zip file artifact
         uses: actions/upload-artifact@v2
