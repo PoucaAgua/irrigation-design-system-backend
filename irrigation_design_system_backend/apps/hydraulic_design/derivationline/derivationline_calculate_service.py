@@ -9,7 +9,9 @@ from core.domain.entity.derivation_line_input import (
 from apps.hydraulic_design.consult_diameter.consult_nominal_diameter import (
     ConsultNominalDiameterTable,
 )
-from apps.hydraulic_design.hydraulic_calculation.hydraulic_calculation import HydraulicCalculation
+from apps.hydraulic_design.hydraulic_calculation.hydraulic_calculation import (
+    HydraulicCalculation,
+)
 
 
 class DerivationLineService:

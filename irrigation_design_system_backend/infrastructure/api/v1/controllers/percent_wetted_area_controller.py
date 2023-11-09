@@ -1,5 +1,7 @@
 from fastapi import APIRouter
-from apps.percent_wetted_area.percent_wetted_area_service import PercentWettedAreaService
+from apps.percent_wetted_area.percent_wetted_area_service import (
+    PercentWettedAreaService,
+)
 from infrastructure.api.v1.responses.percent_wetted_area import (
     IrrigationTreeResponse,
     SaturatedWetRadiusX2Response,

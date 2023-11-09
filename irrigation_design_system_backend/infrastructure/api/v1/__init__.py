@@ -1,7 +1,8 @@
 from fastapi import APIRouter
 
 from infrastructure.api.v1.controllers import (
-    evapotranspiration_controller,
+    crop_evapotranspiration_controller,
+    reference_evapotranspiration_controller,
     project_controller,
     percent_wetted_area_controller,
     percent_shaded_area_controller,
@@ -12,9 +13,14 @@ from infrastructure.api.v1.controllers import (
 router = APIRouter()
 
 router.include_router(
-    evapotranspiration_controller.router,
-    prefix="/evapotranspiration",
-    tags=["Endpoint Evapotranspiration"],
+    reference_evapotranspiration_controller.router,
+    prefix="/reference_evapotranspiration",
+    tags=["Endpoint to calculate the reference_evapotranspiration"],
+)
+router.include_router(
+    crop_evapotranspiration_controller.router,
+    prefix="/crop_evapotranspiration",
+    tags=["Endpoint to calculate the crop_evapotranspiration"],
 )
 router.include_router(
     percent_wetted_area_controller.router,
