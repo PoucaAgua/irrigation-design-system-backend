@@ -1,6 +1,8 @@
 from _decimal import Decimal
 
-from apps.percent_shaded_area.percent_shaded_area_service import PercentShadedAreaService
+from apps.percent_shaded_area.percent_shaded_area_service import (
+    PercentShadedAreaService,
+)
 from core.domain.entity.percent_shaded_area_entity import (
     PlantCanopyProjectionInputEntity,
     PlantStripProjectionInputEntity,
