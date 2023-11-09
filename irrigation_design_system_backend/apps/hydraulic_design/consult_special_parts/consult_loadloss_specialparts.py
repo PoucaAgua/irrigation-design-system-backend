@@ -7,6 +7,6 @@ class ConsultLoadLossSpecialPartsTable:
     @classmethod
     def loadloss_special_parts(cls, type, diameter):
         
-        sp_load_loss = cls.data.loc[cls.data['D'] == diameter, type].values[0]
+        sp_load_loss = cls.data.loc[cls.data['Diameter'] == diameter, type].values[0]
         
         return sp_load_loss
