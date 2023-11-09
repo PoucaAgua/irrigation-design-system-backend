@@ -51,7 +51,7 @@ jobs:
           zip -r9 ../../../../api.zip .
 
       - name: Add App to Zipfile
-        run: cd ./irrigation_design_system_backend && zip -g ../api.zip -r .
+        run: cd ./irrigation_design_system_backend && zip -g ../api.zip -r . --exclude "tests/*"
 
       - name: Upload zip file artifact
         uses: actions/upload-artifact@v2
