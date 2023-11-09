@@ -1,5 +1,5 @@
 import pytest
-from _decimal import Decimal
+from decimal import Decimal
 import math
 from apps.evapotranspiration.crop_evapotranspiration.location_coefficients_method import (
     calculate_by_keller,
@@ -16,24 +16,24 @@ class TestLocationCoefficients:
         "P, expected_result",
         [
             (
-                2.0,
-                1.85,
+                Decimal("2.0"),
+                Decimal("1.85"),
             ),
             (
-                5.0,
-                4.4,
+                Decimal("5.0"),
+                Decimal("4.4"),
             ),
             (
-                8.0,
-                6.95,
+                Decimal("8.0"),
+                Decimal("6.95"),
             ),
             (
-                20.0,
-                17.15,
+                Decimal("20.0"),
+                Decimal("17.15"),
             ),
             (
-                15.0,
-                12.9,
+                Decimal("15.0"),
+                Decimal("12.9"),
             ),
         ],
     )
@@ -45,24 +45,24 @@ class TestLocationCoefficients:
         "P, expected_result",
         [
             (
-                2.0,
-                0.02,
+                Decimal("2.0"),
+                Decimal("0.02"),
             ),
             (
-                5.0,
-                0.05,
+                Decimal("5.0"),
+                Decimal("0.05"),
             ),
             (
-                8.0,
-                0.08,
+                Decimal("8.0"),
+                Decimal("0.08"),
             ),
             (
-                20.0,
-                0.2,
+                Decimal("20.0"),
+                Decimal("0.2"),
             ),
             (
-                15.0,
-                0.15,
+                Decimal("15.0"),
+                Decimal("0.15"),
             ),
         ],
     )
@@ -74,24 +74,24 @@ class TestLocationCoefficients:
         "P, expected_result",
         [
             (
-                2.0,
-                0.02,
+                Decimal("2.0"),
+                Decimal("0.02"),
             ),
             (
-                5.0,
-                0.05,
+                Decimal("5.0"),
+                Decimal("0.05"),
             ),
             (
-                8.0,
-                0.08,
+                Decimal("8.0"),
+                Decimal("0.08"),
             ),
             (
-                20.0,
-                0.2,
+                Decimal("20.0"),
+                Decimal("0.2"),
             ),
             (
-                15.0,
-                0.15,
+                Decimal("15.0"),
+                Decimal("0.15"),
             ),
         ],
     )
@@ -103,24 +103,24 @@ class TestLocationCoefficients:
         "P, expected_result",
         [
             (
-                2.0,
-                0.14142135623730953,
+                Decimal("2.0"),
+                Decimal("0.14142135623730953"),
             ),
             (
-                5.0,
-                0.223606797749979,
+                Decimal("5.0"),
+                Decimal("0.223606797749979"),
             ),
             (
-                8.0,
-                0.28284271247461906,
+                Decimal("8.0"),
+                Decimal("0.28284271247461906"),
             ),
             (
-                20.0,
-                0.447213595499958,
+                Decimal("20.0"),
+                Decimal("0.447213595499958"),
             ),
             (
-                15.0,
-                0.3872983346207417,
+                Decimal("15.0"),
+                Decimal("0.3872983346207417"),
             ),
         ],
     )
