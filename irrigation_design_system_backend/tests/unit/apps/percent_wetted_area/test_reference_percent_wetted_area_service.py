@@ -1,6 +1,8 @@
 from _decimal import Decimal
 
-from apps.percent_wetted_area.percent_wetted_area_service import PercentWettedAreaService
+from apps.percent_wetted_area.percent_wetted_area_service import (
+    PercentWettedAreaService,
+)
 from core.domain.entity.percent_wetted_area_entity import (
     IrrigationTreeEntity,
     SaturatedWetRadiusX2Entity,

@@ -1,6 +1,8 @@
 from _decimal import Decimal
 
-from apps.hydraulic_design.hydraulic_calculation.hydraulic_calculation import HydraulicCalculation
+from apps.hydraulic_design.hydraulic_calculation.hydraulic_calculation import (
+    HydraulicCalculation,
+)
 
 
 class TestHydraulicCalculation:

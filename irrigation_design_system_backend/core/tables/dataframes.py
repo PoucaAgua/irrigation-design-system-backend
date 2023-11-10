@@ -1,22 +1,24 @@
-from core.tables.source_table import SourceTable
+import os
+import pandas as pd
+
+tables_dir = os.path.dirname(os.path.abspath(__file__))
 
 
 class Dataframes:
-    PATH = "/files/"
-    COMMERCIAL_DIAMETER_PATH = PATH + "reference_table_commercial_diameters.csv"
+    PATH = "files"
 
     def __init__(self):
-        self._commercial_diameter = None
+        file_names = [
+            os.path.splitext(file_name)[0]
+            for file_name in os.listdir(os.path.join(tables_dir, self.PATH))
+        ]
 
-    @property
-    def commercial_diameter(self):
-        if self._commercial_diameter:
-            return self._commercial_diameter
+        for file_name in file_names:
+            setattr(self, f"{file_name}", self._load_data(file_name))
 
-        self._commercial_diameter = SourceTable.reference_table_reading(
-            self.COMMERCIAL_DIAMETER_PATH
-        )
-        return self._commercial_diameter
+    def _load_data(self, file_name):
+        file_path = os.path.join(tables_dir, os.path.join(self.PATH, f"{file_name}.csv"))
+        return pd.read_csv(os.path.join(tables_dir, file_path), encoding="utf-8")
 
 
 dataframes = Dataframes()
