@@ -24,6 +24,9 @@ class CropCoefficientRepository:
     def __get_by_id(db, _id: int) -> CropCoefficientModel:
         return db.query(CropCoefficientModel).filter(CropCoefficientModel.id == _id).first()
 
+    def get_all(self, db):
+        return db.query(CropCoefficientModel).all()
 
-
-
+    @staticmethod
+    def get_id(db, _id: int) -> CropCoefficientModel:
+        return db.query(CropCoefficientModel).filter(CropCoefficientModel.id == _id).first()
