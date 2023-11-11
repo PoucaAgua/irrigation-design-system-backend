@@ -1,0 +1,7 @@
+{
+    "python.testing.pytestArgs": [
+        "irrigation_design_system_backend"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

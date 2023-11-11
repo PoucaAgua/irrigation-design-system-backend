@@ -8,7 +8,7 @@ from infrastructure.api.v1.controllers import (
     percent_shaded_area_controller,
     derivation_line_controller,
     irrigation_controller,
-    special_parts_controller,    
+    special_parts_controller,
 )
 
 router = APIRouter()
@@ -68,7 +68,7 @@ router.include_router(
 )
 
 router.include_router(
-    special_parts_controller.router, 
+    special_parts_controller.router,
     prefix="/special_parts",
     tags=["Endpoint Special parts"],
 )
