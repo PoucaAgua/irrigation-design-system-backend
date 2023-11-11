@@ -1,10 +1,9 @@
 from _decimal import Decimal
-
 from core.domain.entity.special_parts_input import SpecialPartsInput
 from apps.hydraulic_design.consult_special_parts.consult_loadloss_specialparts import ConsultLoadLossSpecialPartsTable
 
-class SpecialPartsService:
 
+class SpecialPartsService:
 
     @classmethod
     def special_parts_load_loss(cls, special_parts_input: SpecialPartsInput) -> Decimal:
