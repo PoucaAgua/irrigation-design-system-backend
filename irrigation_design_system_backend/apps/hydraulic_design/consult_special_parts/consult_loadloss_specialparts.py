@@ -1,8 +1,8 @@
-from core.tables.load_dataframe import load_dataframes
+from core.tables.dataframes import dataframes
 
 class ConsultLoadLossSpecialPartsTable:
     
-    data = load_dataframes.special_parts
+    data = dataframes.special_parts
 
     @classmethod
     def loadloss_special_parts(cls, type, diameter):
