@@ -2,7 +2,6 @@ from core.tables.dataframes import dataframes
 
 
 class ConsultLoadLossSpecialPartsTable:
-    
     data = dataframes.special_parts
 
     @classmethod
