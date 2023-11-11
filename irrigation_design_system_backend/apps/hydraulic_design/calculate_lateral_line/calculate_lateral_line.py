@@ -19,18 +19,17 @@ class LateralLineService:
             exponent_pressure_loss_equation = HydraulicConstants.exp_loadloss
             coefficient = HydraulicCalculation.coeficient_K(internal_diameter)
 
-            length_lateral_line = Decimal(max_flow_rate_variation * Decimal(service_pressure / flow_exponent) * Decimal(
-                (exponent_pressure_loss_equation + 1) / coefficient) * Decimal(
-                emitter_spacing / nominal_flow_rate) ** Decimal(exponent_pressure_loss_equation)) ** Decimal(
-                1 / (exponent_pressure_loss_equation + 1))
+            length_lateral_line = (
+                Decimal(max_flow_rate_variation * Decimal(service_pressure / flow_exponent) * Decimal((exponent_pressure_loss_equation + 1) / coefficient) * Decimal(emitter_spacing / nominal_flow_rate) ** Decimal(exponent_pressure_loss_equation)) ** Decimal(1 / (exponent_pressure_loss_equation + 1))
+            )
 
             return length_lateral_line
 
         except ZeroDivisionError:
-            return "Caught an InvalidOperation exception, it is not possible to divide by zero."
+            return Decimal("Caught an InvalidOperation exception, it is not possible to divide by zero.")
 
     @classmethod
-    def calculate_head_loss(cls, lateral_line_entity: LateralLineHeadLossInput):
+    def calculate_head_loss(cls, lateral_line_entity: LateralLineHeadLossInput) -> Decimal:
         try:
             length_lateral_line = lateral_line_entity.length_lateral_line
             internal_diameter = lateral_line_entity.internal_diameter
@@ -51,12 +50,9 @@ class LateralLineService:
 
             friction_f = HydraulicCalculation.friction_factor(internal_diameter, reynolds)
             f_factor = HydraulicCalculation.f_factor(emissors, exponent_load_loss)
-
             head_loss = Decimal(
                 friction_f * (length_lateral_line / internal_diameter) * ((speed_water ** 2) / (2 * g)))
             head_loss_corrected = head_loss * f_factor
             return head_loss_corrected
         except ZeroDivisionError:
-            return "Caught a ZeroDivisionError, it is not possible to divide by zero."
-        
-        
+            return Decimal("Caught a ZeroDivisionError, it is not possible to divide by zero.")

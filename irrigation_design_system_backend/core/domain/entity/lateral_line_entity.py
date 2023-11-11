@@ -12,6 +12,7 @@ class LateralLineInput:
     flow_exponent: Decimal
     exponent_pressure_loss_equation: Decimal
 
+
 @dataclass
 class LateralLineHeadLossInput:
     length_lateral_line: Decimal

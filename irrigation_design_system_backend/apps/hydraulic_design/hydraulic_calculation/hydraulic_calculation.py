@@ -22,9 +22,9 @@ class HydraulicCalculation:
 
     @staticmethod
     def emissors_number(length_lateral_line, emitter_spacing):
-        l = Decimal(length_lateral_line)
+        l_aux = Decimal(length_lateral_line)
         spacing = Decimal(emitter_spacing)
-        en = l / spacing
+        en = l_aux / spacing
 
         return en
 

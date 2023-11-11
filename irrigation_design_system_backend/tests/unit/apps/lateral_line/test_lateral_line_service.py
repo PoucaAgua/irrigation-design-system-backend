@@ -8,7 +8,7 @@ from core.domain.entity.lateral_line_entity import (
 )
 
 
-class TestDerivationLineService:
+class TestLateralLineService:
 
     def test_calculate_diameter(self):
         error = Decimal("1e-3")
@@ -28,6 +28,4 @@ class TestDerivationLineService:
 
         result = LateralLineService.calculate_length_lateral_line(test_lateral_line_entity)
 
-        assert abs(expected - result) < self.error
-
-
+        assert abs(expected - result) < error
