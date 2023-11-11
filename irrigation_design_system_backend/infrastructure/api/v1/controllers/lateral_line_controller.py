@@ -4,10 +4,7 @@ from infrastructure.api.v1.responses.lateral_line import (
     LateralLineDiameterResponse,
     LateralLineHeadLossResponse,
 )
-from core.domain.entity.lateral_line_entity import (
-    LateralLineInput,
-    LateralLineHeadLossInput
-)
+from core.domain.entity.lateral_line_entity import LateralLineInput, LateralLineHeadLossInput
 from apps.hydraulic_design.calculate_lateral_line.calculate_lateral_line import (
     LateralLineService,
 )

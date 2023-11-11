@@ -1,15 +1,12 @@
 from _decimal import Decimal
 
-from apps.hydraulic_design.calculate_lateral_line.calculate_lateral_line import (
-    LateralLineService
-)
+from apps.hydraulic_design.calculate_lateral_line.calculate_lateral_line import LateralLineService
 from core.domain.entity.lateral_line_entity import (
     LateralLineInput,
 )
 
 
 class TestLateralLineService:
-
     def test_calculate_diameter(self):
         error = Decimal("1e-3")
 
