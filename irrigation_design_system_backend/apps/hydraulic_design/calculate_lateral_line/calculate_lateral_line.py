@@ -56,6 +56,7 @@ class LateralLineService:
                 friction_f * (length_lateral_line / internal_diameter) * ((speed_water ** 2) / (2 * g)))
             head_loss_corrected = head_loss * f_factor
             return head_loss_corrected
-        except Exception as e:
-            # Trate qualquer exceção apropriada aqui
-            pass
+        except ZeroDivisionError:
+            return "Caught a ZeroDivisionError, it is not possible to divide by zero."
+        
+        
