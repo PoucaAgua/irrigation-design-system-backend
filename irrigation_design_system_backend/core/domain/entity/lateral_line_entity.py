@@ -11,12 +11,12 @@ class LateralLineInput:
     emitter_spacing: Decimal
     flow_exponent: Decimal
     exponent_pressure_loss_equation: Decimal
+    coefficient: Decimal
 
 
 @dataclass
 class LateralLineHeadLossInput:
     length_lateral_line: Decimal
     internal_diameter: Decimal
-    nominal_flow_rate: Decimal
-    exponent_pressure_loss_equation: Decimal
     emitter_spacing: Decimal
+    nominal_flow_rate: Decimal
