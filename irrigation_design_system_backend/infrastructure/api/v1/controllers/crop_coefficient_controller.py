@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session
 router = APIRouter()
 
 
-@router.post("/crop_coefficients/post/", response_model=CropCoefficientCreateResponse)
+@router.post("/crop_coefficients/upsert/", response_model=CropCoefficientCreateResponse)
 def create_crop_coefficient(crop_coefficient: CropCoefficientInput, db: Session = Depends(get_db)):
     CropCoefficientService.upsert(crop_coefficient, db)
     return {"message": "Crop coefficient created successfully"}
