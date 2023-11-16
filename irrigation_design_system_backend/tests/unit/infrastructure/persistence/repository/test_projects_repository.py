@@ -5,15 +5,22 @@ from infrastructure.persistence.repository.projects_repository import ProjectRep
 
 
 class TestProjectRepository:
-
     repository = ProjectRepository()
 
     @pytest.fixture
     def db(self):
         return Mock()
 
-    @patch('infrastructure.persistence.repository.projects_repository.ProjectMapper')
+    @patch("infrastructure.persistence.repository.projects_repository.ProjectMapper")
     def test_upsert_insert(self, project_mapper_mock, db):
+        """
+        Function to test the insert
+
+        :param project_mapper_mock:
+        :param db:
+        :return:
+        """
+
         # given
         project_input = Mock()
         project_db_mock = Mock(id=None)
@@ -29,8 +36,16 @@ class TestProjectRepository:
         db.commit.assert_called_once()
         db.close.assert_called_once()
 
-    @patch('infrastructure.persistence.repository.projects_repository.ProjectMapper')
+    @patch("infrastructure.persistence.repository.projects_repository.ProjectMapper")
     def test_upsert_update(self, project_mapper_mock, db):
+        """
+        Function to test the update
+
+        :param project_mapper_mock:
+        :param db:
+        :return:
+        """
+
         # given
         project_input = Mock()
         project_db_mock = Mock(id=1)
@@ -45,6 +60,7 @@ class TestProjectRepository:
         result = self.repository.upsert(db=db, project_input=project_input)
 
         # then
+        assert project_db_mock_2 == result
         project_mapper_mock.model_from_input.assert_called_once_with(project_input)
         project_mapper_mock.model_from_input_and_persisted.assert_called_once_with(
             project_input, project_db_persisted_mock
@@ -52,4 +68,32 @@ class TestProjectRepository:
 
         db.merge.assert_called_with(project_db_mock_2)
         db.commit.assert_called_once()
+        db.close.assert_called_once()
+
+    @patch("infrastructure.persistence.repository.projects_repository.ProjectMapper")
+    def test_upsert_invalid_id(self, project_mapper_mock, db):
+        """
+        Function to test if it falls into the value error
+
+        :param project_mapper_mock:
+        :param db:
+        :return:
+        """
+
+        # given
+        project_input = Mock()
+        project_db_mock = Mock(id=1)
+        project_mapper_mock.model_from_input.return_value = project_db_mock
+        db.query().filter().first.return_value = None
+
+        # when & then
+        with pytest.raises(ValueError) as exc_info:
+            self.repository.upsert(db=db, project_input=project_input)
+
+        assert str(exc_info.value) == "invalid id 1"
+
+        project_mapper_mock.model_from_input.assert_called_once_with(project_input)
+
+        assert not db.merge.called
+        db.commit.assert_not_called()
         db.close.assert_called_once()

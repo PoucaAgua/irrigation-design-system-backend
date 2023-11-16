@@ -7,7 +7,6 @@ from infrastructure.persistence.models import Project, DerivationLine, LateralLi
 class ProjectMapper:
     @staticmethod
     def model_from_input(project_input: ProjectInput) -> Project:
-
         field_mappings = dict(
             id=project_input.id,
             user_id=project_input.user_id,
@@ -34,7 +33,6 @@ class ProjectMapper:
     def model_from_input_and_persisted(
         project_input: ProjectInput, project_persisted: Project
     ) -> Project:
-
         field_mappings = dict(
             id=project_input.id,
             user_id=project_input.user_id or project_persisted.user_id,
@@ -43,8 +41,8 @@ class ProjectMapper:
             status=project_input.status or project_persisted.status,
             crop=project_input.crop or project_persisted.crop,
             maximum_actual_irrigation_required=(
-                    project_input.maximum_actual_irrigation_required
-                    or project_persisted.maximum_actual_irrigation_required
+                project_input.maximum_actual_irrigation_required
+                or project_persisted.maximum_actual_irrigation_required
             ),
             crop_evapotranspiration=(
                 project_input.crop_evapotranspiration or project_persisted.crop_evapotranspiration
@@ -64,7 +62,7 @@ class ProjectMapper:
                     line, project_persisted.derivation_line, project_input.id
                 )
                 for line in project_input.derivation_line
-            ]
+            ],
         )
 
         return Project(**field_mappings)
