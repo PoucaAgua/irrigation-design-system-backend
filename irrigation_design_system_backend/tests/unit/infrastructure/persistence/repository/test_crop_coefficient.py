@@ -44,6 +44,7 @@ class TestCropCoefficientRepository:
         result = self.repository.upsert(db=db, crop_coefficient=coefficient_input)
 
         # then
+        assert coefficient_db_mock_2 == result
         crop_coefficient_mapper_mock.entity_to_model.assert_called_once_with(coefficient_input)
         crop_coefficient_mapper_mock.entity_to_model_persisted.assert_called_once_with(
             coefficient_input, coefficient_db_persisted_mock
@@ -51,4 +52,24 @@ class TestCropCoefficientRepository:
 
         db.merge.assert_called_with(coefficient_db_mock_2)
         db.commit.assert_called_once()
+        db.close.assert_called_once()
+
+    @patch('infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper')
+    def test_upsert_invalid_id(self, crop_coefficient_mapper_mock, db):
+        # given
+        coefficient_input = Mock()
+        coefficient_db_mock = Mock(id=1)
+        crop_coefficient_mapper_mock.entity_to_model.return_value = coefficient_db_mock
+        db.query().filter().first.return_value = None
+
+        # when & then
+        with pytest.raises(FileNotFoundError) as exc_info:
+            self.repository.upsert(db=db, crop_coefficient=coefficient_input)
+
+        assert str(exc_info.value) == "invalid id 1"
+
+        crop_coefficient_mapper_mock.entity_to_model.assert_called_once_with(coefficient_input)
+
+        assert not db.merge.called
+        db.commit.assert_not_called()
         db.close.assert_called_once()
