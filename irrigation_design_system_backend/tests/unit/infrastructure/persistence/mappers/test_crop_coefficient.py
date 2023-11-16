@@ -6,6 +6,7 @@ from infrastructure.persistence.models.crop_coefficient import CropCoefficientMo
 
 
 class TestCropCoefficientMapper:
+
     def assert_that_models(self, result: CropCoefficientModel, expected: CropCoefficientModel):
         assert isinstance(result, CropCoefficientModel)
         assert result.id == expected.id, "ID mismatch"
@@ -121,9 +122,9 @@ class TestCropCoefficientMapper:
             id=4,
             crop_name="new_crop",
             crop_type="new_type",
-            kc_initial=0.7,
-            kc_mid_season=1.1,
-            kc_final=1.5,
+            kc_initial=Decimal('0.7'),
+            kc_mid_season=Decimal('1.1'),
+            kc_final=Decimal('1.5'),
             active=True,
         )
 
@@ -131,6 +132,7 @@ class TestCropCoefficientMapper:
 
         assert result.crop_name == "new_crop", "Crop name mismatch"
         assert result.crop_type == "new_type", "Crop type mismatch"
-        assert result.kc_initial == 0.7, "kc_initial mismatch"
-        assert result.kc_mid_season == 1.1, "kc_mid_season mismatch"
-        assert result.kc_final == 1.5, "kc_final mismatch"
+        assert result.kc_initial == Decimal('0.7'), "kc_initial mismatch"
+        assert result.kc_mid_season == Decimal('1.1'), "kc_mid_season mismatch"
+        assert result.kc_final == Decimal('1.5'), "kc_final mismatch"
+
