@@ -19,6 +19,7 @@ class CropCoefficientRepository:
                 crop_coefficient, crop_coefficient_persisted
             )
             db.merge(crop_coefficient_db)
+        return crop_coefficient_db
 
     @staticmethod
     def __get_by_id(db, _id: int) -> CropCoefficientModel:
