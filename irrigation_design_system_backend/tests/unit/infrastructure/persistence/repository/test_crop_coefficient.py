@@ -14,8 +14,8 @@ class TestCropCoefficientRepository:
     @patch('infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper')
     def test_upsert_insert(self, crop_coefficient_mapper_mock, db):
         # given
-        coefficient_input = Mock()
-        coefficient_db_mock = Mock(id=None)
+        coefficient_input = Mock(id=None)
+        coefficient_db_mock = Mock()
         crop_coefficient_mapper_mock.entity_to_model.return_value = coefficient_db_mock
 
         # when
@@ -31,8 +31,8 @@ class TestCropCoefficientRepository:
     @patch('infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper')
     def test_upsert_update(self, crop_coefficient_mapper_mock, db):
         # given
-        coefficient_input = Mock()
-        coefficient_db_mock = Mock(id=1)
+        coefficient_input = Mock(id=1)
+        coefficient_db_mock = Mock()
         coefficient_db_persisted_mock = Mock(id=1)
         coefficient_db_mock_2 = Mock(id=1)
 
@@ -45,7 +45,6 @@ class TestCropCoefficientRepository:
 
         # then
         assert coefficient_db_mock_2 == result
-        crop_coefficient_mapper_mock.entity_to_model.assert_called_once_with(coefficient_input)
         crop_coefficient_mapper_mock.entity_to_model_persisted.assert_called_once_with(
             coefficient_input, coefficient_db_persisted_mock
         )
@@ -54,12 +53,9 @@ class TestCropCoefficientRepository:
         db.commit.assert_called_once()
         db.close.assert_called_once()
 
-    @patch('infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper')
-    def test_upsert_invalid_id(self, crop_coefficient_mapper_mock, db):
+    def test_upsert_invalid_id(self, db):
         # given
-        coefficient_input = Mock()
-        coefficient_db_mock = Mock(id=1)
-        crop_coefficient_mapper_mock.entity_to_model.return_value = coefficient_db_mock
+        coefficient_input = Mock(id=1)
         db.query().filter().first.return_value = None
 
         # when & then
@@ -67,9 +63,6 @@ class TestCropCoefficientRepository:
             self.repository.upsert(db=db, crop_coefficient=coefficient_input)
 
         assert str(exc_info.value) == "invalid id 1"
-
-        crop_coefficient_mapper_mock.entity_to_model.assert_called_once_with(coefficient_input)
-
-        assert not db.merge.called
+        db.merge.assert_not_called()
         db.commit.assert_not_called()
         db.close.assert_called_once()
