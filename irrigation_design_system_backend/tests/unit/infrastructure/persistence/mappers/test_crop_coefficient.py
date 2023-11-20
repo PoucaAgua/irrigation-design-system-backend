@@ -11,9 +11,9 @@ class TestCropCoefficientMapper:
         assert isinstance(result, CropCoefficientModel)
         assert result.id == expected.id, "ID mismatch"
         assert result.crop_type == expected.crop_type, "Crop type mismatch"
-        assert result.kc_initial == expected.kc_initial, "kc_initial mismatch"
-        assert result.kc_mid_season == expected.kc_mid_season, "kc_mid_season mismatch"
-        assert result.kc_final == expected.kc_final, "kc_final mismatch"
+        assert float(result.kc_initial) == float(expected.kc_initial), "kc_initial mismatch"
+        assert float(result.kc_mid_season) == float(expected.kc_mid_season), "kc_mid_season mismatch"
+        assert float(result.kc_final) == float(expected.kc_final), "kc_final mismatch"
         assert result.active == expected.active, "Active mismatch"
 
     @pytest.mark.parametrize(
@@ -135,4 +135,55 @@ class TestCropCoefficientMapper:
         assert result.kc_initial == Decimal('0.7'), "kc_initial mismatch"
         assert result.kc_mid_season == Decimal('1.1'), "kc_mid_season mismatch"
         assert result.kc_final == Decimal('1.5'), "kc_final mismatch"
+
+    def test_entity_to_model_additional(self):
+        input_data = CropCoefficientInput(
+            id=4,
+            crop_name="rice",
+            crop_type="long grain",
+            kc_initial=Decimal('0.6'),
+            kc_mid_season=Decimal('1.2'),
+            kc_final=Decimal('1.8'),
+            active=True,
+        )
+        expected_result = CropCoefficientModel(
+            id=4,
+            crop_name="rice",
+            crop_type="long grain",
+            kc_initial=0.6,
+            kc_mid_season=1.2,
+            kc_final=1.8,
+            active=True,
+        )
+        result = CropCoefficientMapper.entity_to_model(input_data)
+        self.assert_that_models(result, expected_result)
+
+    def test_entity_to_model_persisted_additional(self):
+        entity_input = CropCoefficientInput(
+            id=5,
+            crop_name="potato",
+            crop_type="white",
+            kc_initial=Decimal('0.4'),
+            kc_mid_season=Decimal('0.8'),
+            kc_final=Decimal('1.4'),
+            active=True,
+        )
+        persisted_model = CropCoefficientModel(
+            id=5,
+            crop_name="persisted_potato",
+            crop_type="persisted_white",
+            kc_initial=0.5,
+            kc_mid_season=0.9,
+            kc_final=1.5,
+            active=True,
+        )
+        result = CropCoefficientMapper.entity_to_model_persisted(entity_input, persisted_model)
+        assert result.id == 5, "ID mismatch"
+        assert result.crop_name == "potato", "Crop name mismatch"
+        assert result.crop_type == "white", "Crop type mismatch"
+        assert result.kc_initial == 0.4, "kc_initial mismatch"
+        assert result.kc_mid_season == 0.8, "kc_mid_season mismatch"
+        assert result.kc_final == 1.4, "kc_final mismatch"
+        assert result.active is True, "Active mismatch"
+
 
