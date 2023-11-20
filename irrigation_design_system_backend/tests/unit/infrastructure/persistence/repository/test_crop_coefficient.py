@@ -1,20 +1,26 @@
 import pytest
 from unittest.mock import Mock, patch
-from infrastructure.persistence.repository.crop_coefficient_repository import CropCoefficientRepository
+from infrastructure.persistence.repository.crop_coefficient_repository import (
+    CropCoefficientRepository,
+)
+
 
 class CropCoefficientNotFoundError(Exception):
     pass
 
-try:
-    class TestCropCoefficientRepository:
 
+try:
+
+    class TestCropCoefficientRepository:
         repository = CropCoefficientRepository()
 
         @pytest.fixture
         def db(self):
             return Mock()
 
-        @patch('infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper')
+        @patch(
+            "infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper"
+        )
         def test_upsert_insert(self, crop_coefficient_mapper_mock, db):
             # given
             coefficient_input = Mock(id=None)
@@ -31,7 +37,9 @@ try:
             db.commit.assert_called_once()
             db.close.assert_called_once()
 
-        @patch('infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper')
+        @patch(
+            "infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper"
+        )
         def test_upsert_update(self, crop_coefficient_mapper_mock, db):
             # given
             coefficient_input = Mock(id=1)
@@ -41,7 +49,9 @@ try:
 
             crop_coefficient_mapper_mock.entity_to_model.return_value = coefficient_db_mock
             db.query().filter().first.return_value = coefficient_db_persisted_mock
-            crop_coefficient_mapper_mock.entity_to_model_persisted.return_value = coefficient_db_mock_2
+            crop_coefficient_mapper_mock.entity_to_model_persisted.return_value = (
+                coefficient_db_mock_2
+            )
 
             # when
             result = self.repository.upsert(db=db, crop_coefficient=coefficient_input)
@@ -72,5 +82,3 @@ try:
 
 except CropCoefficientNotFoundError as e:
     print(f"Error: {e}")
-
-

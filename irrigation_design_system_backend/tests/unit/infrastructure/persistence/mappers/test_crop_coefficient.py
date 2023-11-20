@@ -6,13 +6,14 @@ from infrastructure.persistence.models.crop_coefficient import CropCoefficientMo
 
 
 class TestCropCoefficientMapper:
-
     def assert_that_models(self, result: CropCoefficientModel, expected: CropCoefficientModel):
         assert isinstance(result, CropCoefficientModel)
         assert result.id == expected.id, "ID mismatch"
         assert result.crop_type == expected.crop_type, "Crop type mismatch"
         assert float(result.kc_initial) == float(expected.kc_initial), "kc_initial mismatch"
-        assert float(result.kc_mid_season) == float(expected.kc_mid_season), "kc_mid_season mismatch"
+        assert float(result.kc_mid_season) == float(
+            expected.kc_mid_season
+        ), "kc_mid_season mismatch"
         assert float(result.kc_final) == float(expected.kc_final), "kc_final mismatch"
         assert result.active == expected.active, "Active mismatch"
 
@@ -122,9 +123,9 @@ class TestCropCoefficientMapper:
             id=4,
             crop_name="new_crop",
             crop_type="new_type",
-            kc_initial=Decimal('0.7'),
-            kc_mid_season=Decimal('1.1'),
-            kc_final=Decimal('1.5'),
+            kc_initial=Decimal("0.7"),
+            kc_mid_season=Decimal("1.1"),
+            kc_final=Decimal("1.5"),
             active=True,
         )
 
@@ -132,18 +133,18 @@ class TestCropCoefficientMapper:
 
         assert result.crop_name == "new_crop", "Crop name mismatch"
         assert result.crop_type == "new_type", "Crop type mismatch"
-        assert result.kc_initial == Decimal('0.7'), "kc_initial mismatch"
-        assert result.kc_mid_season == Decimal('1.1'), "kc_mid_season mismatch"
-        assert result.kc_final == Decimal('1.5'), "kc_final mismatch"
+        assert result.kc_initial == Decimal("0.7"), "kc_initial mismatch"
+        assert result.kc_mid_season == Decimal("1.1"), "kc_mid_season mismatch"
+        assert result.kc_final == Decimal("1.5"), "kc_final mismatch"
 
     def test_entity_to_model_additional(self):
         input_data = CropCoefficientInput(
             id=4,
             crop_name="rice",
             crop_type="long grain",
-            kc_initial=Decimal('0.6'),
-            kc_mid_season=Decimal('1.2'),
-            kc_final=Decimal('1.8'),
+            kc_initial=Decimal("0.6"),
+            kc_mid_season=Decimal("1.2"),
+            kc_final=Decimal("1.8"),
             active=True,
         )
         expected_result = CropCoefficientModel(
@@ -163,9 +164,9 @@ class TestCropCoefficientMapper:
             id=5,
             crop_name="potato",
             crop_type="white",
-            kc_initial=Decimal('0.4'),
-            kc_mid_season=Decimal('0.8'),
-            kc_final=Decimal('1.4'),
+            kc_initial=Decimal("0.4"),
+            kc_mid_season=Decimal("0.8"),
+            kc_final=Decimal("1.4"),
             active=True,
         )
         persisted_model = CropCoefficientModel(
@@ -185,5 +186,3 @@ class TestCropCoefficientMapper:
         assert result.kc_mid_season == 0.8, "kc_mid_season mismatch"
         assert result.kc_final == 1.4, "kc_final mismatch"
         assert result.active is True, "Active mismatch"
-
-
