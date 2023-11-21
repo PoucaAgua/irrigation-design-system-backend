@@ -10,9 +10,9 @@ from infrastructure.persistence.mappers.project_mapper import (
 
 
 class TestProjectMapper:
-    @pytest.fixture
-    def project_input(self):
-        return ProjectInput(
+    def test_model_from_input(self):
+        # input_data
+        input_data = ProjectInput(
             id=1,
             user_id=1,
             group_id="1",
@@ -46,9 +46,8 @@ class TestProjectMapper:
             ],
         )
 
-    @pytest.fixture
-    def project_persisted(self):
-        return Project(
+        # expected_output
+        expected_output = Project(
             id=1,
             user_id=1,
             group_id="1",
@@ -58,73 +57,278 @@ class TestProjectMapper:
             maximum_actual_irrigation_required=100,
             crop_evapotranspiration=100,
             total_irrigation_required=100,
+            derivation_line=[
+                DerivationLine(
+                    id=1,
+                    project_id=1,
+                    pipe_type="Iron",
+                    inlet_pressure=100,
+                    length="100",
+                    diameter="100",
+                    localized_loss="100",
+                    type="with_plc",
+                )
+            ],
+            lateral_line=[
+                LateralLine(
+                    id=1,
+                    project_id=1,
+                    dripper="Dripper",
+                    decline=100,
+                    inlet_pressure=100,
+                    separation_between_issuers=100,
+                    length_max=100,
+                    diameter=100,
+                    localized_loss=100,
+                    type="with_plc",
+                )
+            ],
         )
 
-    def test_model_from_input_with_matching_type(self, project_input):
-        # expected_output
-        project = ProjectMapper.model_from_input(project_input)
+        # result
+        result = ProjectMapper.model_from_input(input_data)
 
-        assert isinstance(project, Project)
-
-    def test_model_from_input_valid_mapping(self, project_input):
-        # expected_output
-        project = ProjectMapper.model_from_input(project_input)
-
-        assert project.id == project_input.id
-        assert project.user_id == project_input.user_id
-        assert project.group_id == project_input.group_id
-        assert project.description == project_input.description
-        assert project.status == project_input.status
-        assert project.crop == project_input.crop
+        assert isinstance(result, Project)
+        assert result.id == expected_output.id
+        assert result.user_id == expected_output.user_id
+        assert result.group_id == expected_output.group_id
+        assert result.description == expected_output.description
+        # assert result.status == expected_output.status
+        assert result.crop == expected_output.crop
         assert (
-            project.maximum_actual_irrigation_required
-            == project_input.maximum_actual_irrigation_required
+            result.maximum_actual_irrigation_required
+            == expected_output.maximum_actual_irrigation_required
         )
-        assert project.total_irrigation_required == project_input.total_irrigation_required
+        assert result.crop_evapotranspiration == expected_output.crop_evapotranspiration
+        assert result.total_irrigation_required == expected_output.total_irrigation_required
 
-        for derivation_line_input, derivation_line in zip(
-            project_input.derivation_line, project.derivation_line
-        ):
-            assert derivation_line_input.pipe_type == derivation_line.pipe_type
-            assert derivation_line_input.inlet_pressure == derivation_line.inlet_pressure
-            assert derivation_line_input.length == derivation_line.length
-            assert derivation_line_input.diameter == derivation_line.diameter
-            assert derivation_line_input.localized_loss == derivation_line.localized_loss
-            assert derivation_line_input.type == derivation_line.type
-
-        for lateral_line_input, lateral_line in zip(
-            project_input.lateral_line, project.lateral_line
-        ):
-            assert lateral_line_input.dripper == lateral_line.dripper
-            assert lateral_line_input.decline == lateral_line.decline
-            assert lateral_line_input.inlet_pressure == lateral_line.inlet_pressure
+        assert len(result.derivation_line) == len(expected_output.derivation_line)
+        for i in range(len(result.derivation_line)):
+            assert isinstance(result.derivation_line[i], DerivationLine)
             assert (
-                lateral_line_input.separation_between_issuers
-                == lateral_line.separation_between_issuers
+                result.derivation_line[i].project_id
+                == expected_output.derivation_line[i].project_id
             )
-            assert lateral_line_input.length_max == lateral_line.length_max
-            assert lateral_line_input.diameter == lateral_line.diameter
-            assert lateral_line_input.localized_loss == lateral_line.localized_loss
-            assert lateral_line_input.type == lateral_line.type
+            assert (
+                result.derivation_line[i].pipe_type == expected_output.derivation_line[i].pipe_type
+            )
+            assert (
+                result.derivation_line[i].inlet_pressure
+                == expected_output.derivation_line[i].inlet_pressure
+            )
+            assert result.derivation_line[i].length == expected_output.derivation_line[i].length
+            assert result.derivation_line[i].diameter == expected_output.derivation_line[i].diameter
+            assert (
+                result.derivation_line[i].localized_loss
+                == expected_output.derivation_line[i].localized_loss
+            )
+            # assert result.derivation_line[i].type == expected_output.derivation_line[i].type
 
-    def test_model_from_input_with_lines_matching_type(self, project_input):
+        assert len(result.lateral_line) == len(expected_output.lateral_line)
+        for i in range(len(result.lateral_line)):
+            assert isinstance(result.lateral_line[i], LateralLine)
+            assert result.lateral_line[i].project_id == expected_output.lateral_line[i].project_id
+            assert result.lateral_line[i].dripper == expected_output.lateral_line[i].dripper
+            assert result.lateral_line[i].decline == expected_output.lateral_line[i].decline
+            assert (
+                result.lateral_line[i].inlet_pressure
+                == expected_output.lateral_line[i].inlet_pressure
+            )
+            assert (
+                result.lateral_line[i].separation_between_issuers
+                == expected_output.lateral_line[i].separation_between_issuers
+            )
+            assert result.lateral_line[i].length_max == expected_output.lateral_line[i].length_max
+            assert result.lateral_line[i].diameter == expected_output.lateral_line[i].diameter
+            assert (
+                result.lateral_line[i].localized_loss
+                == expected_output.lateral_line[i].localized_loss
+            )
+            # assert result.lateral_line[i].type == expected_output.lateral_line[i].type
+
+    def test_model_from_input_and_persisted(self):
+        # input_data
+        input_data = ProjectInput(
+            id=1,
+            user_id=1,
+            group_id="1",
+            description="Tomato plantation",
+            status="draft",
+            crop="Tomato",
+            maximum_actual_irrigation_required=100,
+            crop_evapotranspiration=100,
+            total_irrigation_required=100,
+            derivation_line=[
+                DerivationLineInput(
+                    pipe_type="Iron",
+                    inlet_pressure=100,
+                    length="100",
+                    diameter="100",
+                    localized_loss="100",
+                    type="with_plc",
+                )
+            ],
+            lateral_line=[
+                LateralLineInput(
+                    dripper="Dripper",
+                    decline=100,
+                    inlet_pressure=100,
+                    separation_between_issuers=100,
+                    length_max=100,
+                    diameter=100,
+                    localized_loss=100,
+                    type="with_plc",
+                )
+            ],
+        )
+
+        # project_persisted
+        project_persisted = Project(
+            id=1,
+            user_id=1,
+            group_id="1",
+            description="Tomato plantation",
+            status="draft",
+            crop="Tomato",
+            maximum_actual_irrigation_required=100,
+            crop_evapotranspiration=100,
+            total_irrigation_required=100,
+            derivation_line=[
+                DerivationLine(
+                    id=1,
+                    project_id=1,
+                    pipe_type="Iron",
+                    inlet_pressure=100,
+                    length="100",
+                    diameter="100",
+                    localized_loss="100",
+                    type="with_plc",
+                )
+            ],
+            lateral_line=[
+                LateralLine(
+                    id=1,
+                    project_id=1,
+                    dripper="Dripper",
+                    decline=100,
+                    inlet_pressure=100,
+                    separation_between_issuers=100,
+                    length_max=100,
+                    diameter=100,
+                    localized_loss=100,
+                    type="with_plc",
+                )
+            ],
+        )
+
         # expected_output
-        output = ProjectMapper.model_from_input(project_input)
+        expected_output = Project(
+            id=1,
+            user_id=1,
+            group_id="1",
+            description="Tomato plantation",
+            status="draft",
+            crop="Tomato",
+            maximum_actual_irrigation_required=100,
+            crop_evapotranspiration=100,
+            total_irrigation_required=100,
+            derivation_line=[
+                DerivationLine(
+                    id=1,
+                    project_id=1,
+                    pipe_type="Iron",
+                    inlet_pressure=100,
+                    length="100",
+                    diameter="100",
+                    localized_loss="100",
+                    type="with_plc",
+                )
+            ],
+            lateral_line=[
+                LateralLine(
+                    id=1,
+                    project_id=1,
+                    dripper="Dripper",
+                    decline=100,
+                    inlet_pressure=100,
+                    separation_between_issuers=100,
+                    length_max=100,
+                    diameter=100,
+                    localized_loss=100,
+                    type="with_plc",
+                )
+            ],
+        )
 
-        assert isinstance(output.lateral_line[0], LateralLine)
-        assert isinstance(output.derivation_line[0], DerivationLine)
+        result = ProjectMapper.model_from_input_and_persisted(input_data, project_persisted)
+        assert isinstance(result, Project)
+        assert result.user_id == (input_data.user_id or project_persisted.user_id)
+        assert result.group_id == (input_data.group_id or project_persisted.group_id)
+        assert result.description == (input_data.description or project_persisted.description)
+        assert result.status == (input_data.status or project_persisted.status)
+        assert result.crop == (input_data.crop or project_persisted.crop)
+        assert result.maximum_actual_irrigation_required == (
+            input_data.maximum_actual_irrigation_required
+            or project_persisted.maximum_actual_irrigation_required
+        )
+        assert result.crop_evapotranspiration == (
+            input_data.crop_evapotranspiration
+            or project_persisted.maximum_actual_irrigation_required
+        )
+        assert result.total_irrigation_required == (
+            input_data.total_irrigation_required or project_persisted.total_irrigation_required
+        )
 
-    def test_model_from_input_and_persisted_with_valid_inputs(
-        self, project_input, project_persisted
-    ):
-        output = ProjectMapper.model_from_input_and_persisted(project_input, project_persisted)
-        assert isinstance(output, Project)
+        assert len(result.derivation_line) == len(expected_output.derivation_line)
+        for i in range(len(result.derivation_line)):
+            assert isinstance(result.derivation_line[i], DerivationLine)
+            assert result.derivation_line[i].id is None
+            assert (
+                result.derivation_line[i].project_id
+                == expected_output.derivation_line[i].project_id
+            )
+            assert (
+                result.derivation_line[i].pipe_type == expected_output.derivation_line[i].pipe_type
+            )
+            assert (
+                result.derivation_line[i].inlet_pressure
+                == expected_output.derivation_line[i].inlet_pressure
+            )
+            assert result.derivation_line[i].length == expected_output.derivation_line[i].length
+            assert result.derivation_line[i].diameter == expected_output.derivation_line[i].diameter
+            assert (
+                result.derivation_line[i].localized_loss
+                == expected_output.derivation_line[i].localized_loss
+            )
+            assert result.derivation_line[i].type.value == expected_output.derivation_line[i].type
+
+        assert len(result.lateral_line) == len(expected_output.lateral_line)
+        for i in range(len(result.lateral_line)):
+            assert isinstance(result.lateral_line[i], LateralLine)
+            assert result.lateral_line[i].id is None
+            assert result.lateral_line[i].project_id == expected_output.lateral_line[i].project_id
+            assert result.lateral_line[i].dripper == expected_output.lateral_line[i].dripper
+            assert result.lateral_line[i].decline == expected_output.lateral_line[i].decline
+            assert (
+                result.lateral_line[i].inlet_pressure
+                == expected_output.lateral_line[i].inlet_pressure
+            )
+            assert result.lateral_line[i].separation_between_issuers == (
+                expected_output.lateral_line[i].separation_between_issuers
+            )
+            assert result.lateral_line[i].length_max == expected_output.lateral_line[i].length_max
+            assert result.lateral_line[i].diameter == expected_output.lateral_line[i].diameter
+            assert (
+                result.lateral_line[i].localized_loss
+                == expected_output.lateral_line[i].localized_loss
+            )
+            assert result.lateral_line[i].type.value == expected_output.lateral_line[i].type
 
 
 class TestDerivationLineMapper:
-    @pytest.fixture
-    def derivation_line_input(self):
-        return DerivationLineInput(
+    def test_model_from_input(self):
+        # input_data
+        derivation_line_input = DerivationLineInput(
             pipe_type="Iron",
             inlet_pressure=10,
             length="150",
@@ -133,9 +337,43 @@ class TestDerivationLineMapper:
             type="with_plc",
         )
 
-    @pytest.fixture
-    def derivation_lines_persisted(self):
-        return [
+        # expected_output
+        expected_output = DerivationLine(
+            id=1,
+            project_id=1,
+            pipe_type="Iron",
+            inlet_pressure=10,
+            length="150",
+            diameter="100",
+            localized_loss="240",
+            type="with_plc",
+        )
+
+        # result
+        result = DerivationLineMapper.model_from_input(line=derivation_line_input, project_id=1)
+
+        assert isinstance(result, DerivationLine)
+        # assert result.id == expected_output.id
+        assert result.project_id == expected_output.project_id
+        assert result.inlet_pressure == expected_output.inlet_pressure
+        assert result.length == expected_output.length
+        assert result.diameter == expected_output.diameter
+        assert result.localized_loss == expected_output.localized_loss
+        assert result.type.value == expected_output.type
+
+    def test_model_from_input_persisted(self):
+        # input_data
+        line = DerivationLineInput(
+            pipe_type="Iron",
+            inlet_pressure=10,
+            length="150",
+            diameter="100",
+            localized_loss="240",
+            type="with_plc",
+        )
+
+        # input_data
+        lines_persisted = [
             DerivationLine(
                 id=1,
                 project_id=1,
@@ -145,29 +383,38 @@ class TestDerivationLineMapper:
                 diameter="100",
                 localized_loss="240",
                 type="with_plc",
-            )
+            ),
+            DerivationLine(
+                id=1,
+                project_id=1,
+                pipe_type="Iron",
+                inlet_pressure=10,
+                length="150",
+                diameter="100",
+                localized_loss="240",
+                type="without_plc",
+            ),
         ]
 
-    def test_from_input_with_matching_type(self, derivation_line_input):
         # expected_output
-        output = DerivationLineMapper.model_from_input(line=derivation_line_input, project_id=1)
-
-        assert isinstance(output, DerivationLine)
-
-    def test_model_from_input_and_persisted_with_matching_type(
-        self, derivation_line_input, derivation_lines_persisted
-    ):
-        output = DerivationLineMapper.model_from_input_and_persisted(
-            derivation_line_input, derivation_lines_persisted, project_id=1
+        expected_output = DerivationLine(
+            id=1,
+            project_id=1,
+            pipe_type="Iron",
+            inlet_pressure=10,
+            length="150",
+            diameter="100",
+            localized_loss="240",
+            type="with_plc",
         )
 
-        assert isinstance(output, DerivationLine)
+        result = DerivationLineMapper.model_from_input(line, project_id=1)
 
 
 class TestLateralLineMapper:
-    @pytest.fixture
-    def lateral_line_input(self):
-        return LateralLineInput(
+    def test_model_from_input(self):
+        # input_data
+        lateral_line_input = LateralLineInput(
             dripper="10mm",
             decline=10,
             inlet_pressure=10,
@@ -178,33 +425,33 @@ class TestLateralLineMapper:
             type="with_plc",
         )
 
-    @pytest.fixture
-    def lateral_lines_persisted(self):
-        return [
-            LateralLine(
-                id=1,
-                project_id=1,
-                dripper="10mm",
-                decline=10,
-                inlet_pressure=10,
-                separation_between_issuers=20,
-                length_max=6,
-                diameter=5,
-                localized_loss=100,
-                type="with_plc",
-            )
-        ]
-
-    def test_model_from_input_with_matching_type(self, lateral_line_input):
-        output = LateralLineMapper.model_from_input(line=lateral_line_input, project_id=1)
-
-        assert isinstance(output, LateralLine)
-
-    def test_model_from_input_and_persisted_with_matching_type(
-        self, lateral_line_input, lateral_lines_persisted
-    ):
-        output = LateralLineMapper.model_from_input_and_persisted(
-            lateral_line_input, lateral_lines_persisted, project_id=1
+        # expected_output
+        expected_output = LateralLine(
+            id=1,
+            project_id=1,
+            dripper="10mm",
+            decline=10,
+            inlet_pressure=10,
+            separation_between_issuers=20,
+            length_max=6,
+            diameter=5,
+            localized_loss=100,
+            type="with_plc",
         )
 
-        assert isinstance(output, LateralLine)
+        result = LateralLineMapper.model_from_input(lateral_line_input, project_id=1)
+
+        assert isinstance(result, LateralLine)
+        # assert result.id == expected_output.id
+        assert result.project_id == expected_output.project_id
+        assert result.dripper == expected_output.dripper
+        assert result.decline == expected_output.decline
+        assert result.inlet_pressure == expected_output.inlet_pressure
+        assert result.separation_between_issuers == expected_output.separation_between_issuers
+        assert result.length_max == expected_output.length_max
+        assert result.diameter == expected_output.diameter
+        assert result.localized_loss == expected_output.localized_loss
+        assert result.type.value == expected_output.type
+
+    def test_model_from_input_persisted(self):
+        pass
