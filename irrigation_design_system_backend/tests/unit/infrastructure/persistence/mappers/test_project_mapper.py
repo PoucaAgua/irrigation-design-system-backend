@@ -260,6 +260,7 @@ class TestProjectMapper:
 
         result = ProjectMapper.model_from_input_and_persisted(input_data, project_persisted)
         assert isinstance(result, Project)
+        assert result.id == expected_output.id
         assert result.user_id == expected_output.user_id
         assert result.group_id == expected_output.group_id
         assert result.description == expected_output.description
@@ -346,7 +347,7 @@ class TestDerivationLineMapper:
         result = DerivationLineMapper.model_from_input(line=derivation_line_input, project_id=1)
 
         assert isinstance(result, DerivationLine)
-        # assert result.id == expected_output.id
+        assert result.id is None
         assert result.project_id == expected_output.project_id
         assert result.inlet_pressure == expected_output.inlet_pressure
         assert result.length == expected_output.length
@@ -406,6 +407,7 @@ class TestDerivationLineMapper:
         )
 
         assert isinstance(result, DerivationLine)
+        assert result.id is None
         assert result.project_id == expected_output.project_id
         assert result.pipe_type == expected_output.pipe_type
         assert result.inlet_pressure == expected_output.inlet_pressure
@@ -446,7 +448,7 @@ class TestLateralLineMapper:
         result = LateralLineMapper.model_from_input(lateral_line_input, project_id=1)
 
         assert isinstance(result, LateralLine)
-        # assert result.id == expected_output.id
+        assert result.id is None
         assert result.project_id == expected_output.project_id
         assert result.dripper == expected_output.dripper
         assert result.decline == expected_output.decline
@@ -517,7 +519,7 @@ class TestLateralLineMapper:
         )
 
         assert isinstance(result, LateralLine)
-        # assert result.id == expected_output.id
+        assert result.id is None
         assert result.project_id == expected_output.project_id
         assert result.dripper == expected_output.dripper
         assert result.decline == expected_output.decline

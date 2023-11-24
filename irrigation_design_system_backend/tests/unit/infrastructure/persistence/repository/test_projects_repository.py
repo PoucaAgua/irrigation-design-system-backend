@@ -13,14 +13,6 @@ class TestProjectRepository:
 
     @patch("infrastructure.persistence.repository.projects_repository.ProjectMapper")
     def test_upsert_insert(self, project_mapper_mock, db):
-        """
-        Function to test the insert
-
-        :param project_mapper_mock:
-        :param db:
-        :return:
-        """
-
         # given
         project_input = Mock()
         project_db_mock = Mock(id=None)
@@ -38,14 +30,6 @@ class TestProjectRepository:
 
     @patch("infrastructure.persistence.repository.projects_repository.ProjectMapper")
     def test_upsert_update(self, project_mapper_mock, db):
-        """
-        Function to test the update
-
-        :param project_mapper_mock:
-        :param db:
-        :return:
-        """
-
         # given
         project_input = Mock()
         project_db_mock = Mock(id=1)
@@ -72,14 +56,6 @@ class TestProjectRepository:
 
     @patch("infrastructure.persistence.repository.projects_repository.ProjectMapper")
     def test_upsert_invalid_id(self, project_mapper_mock, db):
-        """
-        Function to test if it falls into the value error
-
-        :param project_mapper_mock:
-        :param db:
-        :return:
-        """
-
         # given
         project_input = Mock()
         project_db_mock = Mock(id=1)
@@ -87,10 +63,10 @@ class TestProjectRepository:
         db.query().filter().first.return_value = None
 
         # when & then
-        with pytest.raises(ValueError) as exc_info:
+        with pytest.raises(ValueError) as error:
             self.repository.upsert(db=db, project_input=project_input)
 
-        assert str(exc_info.value) == "invalid id 1"
+        assert str(error.value) == "invalid id 1"
 
         project_mapper_mock.model_from_input.assert_called_once_with(project_input)
 
