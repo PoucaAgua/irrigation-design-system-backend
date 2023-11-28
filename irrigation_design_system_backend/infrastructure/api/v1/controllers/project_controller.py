@@ -14,5 +14,5 @@ def projects(project_entity: ProjectInput):
 
 
 @router.get("", response_model=None)
-def find_all():
-    return ProjectService.find_all()
+def find_all(group_id: str, user_id: int):
+    return ProjectService.find_all(group_id, user_id)

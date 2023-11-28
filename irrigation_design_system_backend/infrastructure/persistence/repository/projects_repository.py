@@ -39,7 +39,9 @@ class ProjectRepository:
         return db.query(Project).all()
 
     @transactional_session
-    def find_all(self, db) -> List[Project]:
-        projects = db.query(Project).all()
+    def find_all(self, db, group_id: str, user_id: int) -> List[Project]:
+        projects = (
+            db.query(Project).filter(Project.group_id == group_id, Project.user_id == user_id).all()
+        )
 
         return projects
