@@ -10,3 +10,7 @@ class ProjectService:
     @classmethod
     def upsert_project(cls, project_input: ProjectInput):
         cls.repository.upsert(project_input)
+
+    @classmethod
+    def find_all(cls):
+        cls.repository.find_all()

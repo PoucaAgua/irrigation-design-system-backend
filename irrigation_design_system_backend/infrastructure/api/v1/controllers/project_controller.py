@@ -11,3 +11,8 @@ router = APIRouter()
 def projects(project_entity: ProjectInput):
     ProjectService.upsert_project(project_entity)
     return ProjectResponse()
+
+
+@router.get("", response_model=None)
+def find_all():
+    return ProjectService.find_all()
