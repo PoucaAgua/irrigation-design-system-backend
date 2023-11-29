@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Any
 
 from core.domain.entity.project_input import ProjectInput
 from infrastructure.persistence.mappers.project_mapper import (
@@ -39,9 +39,9 @@ class ProjectRepository:
         return db.query(Project).all()
 
     @transactional_session
-    def find_all(self, db, group_id: str, user_id: int) -> List[Project]:
+    def find_all(self, db, group_id: str, user_id: int) -> List[Any]:
         projects = (
             db.query(Project).filter(Project.group_id == group_id, Project.user_id == user_id).all()
         )
 
-        return projects
+        return [ProjectMapper.to_json(project) for project in projects]

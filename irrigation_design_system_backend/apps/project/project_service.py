@@ -13,4 +13,5 @@ class ProjectService:
 
     @classmethod
     def find_all(cls, group_id: str, user_id: int):
-        cls.repository.find_all(group_id, user_id)
+        print("Projects service")
+        return cls.repository.find_all(group_id, user_id)

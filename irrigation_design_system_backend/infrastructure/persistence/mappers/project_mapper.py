@@ -5,6 +5,20 @@ from infrastructure.persistence.models import Project, DerivationLine, LateralLi
 
 
 class ProjectMapper:
+
+    @staticmethod
+    def to_json(project):
+        field_mappings = dict(
+            id=project.id,
+            description=project.description,
+            group_id=project.group_id,
+            user_id=project.user_id,
+            derivation_line=[],
+            lateral_line=[],
+        )
+
+        return field_mappings
+
     @staticmethod
     def model_from_input(project_input: ProjectInput) -> Project:
         field_mappings = dict(
