@@ -15,12 +15,12 @@ class CropCoefficientModel(Base):
 
     def __eq__(self, other: "CropCoefficientModel") -> bool:
         return (
-                isinstance(other, self.__class__)
-                and self.id == other.id
-                and self.crop_name == other.crop_name
-                and self.crop_type == other.crop_type
-                and self.kc_initial == other.kc_initial
-                and self.kc_mid_season == other.kc_mid_season
-                and self.kc_final == other.kc_final
-                and self.active == other.active
+            isinstance(other, self.__class__)
+            and self.id == other.id
+            and self.crop_name == other.crop_name
+            and self.crop_type == other.crop_type
+            and self.kc_initial == other.kc_initial
+            and self.kc_mid_season == other.kc_mid_season
+            and self.kc_final == other.kc_final
+            and self.active == other.active
         )
