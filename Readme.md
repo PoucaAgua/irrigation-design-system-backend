@@ -78,13 +78,3 @@ format with black
 ```bash
 black .
 ```
-
-check with pipreqs
-```bash
-pip install pipreqs
-```
-
-update requirements.txt
-```bash
-pipreqs .
-```
