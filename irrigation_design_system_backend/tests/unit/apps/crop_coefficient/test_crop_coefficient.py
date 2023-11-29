@@ -2,7 +2,10 @@ import pytest
 from unittest.mock import MagicMock
 from decimal import Decimal
 from core.domain.entity.crop_coefficient_input import CropCoefficientInput
-from irrigation_design_system_backend.apps.crop_coefficient.crop_coefficient import CropCoefficientService
+from irrigation_design_system_backend.apps.crop_coefficient.crop_coefficient import (
+    CropCoefficientService,
+)
+
 
 class TestCropCoefficientService:
     def test_upsert(self):
@@ -144,7 +147,7 @@ class TestCropCoefficientService:
         mock_repo = MagicMock()
         service = CropCoefficientService(repository=mock_repo)
 
-        invalid_id = 'invalid_id'
+        invalid_id = "invalid_id"
 
         with pytest.raises(ValueError):
             service.get_id(mock_repo, invalid_id)
