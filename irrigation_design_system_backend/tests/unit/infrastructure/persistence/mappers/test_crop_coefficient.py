@@ -134,9 +134,11 @@ class TestCropCoefficientMapper:
             active=True,
         )
         result = CropCoefficientMapper.entity_to_model(input_data)
-        self.assert_that_models(result, expected_result)
+
+        assert result == expected_result
 
     def test_entity_to_model_persisted_additional(self):
+        # Given
         entity_input = CropCoefficientInput(
             id=5,
             crop_name="potato",
@@ -155,11 +157,18 @@ class TestCropCoefficientMapper:
             kc_final=1.5,
             active=True,
         )
+        expected_result = CropCoefficientModel(
+            id=5,
+            crop_name="potato",
+            crop_type="white",
+            kc_initial=0.4,
+            kc_mid_season=0.8,
+            kc_final=1.4,
+            active=True,
+        )
+
+        # When
         result = CropCoefficientMapper.entity_to_model_persisted(entity_input, persisted_model)
-        assert result.id == 5, "ID mismatch"
-        assert result.crop_name == "potato", "Crop name mismatch"
-        assert result.crop_type == "white", "Crop type mismatch"
-        assert result.kc_initial == Decimal("0.4"), "kc_initial mismatch"
-        assert result.kc_mid_season == Decimal("0.8"), "kc_mid_season mismatch"
-        assert result.kc_final == Decimal("1.4"), "kc_final mismatch"
-        assert result.active is True, "Active mismatch"
+
+        # Assert
+        assert result == expected_result
