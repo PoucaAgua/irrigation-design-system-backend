@@ -1,10 +1,12 @@
-from core.domain.entity.project_entity import ProjectEntity
-from infrastructure.persistence.repository.projects_repository import ProjectRepository
+from core.domain.entity.project_input import ProjectInput
+from infrastructure.persistence.repository.projects_repository import (
+    ProjectRepository,
+)
 
 
 class ProjectService:
     repository = ProjectRepository()
 
     @classmethod
-    def upsert_project(cls, entity: ProjectEntity):
-        cls.repository.upsert(entity)
+    def upsert_project(cls, project_input: ProjectInput):
+        cls.repository.upsert(project_input)
