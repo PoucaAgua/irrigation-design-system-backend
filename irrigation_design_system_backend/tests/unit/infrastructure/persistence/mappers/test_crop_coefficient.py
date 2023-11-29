@@ -1,4 +1,3 @@
-import pytest
 from decimal import Decimal
 from core.domain.entity.crop_coefficient_input import CropCoefficientInput
 from infrastructure.persistence.mappers.crop_coefficient import CropCoefficientMapper
@@ -84,7 +83,7 @@ class TestCropCoefficientMapper:
         assert result.kc_final == expected_output.kc_final
         assert result.active == expected_output.active
 
-    def test_model_from_input(self):
+    def test_model_from_inputt(self):
         # Given
         input_data = CropCoefficientInput(
             id=1,
@@ -218,7 +217,7 @@ class TestCropCoefficientMapper:
             active=False,
         )
 
-        #When
+        # When
         result = CropCoefficientMapper.model_from_input_persisted(
             crop_coefficient_input, persisted_models
         )
@@ -267,13 +266,13 @@ class TestCropCoefficientMapper:
     def test_entity_to_model_invalid_input(self):
         # Given
         invalid_crop_input = CropCoefficientInput(
-            id='invalid_id',
-            crop_name='invalid_name',
-            crop_type='invalid_type',
-            kc_initial='invalid_value',
-            kc_mid_season='invalid_value',
-            kc_final='invalid_value',
-            active='invalid_bool'
+            id="invalid_id",
+            crop_name="invalid_name",
+            crop_type="invalid_type",
+            kc_initial="invalid_value",
+            kc_mid_season="invalid_value",
+            kc_final="invalid_value",
+            active="invalid_bool",
         )
 
         # When
@@ -314,7 +313,7 @@ class TestCropCoefficientMapper:
 
         assert result == expected_output
 
-    def test_entity_to_model_null_values(self):
+    def test_entity_to_model_null_values_v2(self):
         # Given
         null_values_input = CropCoefficientInput(
             id=15,
@@ -449,8 +448,7 @@ class TestCropCoefficientMapper:
 
         assert result == expected_output
 
-
-    def test_entity_to_model_null_values(self):
+    def test_entity_to_model_null_value(self):
         # Given
         null_input = CropCoefficientInput(
             id=None,
@@ -503,7 +501,6 @@ class TestCropCoefficientMapper:
         result = CropCoefficientMapper.entity_to_model(decimal_input)
 
         assert result == expected_output
-
 
     def test_entity_to_model_null_values(self):
         # Given
@@ -558,4 +555,3 @@ class TestCropCoefficientMapper:
         result = CropCoefficientMapper.entity_to_model(specific_input)
 
         assert result == expected_output
-

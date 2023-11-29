@@ -43,9 +43,7 @@ class TestCropCoefficientRepository:
 
         crop_coefficient_mapper_mock.entity_to_model.return_value = coefficient_db_mock
         db.query().filter().first.return_value = coefficient_db_persisted_mock
-        crop_coefficient_mapper_mock.entity_to_model_persisted.return_value = (
-            coefficient_db_mock_2
-        )
+        crop_coefficient_mapper_mock.entity_to_model_persisted.return_value = coefficient_db_mock_2
 
         # When
         result = self.repository.upsert(db=db, crop_coefficient=coefficient_input)
