@@ -5,7 +5,7 @@ from core.domain.entity.crop_coefficient_input import CropCoefficientInput
 class CropCoefficientMapper:
     @staticmethod
     def entity_to_model(crop_coefficient_input: CropCoefficientInput) -> CropCoefficientModel:
-        return CropCoefficientModel(
+        field_mappings = dict(
             id=crop_coefficient_input.id,
             crop_name=crop_coefficient_input.crop_name,
             crop_type=crop_coefficient_input.crop_type,
@@ -14,6 +14,8 @@ class CropCoefficientMapper:
             kc_final=crop_coefficient_input.kc_final,
             active=crop_coefficient_input.active,
         )
+
+        return CropCoefficientModel(**field_mappings)
 
     @staticmethod
     def entity_to_model_persisted(

@@ -53,40 +53,6 @@ class TestCropCoefficientMapper:
 
         persisted_model = CropCoefficientModel(
             id=1,
-            crop_name="persisted_crop_name",
-            crop_type="persisted_crop_type",
-            kc_initial=Decimal("0.3"),
-            kc_mid_season=Decimal("0.6"),
-            kc_final=Decimal("0.9"),
-            active=True,
-        )
-
-        expected_output = CropCoefficientModel(
-            id=1,
-            crop_name="crop_name",
-            crop_type="crop_type",
-            kc_initial=0.3,
-            kc_mid_season=0.6,
-            kc_final=0.9,
-            active=True,
-        )
-
-        # When
-        result = CropCoefficientMapper.entity_to_model_persisted(input_data, persisted_model)
-
-        assert isinstance(result, CropCoefficientModel)
-        assert result.id == expected_output.id
-        assert result.crop_name == expected_output.crop_name
-        assert result.crop_type == expected_output.crop_type
-        assert result.kc_initial == expected_output.kc_initial
-        assert result.kc_mid_season == expected_output.kc_mid_season
-        assert result.kc_final == expected_output.kc_final
-        assert result.active == expected_output.active
-
-    def test_model_from_inputt(self):
-        # Given
-        input_data = CropCoefficientInput(
-            id=1,
             crop_name="crop_name",
             crop_type="crop_type",
             kc_initial=Decimal("0.5"),
@@ -106,7 +72,7 @@ class TestCropCoefficientMapper:
         )
 
         # When
-        result = CropCoefficientMapper.entity_to_model(input_data)
+        result = CropCoefficientMapper.entity_to_model_persisted(input_data, persisted_model)
 
         assert isinstance(result, CropCoefficientModel)
         assert result.id == expected_output.id
@@ -166,64 +132,7 @@ class TestCropCoefficientMapper:
         )
 
         assert isinstance(result, CropCoefficientModel)
-        assert result.id is None
-        assert result.crop_name == expected_output.crop_name
-        assert result.crop_type == expected_output.crop_type
-        assert result.kc_initial == expected_output.kc_initial
-        assert result.kc_mid_season == expected_output.kc_mid_season
-        assert result.kc_final == expected_output.kc_final
-        assert result.active == expected_output.active
-
-    def test_model_from_input_persisted(self):
-        # Given
-        crop_coefficient_input = CropCoefficientInput(
-            id=1,
-            crop_name="corn",
-            crop_type="type",
-            kc_initial=None,
-            kc_mid_season=None,
-            kc_final=None,
-            active=False,
-        )
-
-        persisted_models = [
-            CropCoefficientModel(
-                id=1,
-                crop_name="persisted_corn",
-                crop_type="persisted_type",
-                kc_initial=Decimal("0.3"),
-                kc_mid_season=Decimal("0.6"),
-                kc_final=Decimal("0.9"),
-                active=True,
-            ),
-            CropCoefficientModel(
-                id=2,
-                crop_name="persisted_wheat",
-                crop_type="persisted_type",
-                kc_initial=Decimal("0.5"),
-                kc_mid_season=Decimal("1"),
-                kc_final=Decimal("2"),
-                active=True,
-            ),
-        ]
-
-        expected_output = CropCoefficientModel(
-            id=1,
-            crop_name="corn",
-            crop_type="type",
-            kc_initial=Decimal("0.3"),
-            kc_mid_season=Decimal("0.6"),
-            kc_final=Decimal("0.9"),
-            active=False,
-        )
-
-        # When
-        result = CropCoefficientMapper.model_from_input_persisted(
-            crop_coefficient_input, persisted_models
-        )
-
-        assert isinstance(result, CropCoefficientModel)
-        assert result.id is None
+        assert result.id == expected_output.id
         assert result.crop_name == expected_output.crop_name
         assert result.crop_type == expected_output.crop_type
         assert result.kc_initial == expected_output.kc_initial
