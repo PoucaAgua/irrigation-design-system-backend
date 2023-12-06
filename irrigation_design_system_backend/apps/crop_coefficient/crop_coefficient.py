@@ -5,17 +5,23 @@ from infrastructure.persistence.repository.crop_coefficient_repository import (
 
 
 class CropCoefficientService:
-    crop_repository = CropCoefficientRepository()
+    def __init__(self, repository=None):
+        self.crop_repository = repository if repository else CropCoefficientRepository()
 
-    @classmethod
-    def upsert(cls, crop_coefficient: CropCoefficientInput):
-        cls.crop_repository.upsert(crop_coefficient)
-        return
+    def upsert(self, crop_coefficient: CropCoefficientInput):
+        if not isinstance(crop_coefficient.id, int) or crop_coefficient.id <= 0:
+            raise ValueError("Invalid coefficient ID")
 
-    @classmethod
-    def get_all(cls, db):
-        return cls.crop_repository.get_all(db)
+        self.crop_repository.upsert(crop_coefficient)
 
-    @classmethod
-    def get_id(cls, db, crop_coefficient_id):
-        return cls.crop_repository.get_id(db, crop_coefficient_id)
+    def get_all(self, db):
+        return self.crop_repository.get_all(db)
+
+    def get_id(self, db, crop_coefficient_id):
+        if not isinstance(crop_coefficient_id, int) or crop_coefficient_id <= 0:
+            raise ValueError("Invalid coefficient ID")
+
+        return self.crop_repository.get_id(db, crop_coefficient_id)
+
+    def delete(self, coefficient_id):
+        return self.crop_repository.delete(coefficient_id)

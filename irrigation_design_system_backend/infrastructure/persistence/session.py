@@ -33,7 +33,6 @@ def transactional_session(func):
         db = kwargs.pop("db", None)
         if db is None:
             db = SessionLocal()
-
         try:
             result = func(self, db, *args, **kwargs)
             db.commit()

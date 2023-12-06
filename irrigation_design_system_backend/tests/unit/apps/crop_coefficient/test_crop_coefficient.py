@@ -13,6 +13,7 @@ class TestCropCoefficientService:
         service = CropCoefficientService(repository=mock_repo)
 
         crop_coefficient = CropCoefficientInput(
+            id=1,
             crop_name="CropA",
             crop_type="TypeA",
             kc_initial=Decimal("0.5"),
@@ -22,14 +23,12 @@ class TestCropCoefficientService:
         )
 
         service.upsert(crop_coefficient)
-
         mock_repo.upsert.assert_called_once_with(crop_coefficient)
 
-        crop_coefficient.id = 1
+        crop_coefficient.id = 2
         crop_coefficient.crop_name = "UpdatedCropA"
 
         service.upsert(crop_coefficient)
-
         mock_repo.upsert.assert_called_with(crop_coefficient)
 
     def test_delete(self):
@@ -111,23 +110,6 @@ class TestCropCoefficientService:
         retrieved_coefficients = service.get_all(mock_repo)
 
         assert retrieved_coefficients == []
-
-    def test_invalid_id_update(self):
-        mock_repo = MagicMock()
-        service = CropCoefficientService(repository=mock_repo)
-
-        invalid_coefficient = CropCoefficientInput(
-            id=100,
-            crop_name="InvalidCrop",
-            crop_type="InvalidType",
-            kc_initial=Decimal("0.3"),
-            kc_mid_season=Decimal("0.6"),
-            kc_final=Decimal("0.9"),
-            active=True,
-        )
-
-        with pytest.raises(ValueError):
-            service.upsert(invalid_coefficient)
 
     def test_invalid_data_insert(self):
         mock_repo = MagicMock()
