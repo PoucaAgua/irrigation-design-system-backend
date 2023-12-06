@@ -16,13 +16,14 @@ class TotalIrrigationInput(BaseModel):
         ge=0,
         description="[CE_e] the electrical conductivity of the soil saturation in dSm^-1",
     )
-    leaching_fraction: Optional[Decimal] = Field(
+    leaching_fraction: Decimal = Field(
         None,
         ge=0,
+        lt=1,
         description="""[FL] represents the minimum leaching fraction 
         to be adopted to control salinity at the crop's tolerance level""",
     )
-    efficiency: Decimal = Field(..., ge=0, le=1)
+    efficiency: Decimal = Field(..., gt=0)
 
     @model_validator(mode="before")
     @classmethod
