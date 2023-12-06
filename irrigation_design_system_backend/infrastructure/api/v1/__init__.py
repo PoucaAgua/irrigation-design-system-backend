@@ -7,7 +7,6 @@ from infrastructure.api.v1.controllers import (
     percent_shaded_area_controller,
     derivation_line_controller,
     irrigation_controller,
-    crop_coefficient_controller,
     special_parts_controller,
     lateral_line_controller,
     crop_coefficient_controller,
@@ -83,10 +82,4 @@ router.include_router(
     special_parts_controller.router,
     prefix="/special_parts",
     tags=["Endpoint Special parts"],
-)
-
-router.include_router(
-    crop_coefficient_controller.router,
-    prefix="/crop_coefficient",
-    tags=["Endpoint Crop Coefficient"],
 )
