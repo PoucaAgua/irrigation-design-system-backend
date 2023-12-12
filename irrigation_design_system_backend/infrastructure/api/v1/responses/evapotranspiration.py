@@ -1,6 +1,6 @@
-from pydantic import BaseModel
+from infrastructure.api.v1.responses.response_model import OutputFloat
 
 
-class EvapotranspirationResponse(BaseModel):
+class EvapotranspirationResponse(OutputFloat):
     message: str = "Evapotranspiration calculation successful."
     value: float
