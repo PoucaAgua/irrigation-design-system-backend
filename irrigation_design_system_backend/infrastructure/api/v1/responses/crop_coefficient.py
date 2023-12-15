@@ -17,12 +17,15 @@ class CropCoefficientListResponse(BaseModel):
 
 
 class CropCoefficientCreateResponse(BaseModel):
-    message: str
+    created_id: int
+    message: str = "Crop coefficient created successfully"
 
 
 class CropCoefficientUpdateResponse(BaseModel):
-    message: str
+    updated_id: int
+    message: str = "Crop coefficient updated successfully"
 
 
 class CropCoefficientDeleteResponse(BaseModel):
-    message: str
+    deleted_id: int
+    message: str = "Crop coefficient deleted successfully"

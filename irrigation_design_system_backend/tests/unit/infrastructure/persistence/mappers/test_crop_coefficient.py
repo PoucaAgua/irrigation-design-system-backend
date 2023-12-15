@@ -31,13 +31,7 @@ class TestCropCoefficientMapper:
         result = CropCoefficientMapper.entity_to_model(input_data)
 
         assert isinstance(result, CropCoefficientModel)
-        assert result.id == expected_output.id
-        assert result.crop_name == expected_output.crop_name
-        assert result.crop_type == expected_output.crop_type
-        assert result.kc_initial == expected_output.kc_initial
-        assert result.kc_mid_season == expected_output.kc_mid_season
-        assert result.kc_final == expected_output.kc_final
-        assert result.active == expected_output.active
+        assert result == expected_output
 
     def test_entity_to_model_and_persisted(self):
         # Given
@@ -75,13 +69,7 @@ class TestCropCoefficientMapper:
         result = CropCoefficientMapper.entity_to_model_persisted(input_data, persisted_model)
 
         assert isinstance(result, CropCoefficientModel)
-        assert result.id == expected_output.id
-        assert result.crop_name == expected_output.crop_name
-        assert result.crop_type == expected_output.crop_type
-        assert result.kc_initial == expected_output.kc_initial
-        assert result.kc_mid_season == expected_output.kc_mid_season
-        assert result.kc_final == expected_output.kc_final
-        assert result.active == expected_output.active
+        assert result == expected_output
 
     def test_entity_to_model_persisted_multiple(self):
         # Given
@@ -132,13 +120,7 @@ class TestCropCoefficientMapper:
         )
 
         assert isinstance(result, CropCoefficientModel)
-        assert result.id == expected_output.id
-        assert result.crop_name == expected_output.crop_name
-        assert result.crop_type == expected_output.crop_type
-        assert result.kc_initial == expected_output.kc_initial
-        assert result.kc_mid_season == expected_output.kc_mid_season
-        assert result.kc_final == expected_output.kc_final
-        assert result.active == expected_output.active
+        assert result == expected_output
 
     def test_invalid_input(self):
         # Given
@@ -155,7 +137,6 @@ class TestCropCoefficientMapper:
         # When
         result = CropCoefficientMapper.entity_to_model(crop_input)
 
-        # Check if result fields are None or empty
         assert (
             result.id is None
             and result.crop_name == ""
@@ -173,7 +154,6 @@ class TestCropCoefficientMapper:
         # When
         result = CropCoefficientMapper.entity_to_model(empty_crop_input)
 
-        # Assert if result is None
         assert result is None or (
             result.id is None
             and result.crop_name is None
@@ -208,7 +188,6 @@ class TestCropCoefficientMapper:
 
         # When
         result = CropCoefficientMapper.entity_to_model(non_negative_input)
-
         assert result == expected_output
 
     def test_entity_to_model_null_values_v2(self):
@@ -235,12 +214,10 @@ class TestCropCoefficientMapper:
 
         # When
         result = CropCoefficientMapper.entity_to_model(null_values_input)
-
-        # Check if the entire 'result' object matches 'expected_output' object
         assert result == expected_output
 
     def test_entity_to_model_all_zeros(self):
-        # input_data
+        # Given
         all_zeros_input = CropCoefficientInput(
             id=20,
             crop_name="zero_crop",
@@ -251,7 +228,6 @@ class TestCropCoefficientMapper:
             active=True,
         )
 
-        # expected_output
         expected_output = CropCoefficientModel(
             id=20,
             crop_name="zero_crop",
@@ -262,16 +238,9 @@ class TestCropCoefficientMapper:
             active=True,
         )
 
+        # When
         result = CropCoefficientMapper.entity_to_model(all_zeros_input)
-
-        # Check each field individually for '0'
-        assert result.id == expected_output.id
-        assert result.crop_name == expected_output.crop_name
-        assert result.crop_type == expected_output.crop_type
-        assert result.kc_initial == expected_output.kc_initial
-        assert result.kc_mid_season == expected_output.kc_mid_season
-        assert result.kc_final == expected_output.kc_final
-        assert result.active == expected_output.active
+        assert result == expected_output
 
     def test_entity_to_model_high_values(self):
         # Given
@@ -297,7 +266,6 @@ class TestCropCoefficientMapper:
 
         # When
         result = CropCoefficientMapper.entity_to_model(high_values_input)
-
         assert result == expected_output
 
     def test_entity_to_model_no_values(self):
@@ -324,7 +292,6 @@ class TestCropCoefficientMapper:
 
         # When
         result = CropCoefficientMapper.entity_to_model(no_values_input)
-
         assert result == expected_output
 
     def test_entity_to_model_null_value(self):
@@ -351,7 +318,6 @@ class TestCropCoefficientMapper:
 
         # When
         result = CropCoefficientMapper.entity_to_model(null_input)
-
         assert result == expected_output
 
     def test_entity_to_model_null_values(self):
@@ -378,5 +344,4 @@ class TestCropCoefficientMapper:
 
         # When
         result = CropCoefficientMapper.entity_to_model(null_input)
-
         assert result == expected_output

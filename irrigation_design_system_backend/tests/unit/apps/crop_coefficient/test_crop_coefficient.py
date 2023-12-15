@@ -46,7 +46,6 @@ class TestCropCoefficientService:
         )
 
         service.delete(existing_coefficient.id)
-
         mock_repo.delete.assert_called_once_with(existing_coefficient.id)
 
     def test_get_id(self):
@@ -67,7 +66,6 @@ class TestCropCoefficientService:
         mock_repo.get_id.return_value = expected_coefficient
 
         retrieved_coefficient = service.get_id(mock_repo, target_id)
-
         assert retrieved_coefficient == expected_coefficient
 
     def test_get_all(self):
@@ -96,9 +94,7 @@ class TestCropCoefficientService:
         ]
 
         mock_repo.get_all.return_value = all_coefficients
-
         retrieved_coefficients = service.get_all(mock_repo)
-
         assert retrieved_coefficients == all_coefficients
 
     def test_empty_database(self):
@@ -106,9 +102,7 @@ class TestCropCoefficientService:
         service = CropCoefficientService(repository=mock_repo)
 
         mock_repo.get_all.return_value = []
-
         retrieved_coefficients = service.get_all(mock_repo)
-
         assert retrieved_coefficients == []
 
     def test_invalid_data_insert(self):
