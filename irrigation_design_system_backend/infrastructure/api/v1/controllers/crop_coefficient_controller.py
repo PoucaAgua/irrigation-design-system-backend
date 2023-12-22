@@ -9,8 +9,8 @@ router = APIRouter()
 
 @router.post("/crop_coefficients/upsert", response_model=CropCoefficientCreateResponse)
 def create_crop_coefficient(crop_coefficient: CropCoefficientInput):
-    created_id, created_coefficient = CropCoefficientService.upsert(crop_coefficient)
-    return {"message": "Crop coefficient created successfully", "created_id": created_id}
+    created_coefficient = CropCoefficientService.upsert(crop_coefficient)
+    return {"message": "Crop coefficient created successfully", "created_id": created_coefficient.id}
 
 
 @router.get("/crop_coefficients/get_all/", response_model=List[CropCoefficientInput])

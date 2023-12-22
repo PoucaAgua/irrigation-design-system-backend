@@ -1,4 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean
+
+from infrastructure.api.v1.responses.crop_coefficient import CropCoefficientResponse
 from infrastructure.persistence.models.base import Base
 
 
@@ -18,4 +20,15 @@ class CropCoefficientModel(Base):
             getattr(self, field_name) == getattr(other, field_name)
             for field_name in self.__dict__.keys()
             if not field_name.startswith("_")
+        )
+
+    def to_response(self) -> CropCoefficientResponse:
+        return CropCoefficientResponse(
+            id=self.id,
+            crop_name=self.crop_name,
+            crop_type=self.crop_type,
+            kc_initial=self.kc_initial,
+            kc_mid_season=self.kc_mid_season,
+            kc_final=self.kc_final,
+            active=self.active
         )
