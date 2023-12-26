@@ -1,8 +1,9 @@
 from fastapi import APIRouter
+from typing import List
 
 from apps.project.project_service import ProjectService
 from core.domain.entity.project_input import ProjectInput
-from infrastructure.api.v1.responses.project import ProjectResponse
+from infrastructure.api.v1.responses.project_response import ProjectResponse, ProjectGetAllResponse
 
 router = APIRouter()
 
@@ -13,6 +14,11 @@ def projects(project_entity: ProjectInput):
     return ProjectResponse()
 
 
-@router.get("", response_model=None)
-def find_all(group_id: str, user_id: int):
-    return ProjectService.find_all(group_id, user_id)
+@router.get("", response_model=List[ProjectGetAllResponse])
+def get_all(group_id: str, user_id: int):
+    projects = ProjectService.get_all(group_id, user_id)
+
+    if not projects:
+        return []
+
+    return ProjectGetAllResponse.from_domain(projects)

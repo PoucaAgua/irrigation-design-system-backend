@@ -12,6 +12,5 @@ class ProjectService:
         cls.repository.upsert(project_input)
 
     @classmethod
-    def find_all(cls, group_id: str, user_id: int):
-        print("Projects service")
-        return cls.repository.find_all(group_id, user_id)
+    def get_all(cls, group_id: str, user_id: int):
+        return cls.repository.get_all(group_id, user_id)

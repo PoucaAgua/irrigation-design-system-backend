@@ -2,23 +2,10 @@ from typing import List
 
 from core.domain.entity.project_input import ProjectInput, DerivationLineInput, LateralLineInput
 from infrastructure.persistence.models import Project, DerivationLine, LateralLine
+from infrastructure.api.v1.responses.project_response import ProjectGetAllResponse
 
 
 class ProjectMapper:
-
-    @staticmethod
-    def to_json(project):
-        field_mappings = dict(
-            id=project.id,
-            description=project.description,
-            group_id=project.group_id,
-            user_id=project.user_id,
-            derivation_line=[],
-            lateral_line=[],
-        )
-
-        return field_mappings
-
     @staticmethod
     def model_from_input(project_input: ProjectInput) -> Project:
         field_mappings = dict(
@@ -80,6 +67,15 @@ class ProjectMapper:
         )
 
         return Project(**field_mappings)
+
+    @staticmethod
+    def output_from_model(projects: List[Project]) -> List[ProjectGetAllResponse]:
+        response_list = []
+        for project in projects:
+            fields = dict(group_id=project.group_id, description=project.description)
+            response_list.append(ProjectGetAllResponse(**fields))
+
+        return response_list
 
 
 class DerivationLineMapper:
