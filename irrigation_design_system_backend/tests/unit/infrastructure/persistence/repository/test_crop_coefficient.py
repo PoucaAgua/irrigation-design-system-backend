@@ -13,7 +13,7 @@ class TestCropCoefficientRepository:
         return Mock()
 
     @patch(
-        "infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper"
+        "irrigation_design_system_backend.infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper"
     )
     def test_upsert_insert(self, crop_coefficient_mapper_mock, db):
         # Given
@@ -27,12 +27,13 @@ class TestCropCoefficientRepository:
         # Then
         assert coefficient_db_mock == result
         crop_coefficient_mapper_mock.entity_to_model.assert_called_with(coefficient_input)
+
         db.add.assert_called_with(coefficient_db_mock)
         db.commit.assert_called_once()
         db.close.assert_called_once()
 
     @patch(
-        "infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper"
+        "irrigation_design_system_backend.infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper"
     )
     def test_upsert_update(self, crop_coefficient_mapper_mock, db):
         # Given
@@ -59,20 +60,21 @@ class TestCropCoefficientRepository:
         db.close.assert_called_once()
 
     @patch(
-        "infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper"
+        "irrigation_design_system_backend.infrastructure.persistence.repository.crop_coefficient_repository.CropCoefficientMapper"
     )
     def test_upsert_invalid_id(self, crop_coefficient_mapper_mock, db):
         # Given
         coefficient_input = Mock()
         coefficient_db_mock = Mock(id=1)
+        coefficient_db_mock.id = 1
         crop_coefficient_mapper_mock.entity_to_model.return_value = coefficient_db_mock
         db.query().filter().first.return_value = None
 
         # When & Then
-        with pytest.raises(FileNotFoundError) as error:
+        with pytest.raises(ValueError) as error:
             self.repository.upsert(db=db, crop_coefficient=coefficient_input)
 
-        assert str(error.value) == "invalid id 1"
+        assert str(error.value) == "Invalid id 1"
         db.merge.assert_not_called()
         db.commit.assert_not_called()
         db.close.assert_called_once()

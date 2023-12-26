@@ -1,6 +1,6 @@
-from decimal import Decimal
-from typing import Optional
 from pydantic import BaseModel, Field
+from typing import Optional
+from decimal import Decimal
 
 
 class CropCoefficientInput(BaseModel):
@@ -14,6 +14,6 @@ class CropCoefficientInput(BaseModel):
         None, ge=0, description="[KC_MID] Mid-season crop coefficient"
     )
     kc_final: Optional[Decimal] = Field(None, ge=0, description="[KC_END] Final crop coefficient")
-    active: bool = Field(
-        True, description="[ACTIVE] Crop coefficient status (True if active, False otherwise)"
+    active: Optional[bool] = Field(
+        None, description="[ACTIVE] Crop coefficient status (True if active, False otherwise)"
     )

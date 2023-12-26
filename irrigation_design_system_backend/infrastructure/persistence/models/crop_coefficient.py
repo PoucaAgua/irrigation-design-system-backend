@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean
-
-from infrastructure.api.v1.responses.crop_coefficient import CropCoefficientResponse
+from infrastructure.api.v1.responses.crop_coefficient import (
+    CropCoefficientResponse,
+)
 from infrastructure.persistence.models.base import Base
 
 
@@ -30,5 +31,5 @@ class CropCoefficientModel(Base):
             kc_initial=self.kc_initial,
             kc_mid_season=self.kc_mid_season,
             kc_final=self.kc_final,
-            active=self.active
+            active=self.active,
         )

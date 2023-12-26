@@ -23,6 +23,7 @@ class CropCoefficientCreateResponse(BaseModel):
 
 class CropCoefficientUpdateResponse(BaseModel):
     updated_id: int
+    updated_fields: List[str]
     message: str = "Crop coefficient updated successfully"
 
 

@@ -1,7 +1,13 @@
 from decimal import Decimal
-from core.domain.entity.crop_coefficient_input import CropCoefficientInput
-from infrastructure.persistence.mappers.crop_coefficient import CropCoefficientMapper
-from infrastructure.persistence.models.crop_coefficient import CropCoefficientModel
+from domain.entity.crop_coefficient_input import (
+    CropCoefficientInput,
+)
+from infrastructure.persistence.mappers.crop_coefficient import (
+    CropCoefficientMapper,
+)
+from infrastructure.persistence.models.crop_coefficient import (
+    CropCoefficientModel,
+)
 
 
 class TestCropCoefficientMapper:
