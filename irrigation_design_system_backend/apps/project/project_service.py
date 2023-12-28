@@ -1,5 +1,5 @@
 from core.domain.entity.project_input import ProjectInput
-from infrastructure.persistence.repository.projects_repository import (
+from infrastructure.persistence.repository.project_repository import (
     ProjectRepository,
 )
 
