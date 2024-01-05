@@ -74,12 +74,12 @@ router.include_router(
     tags=["Endpoint to irrigation time outputs"],
 )
 router.include_router(
-    crop_coefficient_controller.router,
-    prefix="/crop_coefficient",
-    tags=["Endpoint Crop Coefficient"],
-)
-router.include_router(
     special_parts_controller.router,
     prefix="/special_parts",
     tags=["Endpoint Special parts"],
+)
+router.include_router(
+    crop_coefficient_controller.router,
+    prefix="/crop_coefficients",
+    tags=["Endpoint to manage crop coefficients"],
 )
