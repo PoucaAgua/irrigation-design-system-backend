@@ -69,7 +69,7 @@ class ProjectMapper:
         return Project(**field_mappings)
 
     @staticmethod
-    def model_from_output_get_all(projects: List[Project]) -> List[ProjectGetAllResponse]:
+    def get_all_output_from_model(projects: List[Project]) -> List[ProjectGetAllResponse]:
         response_list = []
         for project in projects:
             fields = dict(

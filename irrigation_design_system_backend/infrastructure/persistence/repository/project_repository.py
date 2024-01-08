@@ -41,4 +41,4 @@ class ProjectRepository:
             db.query(Project).filter(Project.group_id == group_id, Project.user_id == user_id).all()
         )
 
-        return ProjectMapper.model_from_output_get_all(projects)
+        return ProjectMapper.get_all_output_from_model(projects)
