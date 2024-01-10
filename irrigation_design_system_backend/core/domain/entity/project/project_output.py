@@ -2,15 +2,15 @@ from pydantic import BaseModel, Field
 from typing import List
 from _decimal import Decimal
 
-from core.domain.entity.project_input import ProjectInput
 from core.domain.enum.status_types import StatusTypes
+from infrastructure.persistence.models import Project
 
 
 class ProjectResponse(BaseModel):
     message: str = "Project created"
 
 
-class ProjectGetAllResponse(BaseModel):
+class ProjectGetAllOutput(BaseModel):
     id: int = Field(..., description="project id")
     user_id: int = Field(..., description="user id")
     group_id: str = Field(..., description="group id")
@@ -24,7 +24,7 @@ class ProjectGetAllResponse(BaseModel):
     total_irrigation_required: Decimal = Field(..., description="total irrigation required")
 
     @classmethod
-    def from_domain(cls, projects: List[ProjectInput]) -> List["ProjectGetAllResponse"]:
+    def from_domain(cls, projects: List[Project]) -> List["ProjectGetAllOutput"]:
         outputs = []
 
         for project in projects:

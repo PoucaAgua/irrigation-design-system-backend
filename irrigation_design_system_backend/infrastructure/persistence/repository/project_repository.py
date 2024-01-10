@@ -1,7 +1,7 @@
 from typing import Optional, List
 
-from core.domain.entity.project_input import ProjectInput
-from infrastructure.api.v1.responses.project_response import ProjectGetAllResponse
+from core.domain.entity.project.project_input import ProjectInput
+from core.domain.entity.project.project_output import ProjectGetAllOutput
 from infrastructure.persistence.mappers.project_mapper import (
     ProjectMapper,
 )
@@ -36,7 +36,7 @@ class ProjectRepository:
         return db.query(Project).filter(Project.id == _id).first()
 
     @transactional_session
-    def get_all(self, db, group_id: str, user_id: int) -> List[ProjectGetAllResponse]:
+    def get_all(self, db, group_id: str, user_id: int) -> List[ProjectGetAllOutput]:
         projects = (
             db.query(Project).filter(Project.group_id == group_id, Project.user_id == user_id).all()
         )

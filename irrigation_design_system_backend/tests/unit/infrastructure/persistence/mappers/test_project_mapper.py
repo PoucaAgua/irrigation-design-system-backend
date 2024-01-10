@@ -1,4 +1,8 @@
-from core.domain.entity.project_input import ProjectInput, DerivationLineInput, LateralLineInput
+from core.domain.entity.project.project_input import (
+    ProjectInput,
+    DerivationLineInput,
+    LateralLineInput,
+)
 from infrastructure.persistence.models import Project, LateralLine, DerivationLine
 from infrastructure.persistence.mappers.project_mapper import (
     ProjectMapper,

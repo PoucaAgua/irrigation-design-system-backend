@@ -1,8 +1,12 @@
 from typing import List
 
-from core.domain.entity.project_input import ProjectInput, DerivationLineInput, LateralLineInput
+from core.domain.entity.project.project_input import (
+    ProjectInput,
+    DerivationLineInput,
+    LateralLineInput,
+)
+from core.domain.entity.project.project_output import ProjectGetAllOutput
 from infrastructure.persistence.models import Project, DerivationLine, LateralLine
-from infrastructure.api.v1.responses.project_response import ProjectGetAllResponse
 
 
 class ProjectMapper:
@@ -69,7 +73,7 @@ class ProjectMapper:
         return Project(**field_mappings)
 
     @staticmethod
-    def get_all_output_from_model(projects: List[Project]) -> List[ProjectGetAllResponse]:
+    def get_all_output_from_model(projects: List[Project]) -> List[ProjectGetAllOutput]:
         response_list = []
         for project in projects:
             fields = dict(
@@ -83,7 +87,7 @@ class ProjectMapper:
                 crop_evapotranspiration=project.crop_evapotranspiration,
                 total_irrigation_required=project.total_irrigation_required,
             )
-            response_list.append(ProjectGetAllResponse(**fields))
+            response_list.append(ProjectGetAllOutput(**fields))
 
         return response_list
 
