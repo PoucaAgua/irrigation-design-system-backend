@@ -1,7 +1,7 @@
 import pytest
 from unittest.mock import Mock, patch
 
-from infrastructure.persistence.repository.projects_repository import ProjectRepository
+from infrastructure.persistence.repository.project_repository import ProjectRepository
 
 
 class TestProjectRepository:
@@ -11,7 +11,7 @@ class TestProjectRepository:
     def db(self):
         return Mock()
 
-    @patch("infrastructure.persistence.repository.projects_repository.ProjectMapper")
+    @patch("infrastructure.persistence.repository.project_repository.ProjectMapper")
     def test_upsert_insert(self, project_mapper_mock, db):
         # given
         project_input = Mock()
@@ -28,7 +28,7 @@ class TestProjectRepository:
         db.commit.assert_called_once()
         db.close.assert_called_once()
 
-    @patch("infrastructure.persistence.repository.projects_repository.ProjectMapper")
+    @patch("infrastructure.persistence.repository.project_repository.ProjectMapper")
     def test_upsert_update(self, project_mapper_mock, db):
         # given
         project_input = Mock()
@@ -54,7 +54,7 @@ class TestProjectRepository:
         db.commit.assert_called_once()
         db.close.assert_called_once()
 
-    @patch("infrastructure.persistence.repository.projects_repository.ProjectMapper")
+    @patch("infrastructure.persistence.repository.project_repository.ProjectMapper")
     def test_upsert_invalid_id(self, project_mapper_mock, db):
         # given
         project_input = Mock()
