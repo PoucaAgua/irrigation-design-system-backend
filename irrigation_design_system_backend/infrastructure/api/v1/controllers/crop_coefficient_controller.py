@@ -1,19 +1,18 @@
 from typing import List
 from fastapi import APIRouter, HTTPException
-from infrastructure.api.v1.responses.crop_coefficient import CropCoefficientCreateResponse
-from core.domain.entity.crop_coefficient_input import CropCoefficientInput
-from apps.crop_coefficient.crop_coefficient import CropCoefficientService
+from apps.crop_coefficient.crop_coefficient_service import CropCoefficientService
+from core.domain.entity.crop_coefficient.crop_coefficient_input import CropCoefficientInput
+from infrastructure.api.v1.responses.crop_coefficient_responses import CropCoefficientResponse
 
 router = APIRouter()
 
 
-@router.post("/crop_coefficients/upsert", response_model=CropCoefficientCreateResponse)
-def create_crop_coefficient(crop_coefficient: CropCoefficientInput):
-    created_coefficient = CropCoefficientService.upsert(crop_coefficient)
-    return {"message": "Crop coefficient created successfully", "created_id": created_coefficient.id}
+@router.post("/crop_coefficients/upsert", response_model=CropCoefficientResponse)
+def upsert_crop_coefficient(crop_coefficient: CropCoefficientInput):
+    return CropCoefficientService.upsert(crop_coefficient)
 
 
-@router.get("/crop_coefficients/get_all/", response_model=List[CropCoefficientInput])
+@router.get("/crop_coefficients/get_all/", response_model=List[CropCoefficientResponse])
 def get_all_crop_coefficients():
     return CropCoefficientService.get_all()
 

@@ -1,15 +1,16 @@
 from pydantic import BaseModel
 from typing import List
+from decimal import Decimal
 
 
 class CropCoefficientResponse(BaseModel):
-    id: int
+    crop_id: int
     crop_name: str
     crop_type: str
-    kc_initial: float
-    kc_mid_season: float
-    kc_final: float
-    active: bool
+    kc_initial: Decimal
+    kc_mid_season: Decimal
+    kc_final: Decimal
+    is_active: bool
 
 
 class CropCoefficientListResponse(BaseModel):

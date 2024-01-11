@@ -75,8 +75,8 @@ router.include_router(
 )
 router.include_router(
     crop_coefficient_controller.router,
-    prefix="/crop_coefficient",
-    tags=["Endpoint Crop Coefficient"],
+    prefix="/crop_coefficients",
+    tags=["Endpoint for Crop Coefficient"],
 )
 router.include_router(
     special_parts_controller.router,

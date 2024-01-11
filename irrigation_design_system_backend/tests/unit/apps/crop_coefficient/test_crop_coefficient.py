@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import MagicMock
 from decimal import Decimal
 from core.domain.entity.crop_coefficient_input import CropCoefficientInput
-from irrigation_design_system_backend.apps.crop_coefficient.crop_coefficient import (
+from irrigation_design_system_backend.apps.crop_coefficient.crop_coefficient_service import (
     CropCoefficientService,
 )
 
