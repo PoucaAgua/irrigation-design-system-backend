@@ -28,7 +28,6 @@ class CropCoefficientService:
         if not isinstance(crop_coefficient_id, int) or crop_coefficient_id <= 0:
             raise ValueError("Invalid coefficient ID")
 
-        # Remova o uso do decorator transactional_session
         db = get_db()
 
         try:
