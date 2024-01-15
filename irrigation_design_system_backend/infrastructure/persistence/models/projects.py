@@ -56,3 +56,18 @@ class DerivationLine(Base):
 
     # Foreign Keys
     project = relationship("Project", back_populates="derivation_line", uselist=False)
+
+    def __eq__(self, other):
+        if isinstance(other, DerivationLine):
+            return (
+                self.id == other.id and
+                self.project_id == other.project_id and
+                self.pipe_type == other.pipe_type and
+                self.inlet_pressure == other.inlet_pressure and
+                self.length == other.length and
+                self.diameter == other.diameter and
+                self.localized_loss == other.localized_loss and
+                self.type == other.type
+            )
+        return False
+

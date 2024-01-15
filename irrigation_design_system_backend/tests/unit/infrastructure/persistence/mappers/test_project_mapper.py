@@ -350,14 +350,7 @@ class TestDerivationLineMapper:
         # result
         result = DerivationLineMapper.model_from_input(line=derivation_line_input, project_id=1)
 
-        assert isinstance(result, DerivationLine)
-        assert result.id is None
-        assert result.project_id == expected_output.project_id
-        assert result.inlet_pressure == expected_output.inlet_pressure
-        assert result.length == expected_output.length
-        assert result.diameter == expected_output.diameter
-        assert result.localized_loss == expected_output.localized_loss
-        assert result.type.value == expected_output.type
+        assert result == expected_output
 
     def test_model_from_input_persisted(self):
         # input_data
