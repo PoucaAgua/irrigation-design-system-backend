@@ -1,5 +1,4 @@
-from typing import Optional, List
-
+from typing import Optional
 from core.domain.entity.crop_coefficient.crop_coefficient_input import CropCoefficientInput
 from infrastructure.api.v1.responses.crop_coefficient_responses import CropCoefficientResponse
 from infrastructure.persistence.mappers.crop_coefficient_mapper import CropCoefficientMapper
