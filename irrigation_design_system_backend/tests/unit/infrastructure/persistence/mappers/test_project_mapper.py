@@ -425,7 +425,7 @@ class TestLateralLineMapper:
             length_max=6,
             diameter=5,
             localized_loss=100,
-            type=LineTypes.with_plc
+            type=LineTypes.with_plc,
         )
 
         # expected_output
@@ -438,7 +438,7 @@ class TestLateralLineMapper:
             length_max=6,
             diameter=5,
             localized_loss=100,
-            type=LineTypes.with_plc
+            type=LineTypes.with_plc,
         )
 
         result = LateralLineMapper.model_from_input(lateral_line_input, project_id=1)
@@ -455,7 +455,7 @@ class TestLateralLineMapper:
             length_max=6,
             diameter=5,
             localized_loss=100,
-            type=LineTypes.with_plc
+            type=LineTypes.with_plc,
         )
 
         # input_data
@@ -469,7 +469,7 @@ class TestLateralLineMapper:
                 length_max=6,
                 diameter=5,
                 localized_loss=100,
-                type=LineTypes.with_plc
+                type=LineTypes.with_plc,
             ),
             LateralLine(
                 project_id=1,
@@ -480,7 +480,7 @@ class TestLateralLineMapper:
                 length_max=6,
                 diameter=5,
                 localized_loss=100,
-                type=LineTypes.with_plc
+                type=LineTypes.with_plc,
             ),
         ]
 
@@ -494,7 +494,7 @@ class TestLateralLineMapper:
             length_max=6,
             diameter=5,
             localized_loss=100,
-            type=LineTypes.with_plc
+            type=LineTypes.with_plc,
         )
 
         result = LateralLineMapper.model_from_input_and_persisted(
