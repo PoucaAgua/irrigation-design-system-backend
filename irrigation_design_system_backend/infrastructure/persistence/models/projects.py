@@ -23,6 +23,23 @@ class Project(Base):
     lateral_line = relationship("LateralLine", back_populates="project", uselist=True)
     derivation_line = relationship("DerivationLine", back_populates="project", uselist=True)
 
+    def __eq__(self, other):
+        if isinstance(other, Project):
+            return (
+                self.id == other.id
+                and self.user_id == other.user_id
+                and self.group_id == other.group_id
+                and self.description == other.description
+                and self.crop == other.crop
+                and self.maximum_actual_irrigation_required
+                == other.maximum_actual_irrigation_required
+                and self.crop_evapotranspiration == other.crop_evapotranspiration
+                and self.total_irrigation_required == other.total_irrigation_required
+                and self.lateral_line == other.lateral_line
+                and self.derivation_line == other.derivation_line
+            )
+        return False
+
 
 class LateralLine(Base):
     __tablename__ = "lateral_lines"
@@ -41,6 +58,22 @@ class LateralLine(Base):
     # Foreign Keys
     project = relationship("Project", back_populates="lateral_line", uselist=False)
 
+    def __eq__(self, other):
+        if isinstance(other, LateralLine):
+            return (
+                self.id == other.id
+                and self.project_id == other.project_id
+                and self.dripper == other.dripper
+                and self.decline == other.decline
+                and self.inlet_pressure == other.inlet_pressure
+                and self.separation_between_issuers == other.separation_between_issuers
+                and self.length_max == other.length_max
+                and self.diameter == other.diameter
+                and self.localized_loss == other.localized_loss
+                and self.type == other.type
+            )
+        return False
+
 
 class DerivationLine(Base):
     __tablename__ = "derivation_lines"
@@ -56,3 +89,17 @@ class DerivationLine(Base):
 
     # Foreign Keys
     project = relationship("Project", back_populates="derivation_line", uselist=False)
+
+    def __eq__(self, other):
+        if isinstance(other, DerivationLine):
+            return (
+                self.id == other.id
+                and self.project_id == other.project_id
+                and self.pipe_type == other.pipe_type
+                and self.inlet_pressure == other.inlet_pressure
+                and self.length == other.length
+                and self.diameter == other.diameter
+                and self.localized_loss == other.localized_loss
+                and self.type == other.type
+            )
+        return False
