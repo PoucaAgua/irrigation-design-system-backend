@@ -8,6 +8,7 @@ from core.domain.enum.line_types import LineTypes
 
 
 class DerivationLineInput(BaseModel):
+    id: Optional[int] = Field(default=None)
     pipe_type: str
     inlet_pressure: Decimal
     length: str
@@ -17,6 +18,7 @@ class DerivationLineInput(BaseModel):
 
 
 class LateralLineInput(BaseModel):
+    id: Optional[int] = Field(default=None)
     dripper: str
     decline: Decimal
     inlet_pressure: Decimal
