@@ -25,8 +25,3 @@ class CropCoefficientCreateResponse(BaseModel):
 class CropCoefficientUpdateResponse(BaseModel):
     updated_id: int
     message: str = "Crop coefficient updated successfully"
-
-
-class CropCoefficientDeleteResponse(BaseModel):
-    deleted_id: int
-    message: str = "Crop coefficient deleted successfully"

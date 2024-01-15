@@ -26,7 +26,3 @@ class CropCoefficientRepository:
         return (
             db.query(CropCoefficientModel).filter(CropCoefficientModel.crop_id == crop_id).first()
         )
-
-    @transactional_session
-    def get_all(self, db) -> List[CropCoefficientModel]:
-        return db.query(CropCoefficientModel).all()

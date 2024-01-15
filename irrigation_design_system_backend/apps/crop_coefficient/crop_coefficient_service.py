@@ -16,21 +16,3 @@ class CropCoefficientService:
     @classmethod
     def upsert(cls, crop_coefficient: CropCoefficientInput) -> CropCoefficientResponse:
         return cls.crop_repository.upsert(crop_coefficient)
-
-    @classmethod
-    def get_all(cls) -> List[CropCoefficientResponse]:
-        with get_db() as db:
-            crop_coefficients = cls.crop_repository.get_all(db)
-            return [CropCoefficientMapper.to_response(crop) for crop in crop_coefficients]
-
-    @classmethod
-    def get_id(cls, crop_coefficient_id):
-        if not isinstance(crop_coefficient_id, int) or crop_coefficient_id <= 0:
-            raise ValueError("Invalid coefficient ID")
-
-        db = get_db()
-
-        try:
-            return cls.crop_repository.get_by_id(db, crop_coefficient_id)
-        finally:
-            db.close()
