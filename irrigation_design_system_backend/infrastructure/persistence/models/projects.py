@@ -23,6 +23,23 @@ class Project(Base):
     lateral_line = relationship("LateralLine", back_populates="project", uselist=True)
     derivation_line = relationship("DerivationLine", back_populates="project", uselist=True)
 
+    def __eq__(self, other):
+        if isinstance(other, Project):
+            return (
+                self.id == other.id
+                and self.user_id == other.user_id
+                and self.group_id == other.group_id
+                and self.description == other.description
+                and self.crop == other.crop
+                and self.maximum_actual_irrigation_required
+                == other.maximum_actual_irrigation_required
+                and self.crop_evapotranspiration == other.crop_evapotranspiration
+                and self.total_irrigation_required == other.total_irrigation_required
+                and self.lateral_line == other.lateral_line
+                and self.derivation_line == other.derivation_line
+            )
+        return False
+
 
 class LateralLine(Base):
     __tablename__ = "lateral_lines"
