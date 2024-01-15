@@ -9,6 +9,7 @@ from infrastructure.persistence.mappers.project_mapper import (
     DerivationLineMapper,
     LateralLineMapper,
 )
+from core.domain.enum.line_types import LineTypes
 
 
 class TestProjectMapper:
@@ -332,19 +333,18 @@ class TestDerivationLineMapper:
             length="150",
             diameter="100",
             localized_loss="240",
-            type="with_plc",
+            type=LineTypes.with_plc,
         )
 
         # expected_output
         expected_output = DerivationLine(
-            id=1,
             project_id=1,
             pipe_type="Iron",
             inlet_pressure=10,
             length="150",
             diameter="100",
             localized_loss="240",
-            type="with_plc",
+            type=LineTypes.with_plc,
         )
 
         # result
