@@ -360,58 +360,47 @@ class TestDerivationLineMapper:
             length="150",
             diameter="100",
             localized_loss="240",
-            type="with_plc",
+            type=LineTypes.with_plc,
         )
 
         # input_data
         lines_persisted = [
             DerivationLine(
-                id=1,
                 project_id=1,
                 pipe_type="Iron",
                 inlet_pressure=10,
                 length="150",
                 diameter="100",
                 localized_loss="240",
-                type="with_plc",
+                type=LineTypes.with_plc,
             ),
             DerivationLine(
-                id=1,
                 project_id=1,
                 pipe_type="Iron",
                 inlet_pressure=10,
                 length="150",
                 diameter="100",
                 localized_loss="240",
-                type="without_plc",
+                type=LineTypes.with_plc,
             ),
         ]
 
         # expected_output
         expected_output = DerivationLine(
-            id=1,
             project_id=1,
             pipe_type="Iron",
             inlet_pressure=10,
             length="150",
             diameter="100",
             localized_loss="240",
-            type="with_plc",
+            type=LineTypes.with_plc,
         )
 
         result = DerivationLineMapper.model_from_input_and_persisted(
             line, lines_persisted, project_id=1
         )
 
-        assert isinstance(result, DerivationLine)
-        assert result.id is None
-        assert result.project_id == expected_output.project_id
-        assert result.pipe_type == expected_output.pipe_type
-        assert result.inlet_pressure == expected_output.inlet_pressure
-        assert result.length == expected_output.length
-        assert result.diameter == expected_output.diameter
-        assert result.localized_loss == expected_output.localized_loss
-        assert result.type.value == expected_output.type
+        assert result == expected_output
 
 
 class TestLateralLineMapper:
