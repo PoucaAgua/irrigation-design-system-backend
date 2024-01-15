@@ -425,12 +425,11 @@ class TestLateralLineMapper:
             length_max=6,
             diameter=5,
             localized_loss=100,
-            type="with_plc",
+            type=LineTypes.with_plc
         )
 
         # expected_output
         expected_output = LateralLine(
-            id=1,
             project_id=1,
             dripper="10mm",
             decline=10,
@@ -439,22 +438,12 @@ class TestLateralLineMapper:
             length_max=6,
             diameter=5,
             localized_loss=100,
-            type="with_plc",
+            type=LineTypes.with_plc
         )
 
         result = LateralLineMapper.model_from_input(lateral_line_input, project_id=1)
 
-        assert isinstance(result, LateralLine)
-        assert result.id is None
-        assert result.project_id == expected_output.project_id
-        assert result.dripper == expected_output.dripper
-        assert result.decline == expected_output.decline
-        assert result.inlet_pressure == expected_output.inlet_pressure
-        assert result.separation_between_issuers == expected_output.separation_between_issuers
-        assert result.length_max == expected_output.length_max
-        assert result.diameter == expected_output.diameter
-        assert result.localized_loss == expected_output.localized_loss
-        assert result.type.value == expected_output.type
+        assert result == expected_output
 
     def test_model_from_input_persisted(self):
         # input_data
@@ -466,13 +455,12 @@ class TestLateralLineMapper:
             length_max=6,
             diameter=5,
             localized_loss=100,
-            type="with_plc",
+            type=LineTypes.with_plc
         )
 
         # input_data
         lines_persisted = [
             LateralLine(
-                id=1,
                 project_id=1,
                 dripper="10mm",
                 decline=10,
@@ -481,10 +469,9 @@ class TestLateralLineMapper:
                 length_max=6,
                 diameter=5,
                 localized_loss=100,
-                type="with_plc",
+                type=LineTypes.with_plc
             ),
             LateralLine(
-                id=1,
                 project_id=1,
                 dripper="10mm",
                 decline=10,
@@ -493,13 +480,12 @@ class TestLateralLineMapper:
                 length_max=6,
                 diameter=5,
                 localized_loss=100,
-                type="with_plc",
+                type=LineTypes.with_plc
             ),
         ]
 
         # expected_output
         expected_output = LateralLine(
-            id=1,
             project_id=1,
             dripper="10mm",
             decline=10,
@@ -508,21 +494,11 @@ class TestLateralLineMapper:
             length_max=6,
             diameter=5,
             localized_loss=100,
-            type="with_plc",
+            type=LineTypes.with_plc
         )
 
         result = LateralLineMapper.model_from_input_and_persisted(
             line, lines_persisted, project_id=1
         )
 
-        assert isinstance(result, LateralLine)
-        assert result.id is None
-        assert result.project_id == expected_output.project_id
-        assert result.dripper == expected_output.dripper
-        assert result.decline == expected_output.decline
-        assert result.inlet_pressure == expected_output.inlet_pressure
-        assert result.separation_between_issuers == expected_output.separation_between_issuers
-        assert result.length_max == expected_output.length_max
-        assert result.diameter == expected_output.diameter
-        assert result.localized_loss == expected_output.localized_loss
-        assert result.type.value == expected_output.type
+        assert result == expected_output

@@ -41,6 +41,22 @@ class LateralLine(Base):
     # Foreign Keys
     project = relationship("Project", back_populates="lateral_line", uselist=False)
 
+    def __eq__(self, other):
+        if isinstance(other, LateralLine):
+            return (
+                self.id == other.id
+                and self.project_id == other.project_id
+                and self.dripper == other.dripper
+                and self.decline == other.decline
+                and self.inlet_pressure == other.inlet_pressure
+                and self.separation_between_issuers == other.separation_between_issuers
+                and self.length_max == other.length_max
+                and self.diameter == other.diameter
+                and self.localized_loss == other.localized_loss
+                and self.type == other.type
+            )
+        return False
+
 
 class DerivationLine(Base):
     __tablename__ = "derivation_lines"
