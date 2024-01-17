@@ -21,7 +21,7 @@ class CropCoefficientModel(Base):
             if not field_name.startswith("_")
         )
 
-    def to_response(self) -> CropCoefficientResponse:
+    def to_response(self) -> "CropCoefficientResponse":
         return CropCoefficientResponse(
             crop_id=self.crop_id,
             crop_name=self.crop_name,
