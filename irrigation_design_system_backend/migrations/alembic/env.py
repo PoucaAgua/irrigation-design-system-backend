@@ -8,7 +8,7 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
 
-env_path = Path('..') / ".env"
+env_path = Path("..") / ".env"
 load_dotenv(dotenv_path=env_path)
 DATABASE = os.getenv("DATABASE", "postgres")
 POSTGRES_USER = os.getenv("POSTGRES_USER")
