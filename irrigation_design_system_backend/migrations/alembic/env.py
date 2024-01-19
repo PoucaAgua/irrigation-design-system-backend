@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from infrastructure.persistence.models.base import Base
+from infrastructure.persistence.models import Base
 
 from logging.config import fileConfig
 from sqlalchemy import engine_from_config
