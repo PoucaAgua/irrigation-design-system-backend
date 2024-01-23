@@ -1,4 +1,4 @@
-"""first migrations
+"""create project tables
 
 Revision ID: 414771113700
 Revises: 
@@ -41,6 +41,8 @@ def upgrade() -> None:
     )
     op.create_index(op.f("ix_projects_id"), "projects", ["id"], unique=False)
     op.create_index(op.f("ix_projects_user_id"), "projects", ["user_id"], unique=False)
+
+    # derivation line table
     op.create_table(
         "derivation_lines",
         sa.Column("id", sa.BigInteger(), autoincrement=True, nullable=False),
@@ -65,6 +67,8 @@ def upgrade() -> None:
     op.create_index(
         op.f("ix_derivation_lines_project_id"), "derivation_lines", ["project_id"], unique=False
     )
+
+    # lateral line table
     op.create_table(
         "lateral_lines",
         sa.Column("id", sa.BigInteger(), autoincrement=True, nullable=False),
@@ -99,10 +103,15 @@ def downgrade() -> None:
     op.drop_index(op.f("ix_lateral_lines_project_id"), table_name="lateral_lines")
     op.drop_index(op.f("ix_lateral_lines_id"), table_name="lateral_lines")
     op.drop_table("lateral_lines")
+    op.execute("DROP TYPE IF EXISTS lateral_line_types")
+
     op.drop_index(op.f("ix_derivation_lines_project_id"), table_name="derivation_lines")
     op.drop_index(op.f("ix_derivation_lines_id"), table_name="derivation_lines")
     op.drop_table("derivation_lines")
+    op.execute("DROP TYPE IF EXISTS derivation_line_types")
+
     op.drop_index(op.f("ix_projects_user_id"), table_name="projects")
     op.drop_index(op.f("ix_projects_id"), table_name="projects")
     op.drop_table("projects")
+    op.execute("DROP TYPE IF EXISTS project_status")
     # ### end Alembic commands ###
