@@ -23,7 +23,7 @@ class CropCoefficientMapper:
             crop_type=entity_input.crop_type or persisted.crop_type,
             kc_initial=entity_input.kc_initial or persisted.kc_initial,
             kc_mid_season=entity_input.kc_mid_season or persisted.kc_mid_season,
-            kf_final=entity_input.kc_final or persisted.kc_final,
+            kc_final=entity_input.kc_final or persisted.kc_final,
             is_active=entity_input.is_active or persisted.is_active,
         )
 
