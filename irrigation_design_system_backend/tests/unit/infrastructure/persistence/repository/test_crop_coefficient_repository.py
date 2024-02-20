@@ -54,4 +54,18 @@ class TestCropCoefficientRepository:
 
         crop_coefficient_mapper_mock.entity_to_model.return_value = crop_coefficient_db_mock
         db.query().filter().first.return_value = crop_coefficient_db_persisted_mock
+        crop_coefficient_mapper_mock.entity_to_model_persisted.return_value = (
+            crop_coefficient_db_mock_2
+        )
 
+        result = self.repository.upsert(db=db, crop_coefficient=crop_coefficient_input)
+
+        assert crop_coefficient_db_mock_2 == result
+        crop_coefficient_mapper_mock.entity_to_model.assert_called_once_with(crop_coefficient_input)
+        crop_coefficient_mapper_mock.entity_to_model_persisted.assert_called_once_with(
+            crop_coefficient_input, crop_coefficient_db_persisted_mock
+        )
+
+        db.merge.assert_called_with(crop_coefficient_db_mock_2)
+        db.commit.assert_called_once()
+        db.close.assert_called_once()

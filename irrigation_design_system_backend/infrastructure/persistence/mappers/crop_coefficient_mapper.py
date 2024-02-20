@@ -13,13 +13,21 @@ class CropCoefficientMapper:
             if value is not None:
                 setattr(model, field, value)
 
-    @classmethod
+    @staticmethod
     def entity_to_model_persisted(
-        cls, entity_input: CropCoefficientInput, persisted: CropCoefficientModel
+        entity_input: CropCoefficientInput, persisted: CropCoefficientModel
     ) -> CropCoefficientModel:
-        model = cls.entity_to_model(entity_input)
-        cls.update_model_from_entity(model, entity_input)
-        return model
+        field_mappings = dict(
+            crop_id=entity_input.crop_id or persisted.crop_id,
+            crop_name=entity_input.crop_name or persisted.crop_name,
+            crop_type=entity_input.crop_type or persisted.crop_type,
+            kc_initial=entity_input.kc_initial or persisted.kc_initial,
+            kc_mid_season=entity_input.kc_mid_season or persisted.kc_mid_season,
+            kf_final=entity_input.kc_final or persisted.kc_final,
+            is_active=entity_input.is_active or persisted.is_active,
+        )
+
+        return CropCoefficientModel(**field_mappings)
 
     @staticmethod
     def to_response(model: CropCoefficientModel):
