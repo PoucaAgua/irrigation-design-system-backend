@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from apps.crop_coefficient.crop_coefficient_service import CropCoefficientService
 from core.domain.entity.crop_coefficient.crop_coefficient_input import CropCoefficientInput
-from infrastructure.api.v1.responses.crop_coefficient_responses import CropCoefficientResponse
+from core.domain.entity.crop_coefficient.crop_coefficient_output import CropCoefficientResponse
 
 router = APIRouter()
 

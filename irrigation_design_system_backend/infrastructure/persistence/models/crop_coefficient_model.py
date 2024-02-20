@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean
 from infrastructure.persistence.models.base import Base
-from infrastructure.api.v1.responses.crop_coefficient_responses import CropCoefficientResponse
+from core.domain.entity.crop_coefficient.crop_coefficient_output import CropCoefficientResponse
 
 
 class CropCoefficientModel(Base):

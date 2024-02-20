@@ -1,6 +1,6 @@
 from decimal import Decimal
 from core.domain.entity.crop_coefficient.crop_coefficient_input import CropCoefficientInput
-from infrastructure.api.v1.responses.crop_coefficient_responses import CropCoefficientResponse
+from core.domain.entity.crop_coefficient.crop_coefficient_output import CropCoefficientResponse
 from infrastructure.persistence.mappers.crop_coefficient_mapper import CropCoefficientMapper
 from infrastructure.persistence.models.crop_coefficient_model import CropCoefficientModel
 
@@ -69,22 +69,22 @@ class TestCropCoefficientMapper:
         # Arrange
         input_entity = CropCoefficientInput(
             crop_id=1,
-            crop_name="Test Crop",
-            crop_type="Test Type",
-            kc_initial=Decimal("1.5"),
-            kc_mid_season=Decimal("2.0"),
-            kc_final=Decimal("1.8"),
+            crop_name="crop",
+            crop_type="type",
+            kc_initial=Decimal("2.0"),
+            kc_mid_season=Decimal("2.5"),
+            kc_final=Decimal("2.2"),
             is_active=True,
         )
 
         persisted_model = CropCoefficientModel(
             crop_id=1,
-            crop_name="Persisted Crop",
-            crop_type="Persisted Type",
-            kc_initial=2.0,
-            kc_mid_season=2.5,
-            kc_final=2.2,
-            is_active=False,
+            crop_name="crop",
+            crop_type="type",
+            kc_initial=Decimal("2.0"),
+            kc_mid_season=Decimal("2.5"),
+            kc_final=Decimal("2.2"),
+            is_active=True,
         )
 
         # Act
@@ -95,11 +95,11 @@ class TestCropCoefficientMapper:
         # Assert
         assert isinstance(result_model, CropCoefficientModel)
         assert result_model.crop_id == 1
-        assert result_model.crop_name == "Test Crop"
-        assert result_model.crop_type == "Test Type"
-        assert result_model.kc_initial == 1.5
-        assert result_model.kc_mid_season == 2.0
-        assert result_model.kc_final == Decimal("1.8")
+        assert result_model.crop_name == "crop"
+        assert result_model.crop_type == "type"
+        assert result_model.kc_initial == Decimal("2.0")
+        assert result_model.kc_mid_season == Decimal("2.5")
+        assert result_model.kc_final == Decimal("2.2")
         assert result_model.is_active is True
 
     def test_to_response(self):

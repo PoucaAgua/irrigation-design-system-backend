@@ -1,5 +1,5 @@
 from core.domain.entity.crop_coefficient.crop_coefficient_input import CropCoefficientInput
-from infrastructure.api.v1.responses.crop_coefficient_responses import CropCoefficientResponse
+from core.domain.entity.crop_coefficient.crop_coefficient_output import CropCoefficientResponse
 from infrastructure.persistence.repository.crop_coefficient_repository import (
     CropCoefficientRepository,
 )
