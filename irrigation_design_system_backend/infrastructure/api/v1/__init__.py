@@ -1,5 +1,4 @@
 from fastapi import APIRouter
-
 from infrastructure.api.v1.controllers import (
     crop_evapotranspiration_controller,
     reference_evapotranspiration_controller,
@@ -10,7 +9,9 @@ from infrastructure.api.v1.controllers import (
     irrigation_controller,
     special_parts_controller,
     lateral_line_controller,
+    crop_coefficient_controller,
 )
+
 
 router = APIRouter()
 
@@ -72,7 +73,11 @@ router.include_router(
     prefix="/irrigation/time",
     tags=["Endpoint to irrigation time outputs"],
 )
-
+router.include_router(
+    crop_coefficient_controller.router,
+    prefix="/crop_coefficients",
+    tags=["Endpoint for Crop Coefficient"],
+)
 router.include_router(
     special_parts_controller.router,
     prefix="/special_parts",
